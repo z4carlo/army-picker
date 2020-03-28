@@ -1,10 +1,11 @@
 import React from "react";
 
 function renderUnits (data) {
+    console.log(data);
     return [].concat(data.NCUs.map((NCU, i) =>
     (
         <h4>
-        {data.nonCombatUnits[0].items[NCU.id].name}
+        {data.NCUs[i].unitInfo.name}
         </h4>
     )))
 }

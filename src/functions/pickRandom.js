@@ -5,5 +5,5 @@ export default function pickRandom(options) {
     const id = (Math.floor(Math.random()*number));
     const unitInfo = options[id];
 
-    return {id, unitInfo};
+    return {unitInfo};
 }
