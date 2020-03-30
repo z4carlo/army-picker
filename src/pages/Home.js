@@ -88,6 +88,15 @@ export default function Home(props) {
     }
   };
 
+  function clearAll(event) {
+    return
+    // event.preventDefault();
+    // setCommander();
+    // setUnits();
+    // setNCUs();
+    // setPointsLeft(40);
+  };
+
   function renderAttachments (units) {
     return [].concat(units.map((unit, i) =>
       (units[i].attachment === "None" ?
@@ -169,6 +178,17 @@ export default function Home(props) {
         </Row>
         <Row>
           <h4><b>{pointsLeft}</b></h4>
+          {commander && <form onSubmit={clearAll}>
+            <LoaderButton
+              block
+              type="submit"
+              bsSize="large"
+              isLoading={isLoading}
+              // disabled={!validateAdd()}
+              text="Clear All"
+              loadingText="Adding…"
+            />     
+            </form>}
         </Row>
       </Grid>
     </div>
