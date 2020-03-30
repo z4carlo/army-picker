@@ -25,7 +25,12 @@ export default function Home(props) {
     event.preventDefault();
     const newcommander = pickRandom(commanders[0].items);
     console.log(newcommander);
-    units[0] = {name: "", attachment: newcommander};
+    if (newcommander.type == ("Infantry" || "Cavalry")) {
+      units[0] = {name: "", attachment: newcommander};
+    }
+    if (newcommander.type == ("NCU")) {
+      NCUs[0] = newcommander;
+    }
     setPointsLeft(pointsLeft-(newcommander.cost));
     setCommander(newcommander);
     console.log(units);
@@ -35,17 +40,17 @@ export default function Home(props) {
     event.preventDefault();
     var filteredData = filterPoints(combatUnits[0].items, pointsLeft);
     filteredData = noRepeats(filteredData, commander, NCUs, units, attachments);
+    var newUnit = pickRandom(filteredData)
     if (filteredData.length > 0) {
-      if (units[0].name == "") {
-        let newUnit = pickRandom(filteredData);
+      if (units.length>0 && units[0].name == "") {
         newUnit.attachment = units[0].attachment 
         units[0] = newUnit;
       }
       else {
-        const unit = units.concat(pickRandom(filteredData));
+        const unit = units.concat(newUnit);
         setUnits (unit);
       }
-      setPointsLeft(pointsLeft-(units[units.length-1].cost));
+      setPointsLeft(pointsLeft-(newUnit.cost));
       console.log(units);
     }
   };
