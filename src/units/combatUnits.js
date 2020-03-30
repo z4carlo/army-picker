@@ -1,6 +1,7 @@
 const combatUnits = [
     {
      type: 'group', name: 'Lannister', items: [
+       { name: "Gregor Clegane", cost: 4, attachment: "None", type: "Cavalry", unique: true },
        { name: "Lannister Guardsmen", cost: 5, attachment: "None", type: "Infantry", unique: false },
        { name: "Poor Fellows", cost: 5, attachment: "None", type: "Infantry", unique: false },
        { name: "Mountains Men", cost: 6, attachment: "None", type: "Infantry", unique: false },

@@ -7,6 +7,7 @@ import attachments from "../units/attachments"
 import pickRandom from "../functions/pickRandom"
 import filterPoints from "../functions/filterPoints"
 import noRepeats from "../functions/noRepeats"
+import attachmentMatch from "../functions/attachmentMatch"
 import { Grid, Row, Col } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton"
 import RenderUnits from "../components/renderUnits"
@@ -15,7 +16,7 @@ import RenderNCUs from "../components/renderNCUs"
 
 export default function Home(props) {
 
-  const [commander, setCommander] = useState([]);
+  const [commander, setCommander] = useState(false);
   const [units, setUnits] = useState([]);
   const [NCUs, setNCUs] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -26,25 +27,34 @@ export default function Home(props) {
     const newcommander = pickRandom(commanders[0].items);
     console.log(newcommander);
     if (newcommander.type == ("Infantry" || "Cavalry")) {
-      units[0] = JSON.parse(JSON.stringify({name: "", attachment: newcommander}));
+      if (newcommander.name == "Joffrey Baratheon") {
+        units[0] = {name: "Kingsguard", cost: 6, type: "Infantry", attachment: newcommander, unique: true};
+      } else {
+        units[0] = {name: "", attachment: newcommander};
+      }
     }
     if (newcommander.type == ("NCU")) {
       NCUs[0] = newcommander;
     }
     setPointsLeft(pointsLeft-(newcommander.cost));
-    setCommander(newcommander);
-    console.log(units);
+    setCommander(true);
+    console.log(commander);
   };
 
   function addCombatUnit(event) {
     event.preventDefault();
     var filteredData = filterPoints(combatUnits[0].items, pointsLeft);
     filteredData = noRepeats(filteredData, commander, NCUs, units, attachments);
-    var newUnit = pickRandom(filteredData)
     if (filteredData.length > 0) {
       if (units.length>0 && units[0].name == "") {
-        newUnit.attachment = JSON.parse(JSON.stringify(units[0].attachment));
-        units[0] = JSON.parse(JSON.stringify(newUnit));
+        filteredData = attachmentMatch(filteredData, units[0].attachment.type);
+      }
+    }
+    var newUnit = JSON.parse(JSON.stringify(pickRandom(filteredData)));
+    if (filteredData.length > 0) {
+      if (units.length>0 && units[0].name == "") {
+        newUnit.attachment = units[0].attachment;
+        units[0] = newUnit;
       }
       else {
         const unit = units.concat(newUnit);
@@ -70,6 +80,7 @@ export default function Home(props) {
     event.preventDefault();
     var filteredData = filterPoints(attachments[0].items, pointsLeft);
     filteredData = noRepeats(filteredData, commander, NCUs, units, attachments)
+    filteredData = attachmentMatch(filteredData, units[i].type);
     if (filteredData.length > 0) {
     const attachment = pickRandom(filteredData);
     units[i].attachment = JSON.parse(JSON.stringify(attachment));
@@ -105,8 +116,8 @@ export default function Home(props) {
       <Grid>
         <Row>
           <Col xs={12} md={3}>
-            {commander.length>0 && <h4>{commander.name}</h4>}
-            {commander.length == 0 && <form onSubmit={addCommander}>
+            {/* {commander && <h4>{commander[0].name}</h4>} */}
+            {!commander && <form onSubmit={addCommander}>
             <LoaderButton
               block
               type="submit"
@@ -123,7 +134,7 @@ export default function Home(props) {
               nonCombatUnits={nonCombatUnits}
               NCUs={NCUs}
             />}            
-            <form onSubmit={addNCU}>
+            {commander && <form onSubmit={addNCU}>
             <LoaderButton
               block
               type="submit"
@@ -133,14 +144,14 @@ export default function Home(props) {
               text="Add NCU"
               loadingText="Adding…"
             />     
-            </form>        
+            </form>}        
           </Col>
           <Col xs={12} md={3}>
-            {units.length>0 &&<RenderUnits
+            {units.length>0 && (units[0].name != "") &&<RenderUnits
               combatUnits={combatUnits}
               units={units}
             />}
-            <form onSubmit={addCombatUnit}>
+            {commander && <form onSubmit={addCombatUnit}>
             <LoaderButton
               block
               type="submit"
@@ -150,7 +161,7 @@ export default function Home(props) {
               text="Add Combat Unit"
               loadingText="Adding…"
             />     
-            </form>       
+            </form>}  
           </Col>
           <Col xs={12} md={3}>
             {units.length>0 && renderAttachments(units)}
