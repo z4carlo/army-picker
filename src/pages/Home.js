@@ -88,7 +88,8 @@ export default function Home(props) {
           </form>
           :
         <h4>
-          {units[i].attachment.name}
+          {units[i].attachment.name}<br></br>
+          {units[i].attachment.cost}
         </h4>
       )))
   }
