@@ -26,7 +26,7 @@ export default function Home(props) {
     const newcommander = pickRandom(commanders[0].items);
     console.log(newcommander);
     if (newcommander.type == ("Infantry" || "Cavalry")) {
-      units[0] = {name: "", attachment: newcommander};
+      units[0] = JSON.parse(JSON.stringify({name: "", attachment: newcommander}));
     }
     if (newcommander.type == ("NCU")) {
       NCUs[0] = newcommander;
@@ -43,8 +43,8 @@ export default function Home(props) {
     var newUnit = pickRandom(filteredData)
     if (filteredData.length > 0) {
       if (units.length>0 && units[0].name == "") {
-        newUnit.attachment = units[0].attachment 
-        units[0] = newUnit;
+        newUnit.attachment = JSON.parse(JSON.stringify(units[0].attachment));
+        units[0] = JSON.parse(JSON.stringify(newUnit));
       }
       else {
         const unit = units.concat(newUnit);
@@ -66,13 +66,13 @@ export default function Home(props) {
     }
   };
 
-  function addAttachment(event) {
+  function addAttachment(event, i) {
     event.preventDefault();
     var filteredData = filterPoints(attachments[0].items, pointsLeft);
     filteredData = noRepeats(filteredData, commander, NCUs, units, attachments)
     if (filteredData.length > 0) {
     const attachment = pickRandom(filteredData);
-    units[0].attachment = attachment;
+    units[i].attachment = JSON.parse(JSON.stringify(attachment));
     setPointsLeft(pointsLeft-(attachment.cost));
     }
   };
@@ -80,7 +80,7 @@ export default function Home(props) {
   function renderAttachments (units) {
     return [].concat(units.map((unit, i) =>
       (units[i].attachment === "None" ?
-        <form onSubmit={addAttachment}>
+        <form onSubmit={event => addAttachment(event, i)}>
           <LoaderButton
             block
             type="submit"
