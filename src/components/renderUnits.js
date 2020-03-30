@@ -4,7 +4,8 @@ function renderUnits (data) {
     return [].concat(data.units.map((unit, i) =>
     (
         <h4>
-        {data.units[i].unitInfo.name}
+        {data.units[i].name}<br></br>
+        {data.units[i].cost}
         </h4>
     )))
 }
