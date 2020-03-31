@@ -13,7 +13,6 @@ import LoaderButton from "../components/LoaderButton"
 import RenderUnits from "../components/renderUnits"
 import RenderNCUs from "../components/renderNCUs"
 
-
 export default function Home(props) {
 
   const [commander, setCommander] = useState(false);

@@ -1,6 +1,7 @@
 import React from "react";
 
 function renderUnits (data) {
+    console.log(data);
     return [].concat(data.units.map((unit, i) =>
     (
         <h4>
