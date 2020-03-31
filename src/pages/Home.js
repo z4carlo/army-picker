@@ -12,6 +12,7 @@ import { Grid, Row, Col } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton"
 import RenderUnits from "../components/renderUnits"
 import RenderNCUs from "../components/renderNCUs"
+import Img from 'react-image';
 
 export default function Home(props) {
 
@@ -96,6 +97,8 @@ export default function Home(props) {
     // setPointsLeft(40);
   };
 
+  const DrawImage = ({location}) => {console.log(location); return<Img width="200" height="275" src={location} />};
+
   function renderAttachments (units) {
     return [].concat(units.map((unit, i) =>
       (units[i].attachment === "None" ?
@@ -111,10 +114,11 @@ export default function Home(props) {
             />
           </form>
           :
-        <h4>
-          {units[i].attachment.name}<br></br>
-          {units[i].attachment.cost}
-        </h4>
+          <h4>
+            <div key={i}>
+              <DrawImage location={units[i].attachment.imgFile}/>
+            </div>
+          </h4>
       )))
   }
 
@@ -137,7 +141,10 @@ export default function Home(props) {
             />     
             </form>} 
           </Col>
+        </Row>
+        <Row>
           <Col xs={12} md={3}>
+            <h3>NCUs</h3>
             {NCUs.length>0 &&<RenderNCUs
               nonCombatUnits={nonCombatUnits}
               NCUs={NCUs}
@@ -154,7 +161,8 @@ export default function Home(props) {
             />     
             </form>}        
           </Col>
-          <Col xs={12} md={3}>
+          <Col xs={12} md={6}>
+            <h3>Combat Units</h3>
             {units.length>0 && (units[0].name != "") &&<RenderUnits
               combatUnits={combatUnits}
               units={units}
@@ -172,6 +180,7 @@ export default function Home(props) {
             </form>}  
           </Col>
           <Col xs={12} md={3}>
+            <h3>Attachments</h3>
             {units.length>0 && renderAttachments(units)}
           </Col>
         </Row>
