@@ -11,6 +11,7 @@ function renderUnits (data) {
             <div key={i}>
                 <DrawImage location={data.units[i].imgFile}/>
             </div>
+            {data.units[i].name}
         </h4>
     )))
 }

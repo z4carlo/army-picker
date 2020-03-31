@@ -8,7 +8,7 @@ import pickRandom from "../functions/pickRandom"
 import filterPoints from "../functions/filterPoints"
 import noRepeats from "../functions/noRepeats"
 import attachmentMatch from "../functions/attachmentMatch"
-import { Grid, Row, Col } from "react-bootstrap";
+import { Grid, Row, Col, Checkbox } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton"
 import RenderUnits from "../components/renderUnits"
 import RenderNCUs from "../components/renderNCUs"
@@ -21,11 +21,19 @@ export default function Home(props) {
   const [NCUs, setNCUs] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [pointsLeft, setPointsLeft] = useState(40);
+  const [faction, setFaction] = useState(0);
+  const [pickedFaction, setPickedFaction] = useState(false);
+  const [neutrals, setNeutrals] = useState(false);
 
   function addCommander(event) {
     event.preventDefault();
-    const newcommander = pickRandom(commanders[0].items);
-    console.log(newcommander);
+    // var newcommander;
+    if (neutrals == false) {
+      var newcommander = pickRandom(commanders[faction].items);
+    } else {
+      var newcommander = pickRandom(commanders[faction].items.concat(commanders[0].items));
+    }
+    // var newcommander = pickRandom(commanders[faction].items);
     if (newcommander.type == ("Infantry" || "Cavalry")) {
       if (newcommander.name == "Joffrey Baratheon") {
         units[0] = {name: "Kingsguard", cost: 6, type: "Infantry", attachment: newcommander, unique: true};
@@ -43,7 +51,11 @@ export default function Home(props) {
 
   function addCombatUnit(event) {
     event.preventDefault();
-    var filteredData = filterPoints(combatUnits[0].items, pointsLeft);
+    if (neutrals == false) {
+      var filteredData = filterPoints(combatUnits[faction].items, pointsLeft);
+    } else {
+      var filteredData = filterPoints(combatUnits[faction].items.concat(combatUnits[0].items), pointsLeft);
+    }
     filteredData = noRepeats(filteredData, commander, NCUs, units, attachments);
     if (filteredData.length > 0) {
       if (units.length>0 && units[0].name == "") {
@@ -67,7 +79,11 @@ export default function Home(props) {
 
   function addNCU(event) {
     event.preventDefault();
-    var filteredData = filterPoints(nonCombatUnits[0].items, pointsLeft);
+    if (neutrals == false) {
+      var filteredData = filterPoints(nonCombatUnits[faction].items, pointsLeft);
+    } else {
+      var filteredData = filterPoints(nonCombatUnits[faction].items.concat(nonCombatUnits[0].items), pointsLeft);
+    }
     filteredData = noRepeats(filteredData, commander, NCUs, units, attachments);
     if (filteredData.length > 0) {
     const NCU = NCUs.concat(pickRandom(filteredData));
@@ -78,7 +94,7 @@ export default function Home(props) {
 
   function addAttachment(event, i) {
     event.preventDefault();
-    var filteredData = filterPoints(attachments[0].items, pointsLeft);
+    var filteredData = filterPoints(attachments[faction].items, pointsLeft);
     filteredData = noRepeats(filteredData, commander, NCUs, units, attachments)
     filteredData = attachmentMatch(filteredData, units[i].type);
     if (filteredData.length > 0) {
@@ -118,8 +134,21 @@ export default function Home(props) {
             <div key={i}>
               <DrawImage location={units[i].attachment.imgFile}/>
             </div>
+            {units[i].attachment.name}
           </h4>
       )))
+  }
+
+  function chooseNeutral (event) {
+    event.preventDefault();
+    setFaction(0);
+    setPickedFaction(true);
+  }
+
+  function chooseLannister (event) {
+    event.preventDefault();
+    setFaction(1);
+    setPickedFaction(true);
   }
 
   function renderPage() {
@@ -127,9 +156,34 @@ export default function Home(props) {
     <div className="Home">
       <Grid>
         <Row>
+          {!pickedFaction && <form onSubmit={chooseNeutral}>
+            <LoaderButton
+              block
+              type="submit"
+              bsSize="large"
+              isLoading={isLoading}
+              // disabled={!validateAdd()}
+              text="Neutral"
+              loadingText="Adding…"
+            />     
+          </form>}
+          {!pickedFaction && <form onSubmit={chooseLannister}>
+            <LoaderButton
+              block
+              type="submit"
+              bsSize="large"
+              isLoading={isLoading}
+              // disabled={!validateAdd()}
+              text="Lannister"
+              loadingText="Adding…"
+            />       
+          </form>}
+          {faction != 0 && !commander && <Checkbox checked={neutrals} onChange={() => setNeutrals(!neutrals)}>
+            <p>Include Neutrals</p>
+          </Checkbox>}          
           <Col xs={12} md={3}>
             {/* {commander && <h4>{commander[0].name}</h4>} */}
-            {!commander && <form onSubmit={addCommander}>
+            {!commander && pickedFaction && <form onSubmit={addCommander}>
             <LoaderButton
               block
               type="submit"

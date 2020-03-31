@@ -1,5 +1,15 @@
 const combatUnits = [
     {
+      type: 'group', name: 'Neutral', items: [
+        { name: "House Bolton Cutthroats", cost: 5, attachment: "None", type: "Infantry", unique: false, imgFile: "" },
+        { name: "Stormcrow Mercenaries", cost: 5, attachment: "None", type: "Infantry", unique: false, imgFile: "" },
+        { name: "Bloody Mummer Skirmishers", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "" },
+        { name: "Stormcrow Archers", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "" },
+        { name: "House Bolton Bastard's Girls", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "" },
+        { name: "House bolton Flayed Men", cost: 9, attachment: "None", type: "Cavalry", unique: false, imgFile: "" },
+      ]
+    },
+    {
      type: 'group', name: 'Lannister', items: [
        { name: "Gregor Clegane", cost: 4, attachment: "None", type: "Cavalry", unique: true, imgFile: "./Images/Lannister/10107f.jpg" },
        { name: "Lannister Guardsmen", cost: 5, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Lannister/10101f.jpg" },

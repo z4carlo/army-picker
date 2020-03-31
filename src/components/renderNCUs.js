@@ -10,6 +10,7 @@ function renderUnits (data) {
             <div key={i}>
                 <DrawImage location={data.NCUs[i].imgFile}/>
             </div>
+            {data.NCUs[i].name}
         </h4>
     )))
 }

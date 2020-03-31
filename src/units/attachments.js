@@ -1,5 +1,19 @@
 const attachments = [
     {
+      type: 'group', name: 'Lannister', items: [
+        { name: "Bolton Flayer", cost: 1, type: "Infantry", unique: false, imgFile: "" },
+        { name: "Stormcrow Lieutenant", cost: 1, type: "Infantry", unique: false, imgFile: "" },
+        { name: "Dreadfort Captain", cost: 1, type: "Infantry", unique: false, imgFile: "" },
+        { name: "Brienne", cost: 2, type: "Infantry", unique: true, imgFile: "" },
+        { name: "Bronn", cost: 2, type: "Infantry", unique: true, imgFile: "" },
+        { name: "Daario Naharis", cost: 2, type: "Infantry", unique: true, imgFile: "" },
+        { name: "Jaqen H'ghar", cost: 2, type: "Infantry", unique: true, imgFile: "" },
+        { name: "Roose Bolton", cost: 2, type: "Infantry", unique: true , imgFile: "" },
+        { name: "Ramsay Snow", cost: 3, type: "Infantry", unique: true, imgFile: "" },
+        { name: "Vargo Hoat", cost: 3, type: "Infantry", unique: true, imgFile: "" },
+      ]
+    },
+    {
      type: 'group', name: 'Lannister', items: [
        { name: "Preston Greenfield", cost: 1, type: "Infantry", unique: true, imgFile: "./Images/Lannister/20112f.jpg" },
        { name: "Meryn Trant", cost: 1, type: "Infantry", unique: true, imgFile: "./Images/Lannister/20109f.jpg" },
