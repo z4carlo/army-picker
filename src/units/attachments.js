@@ -26,6 +26,7 @@ const attachments = [
        { name: "Mandon Moore", cost: 2, type: "Infantry", unique: true, imgFile: "./Images/Lannister/20108f.jpg", attachment2: "None" },
        { name: "Sandor Clegane", cost: 2, type: "Infantry", unique: true, imgFile: "./Images/Lannister/20103f.jpg", attachment2: "None" },
        { name: "Jamie Lannister", cost: 2, type: "Infantry", unique: true, imgFile: "./Images/Lannister/20107f.jpg", attachment2: "None" },
+       { name: "Tyrion Lannister", cost: 2, type: "Infantry", unique: true, imgFile: "./Images/Lannister/20120f.jpg", attachment2: "None" },
        { name: "Barristan Selmy", cost: 3, type: "Infantry", unique: true, imgFile: "./Images/Lannister/20106f.jpg", attachment2: "None" },
        { name: "Gregor Clegane", cost: 3, type: "Infantry", unique: true, imgFile: "./Images/Lannister/20114f.jpg", attachment2: "None" },
        { name: "Gregor Clegane", cost: 3, type: "Cavalry", unique: true, imgFile: "./Images/Lannister/20118f.jpg", attachment2: "None" },
