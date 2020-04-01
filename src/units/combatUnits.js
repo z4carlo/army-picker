@@ -11,27 +11,27 @@ const combatUnits = [
     },
     {
       type: 'group', name: 'Lannister', items: [
-        { name: "Gregor Clegane", cost: 4, attachment: "None", type: "Cavalry", unique: true, imgFile: "./Images/Lannister/10107f.jpg" },
-        { name: "Lannister Guardsmen", cost: 5, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Lannister/10101f.jpg" },
-        { name: "Poor Fellows", cost: 5, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Lannister/10109f.jpg" },
-        { name: "Mountains Men", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Lannister/10103f.jpg" },
-        { name: "Lannister Halberdiers", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Lannister/10102f.jpg" },
-        { name: "Lannister Crossbowmen", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Lannister/10106f.jpg" },
-        { name: "Pyromancers", cost: 7, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Lannister/10104f.jpg" },
-        //  { name: "The Warrior's Sons", cost: 8, attachment: "None", type: "Infantry", unique: false, imgFile: "./Test1.jpg" },
-        { name: "Knights of Castely Rock", cost: 8, attachment: "None", type: "Cavalry", unique: false, imgFile: "./Images/Lannister/10105f.jpg" },
+        { name: "Gregor Clegane", cost: 4, attachment: "None", type: "Cavalry", unique: true, imgFile: "./Images/Lannister/CombatUnit-Cards/LAN-CombatUnit-Gregor-Mounted.png" },
+        { name: "Lannister Guardsmen", cost: 5, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Lannister/CombatUnit-Cards/LAN-CombatUnit-LannisterGuardsmen.png" },
+        { name: "Poor Fellows", cost: 5, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Lannister/CombatUnit-Cards/LAN-CombatUnit-PoorFellows.png" },
+        { name: "Mountains Men", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Lannister/CombatUnit-Cards/LAN-CombatUnit-MountainsMen.png" },
+        { name: "Lannister Halberdiers", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Lannister/CombatUnit-Cards/LAN-CombatUnit-Halberdiers.png" },
+        { name: "Lannister Crossbowmen", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Lannister/CombatUnit-Cards/LAN-CombatUnit-Crossbowmen.png" },
+        { name: "Pyromancers", cost: 7, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Lannister/CombatUnit-Cards/LAN-CombatUnit-Pyromancers.png" },
+        { name: "The Warrior's Sons", cost: 8, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Lannister/CombatUnit-Cards/LAN-CombatUnit-WarriorSons.png" },
+        { name: "Knights of Castely Rock", cost: 8, attachment: "None", type: "Cavalry", unique: false, imgFile: "./Images/Lannister/CombatUnit-Cards/LAN-CombatUnit-KOCR.png" },
      ]
     },
     {
       type: 'group', name: 'Stark', items: [
-        { name: "Crannogman Trackers", cost: 5, attachment: "None", type: "Infantry", unique: false, imgFile: "" },
-        { name: "Stark Sworn Swords", cost: 5, attachment: "None", type: "Infantry", unique: false, imgFile: "" },
-        { name: "House Tully Sworn Sheild", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "" },
-        { name: "Stark Bowmen", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "" },
-        { name: "House Umber Beserkers", cost: 7, attachment: "None", type: "Infantry", unique: false, imgFile: "" },
-        { name: "House Umber Great Axes", cost: 7, attachment: "None", type: "Infantry", unique: false, imgFile: "" },
-        { name: "Stark outriders", cost: 7, attachment: "None", type: "Cavalry", unique: false, imgFile: "" },
-        { name: "House Tully Cavaliers", cost: 9, attachment: "None", type: "Cavalry", unique: false, imgFile: "" },
+        { name: "Crannogman Trackers", cost: 5, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Crannogman-Trackers.png" },
+        { name: "Stark Sworn Swords", cost: 5, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-SwornSwords.png" },
+        { name: "House Tully Sworn Sheild", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-TullyShields.png" },
+        { name: "Stark Bowmen", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Bowmen.png" },
+        { name: "House Umber Beserkers", cost: 7, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Beserkers.png" },
+        { name: "House Umber Greataxes", cost: 7, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-GreatAxes.png" },
+        { name: "Stark outriders", cost: 7, attachment: "None", type: "Cavalry", unique: false, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Outriders.png" },
+        { name: "House Tully Cavaliers", cost: 9, attachment: "None", type: "Cavalry", unique: false, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Tully-Cavaliers.png" },
     ]
    }
   ]

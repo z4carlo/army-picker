@@ -39,12 +39,12 @@ export default function Home(props) {
     // var newcommander = pickRandom(commanders[faction].items);
     if ((newcommander.type == "Infantry") || (newcommander.type == "Cavalry")) {
       if (newcommander.name == "Joffrey Baratheon") {
-        units[0] = {name: "Kingsguard", cost: 6, type: "Infantry", attachment: newcommander, attachment2: "None", unique: true};
+        units[0] = {name: "Kingsguard", cost: 6, type: "Infantry", attachment: newcommander, attachment2: "None", unique: true, imgFile: "./Images/Lannister/CombatUnit-Cards/LAN-CombatUnit-Kingsguard.png"};
       } else if (newcommander.name == "Eddard Stark") {
-        units[0] = {name: "Eddard's Honor Guard", cost: 7, type: "Infantry", attachment: newcommander, attachment2: "None", unique: true};
+        units[0] = {name: "Eddard's Honor Guard", cost: 7, type: "Infantry", attachment: newcommander, attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-HonorGuard.png"};
       } else if (newcommander.name == "Robb Stark") {
         units[0] = {name: "", attachment: newcommander};
-        units[1] = {name: "Greywind", cost: 0, type: "Monster", attachment: "None", attachment2: "None", unique: true};
+        units[1] = {name: "Greywind", cost: 0, type: "Monster", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Greywind.png"};
       } else {
         units[0] = {name: "", attachment: newcommander, attachment2: "None",};
       }
@@ -132,11 +132,11 @@ export default function Home(props) {
     if (filteredData.length > 0) {
     const attachment = pickRandom(filteredData);
     if (attachment.name == "Robb Stark") {
-      units[units.length] = {name: "Greywind", cost: 0, type: "Monster", attachment: "None", attachment2: "None", unique: true};
+      units[units.length] = {name: "Greywind", cost: 0, type: "Monster", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Greywind.png"};
     } else if (attachment.name == "Rickon Stark") {
-      units[units.length] = {name: "Shaggydog", cost: 0, type: "Monster", attachment: "None", attachment2: "None", unique: true};
+      units[units.length] = {name: "Shaggydog", cost: 0, type: "Monster", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Shaggydog.png"};
     } else if (attachment.name == "Bran Stark") {
-      units[units.length] = {name: "Summer", cost: 0, type: "Monster", attachment: "None", attachment2: "None", unique: true};
+      units[units.length] = {name: "Summer", cost: 0, type: "Monster", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Summer.png"};
     }
     units[i].attachment = JSON.parse(JSON.stringify(attachment));
     if (attachment.neutral == true) {
@@ -152,10 +152,9 @@ export default function Home(props) {
     // setCommander();
     // setUnits();
     // setNCUs();
-    // setPointsLeft(40);
   };
 
-  const DrawImage = ({location}) => <Img width="140" height="200" src={location} />
+  const DrawImage = ({location}) => {console.log (location); return<Img width="140" height="200" src={location} />}
 
   function renderAttachments (units) {
     return [].concat(units.map((unit, i) =>
@@ -184,7 +183,12 @@ export default function Home(props) {
   function renderAttachments2 (units) {
     return [].concat(units.map((unit, i) =>
       (units[i].attachment === "None" || units[i].attachment.attachment2 === "None" ?
-          <h4>None</h4>
+          <h4>
+            <div key={i}>
+              <DrawImage location={"./Images/General/NonCombat-Unit.png"}/>
+            </div>
+            None
+          </h4>
           :
           <h4>
             <div key={i}>
