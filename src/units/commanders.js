@@ -1,8 +1,8 @@
 const commanders = [
     {
       type: 'group', name: 'Neutral', items: [
-      { name: "Ramsay Snow", cost: 0, type: "NCU", unique: true, imgFile: "" },
-      { name: "Roose Bolton", cost: 0, type: "Infantry", unique: true, imgFile: "" },
+      { name: "Ramsay Snow", cost: 0, type: "Infantry", unique: true, imgFile: "" },
+      { name: "Roose Bolton", cost: 0, type: "NCU", unique: true, imgFile: "" },
       { name: "Vargo Hoat", cost: 0, type: "Infantry", unique: true, imgFile: "" },
       { name: "Daario Naharis", cost: 0, type: "Infantry", unique: true, imgFile: "" }
       ]

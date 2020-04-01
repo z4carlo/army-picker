@@ -46,7 +46,6 @@ export default function Home(props) {
     }
     setPointsLeft(pointsLeft-(newcommander.cost));
     setCommander(true);
-    console.log(commander);
   };
 
   function addCombatUnit(event) {
@@ -73,7 +72,6 @@ export default function Home(props) {
         setUnits (unit);
       }
       setPointsLeft(pointsLeft-(newUnit.cost));
-      console.log(units);
     }
   };
 
@@ -94,13 +92,28 @@ export default function Home(props) {
 
   function addAttachment(event, i) {
     event.preventDefault();
-    var filteredData = filterPoints(attachments[faction].items, pointsLeft);
+    console.log(units[i].name);
+    if (units[i].name === "Stormcrow Mercenaries") {
+      console.log("Im a Stormcrow");
+      var tempPoints = pointsLeft + 1;
+    } else if (units[i].name === "Stormcrow Archers") {
+      console.log("Im a Stormcrow");
+      var tempPoints = pointsLeft + 1;
+    } else {
+      console.log("Im not a Stormcrow");
+      var tempPoints = pointsLeft;
+    }
+    if (neutrals == false) {
+      var filteredData = filterPoints(attachments[faction].items, tempPoints);
+    } else {
+      var filteredData = filterPoints(attachments[faction].items.concat(attachments[0].items), tempPoints);
+    }
     filteredData = noRepeats(filteredData, commander, NCUs, units, attachments)
     filteredData = attachmentMatch(filteredData, units[i].type);
     if (filteredData.length > 0) {
     const attachment = pickRandom(filteredData);
     units[i].attachment = JSON.parse(JSON.stringify(attachment));
-    setPointsLeft(pointsLeft-(attachment.cost));
+    setPointsLeft(tempPoints-(attachment.cost)); 
     }
   };
 
@@ -113,7 +126,7 @@ export default function Home(props) {
     // setPointsLeft(40);
   };
 
-  const DrawImage = ({location}) => {console.log(location); return<Img width="200" height="275" src={location} />};
+  const DrawImage = ({location}) => <Img width="200" height="275" src={location} />
 
   function renderAttachments (units) {
     return [].concat(units.map((unit, i) =>
