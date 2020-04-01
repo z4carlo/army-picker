@@ -331,7 +331,7 @@ export default function Home(props) {
         </Row> */}
         <Row>
           <Col xs={12} md={2}>
-            <h3>NCUs</h3>
+          {commander && <h3>NCUs</h3>}
             {NCUs.length>0 &&<RenderNCUs
               nonCombatUnits={nonCombatUnits}
               NCUs={NCUs}
@@ -349,7 +349,7 @@ export default function Home(props) {
             </form>}        
           </Col>
           <Col xs={12} md={4}>
-            <h3>Combat Units</h3>
+            {commander && <h3>Combat Units</h3>}
             {units.length>0 && (units[0].name != "") &&<RenderUnits
               units={units}
             />}
@@ -367,10 +367,11 @@ export default function Home(props) {
           </Col>
           <Col xs={12} md={4}>
             <Col xs={6} md={6}>
-            <h3>Attachments</h3>
+            {commander && <h3>Attachment 1</h3>}
             {units.length>0 && renderAttachments(units)}
             </Col>
             <Col xs={6} md={6}>
+            {commander && <h3>Attachment 2</h3>}
             <h3></h3>
             {units.length>0 && renderAttachments2(units)}
             </Col>
