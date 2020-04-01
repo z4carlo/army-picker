@@ -24,6 +24,8 @@ export default function Home(props) {
   const [faction, setFaction] = useState(0);
   const [pickedFaction, setPickedFaction] = useState(false);
   const [neutrals, setNeutrals] = useState(false);
+  const [neutralPoints, setNeutralPoints] = useState(0);
+  const [haveArya, setHaveArya] = useState(false);
 
   function addCommander(event) {
     event.preventDefault();
@@ -58,7 +60,8 @@ export default function Home(props) {
     if (neutrals == false) {
       var filteredData = filterPoints(combatUnits[faction].items, pointsLeft);
     } else {
-      var filteredData = filterPoints(combatUnits[faction].items.concat(combatUnits[0].items), pointsLeft);
+      var neutralUnits = filterPoints(combatUnits[0].items, neutralPoints);
+      var filteredData = filterPoints(combatUnits[faction].items.concat(neutralUnits), pointsLeft);
     }
     filteredData = noRepeats(filteredData, commander, NCUs, units, attachments);
     if (filteredData.length > 0) {
@@ -76,6 +79,9 @@ export default function Home(props) {
         const unit = units.concat(newUnit);
         setUnits (unit);
       }
+      if (newUnit.neutral == true) {
+        setNeutralPoints(neutralPoints-(newUnit.cost));
+      }
       setPointsLeft(pointsLeft-(newUnit.cost));
     }
   };
@@ -85,35 +91,42 @@ export default function Home(props) {
     if (neutrals == false) {
       var filteredData = filterPoints(nonCombatUnits[faction].items, pointsLeft);
     } else {
-      var filteredData = filterPoints(nonCombatUnits[faction].items.concat(nonCombatUnits[0].items), pointsLeft);
+      var neutralUnits = filterPoints(nonCombatUnits[0].items, neutralPoints);
+      var filteredData = filterPoints(nonCombatUnits[faction].items.concat(neutralUnits), pointsLeft);
     }
     filteredData = noRepeats(filteredData, commander, NCUs, units, attachments);
     if (filteredData.length > 0) {
     const NCU = NCUs.concat(pickRandom(filteredData));
     setNCUs (NCU);
+    if (NCU[NCU.length-1].name == "Arya Stark") {
+      setHaveArya(true);
+    }
+    if (NCU[NCU.length-1].neutral == true) {
+      setNeutralPoints(neutralPoints-(NCU[NCU.length-1].cost));
+    }
     setPointsLeft(pointsLeft-(NCU[NCU.length-1].cost));
     }
   };
 
   function addAttachment(event, i) {
     event.preventDefault();
-    console.log(units[i].name);
     if (units[i].name === "Stormcrow Mercenaries") {
-      console.log("Im a Stormcrow");
       var tempPoints = pointsLeft + 1;
+      var tempNeutralPoints = neutralPoints + 1;
     } else if (units[i].name === "Stormcrow Archers") {
-      console.log("Im a Stormcrow");
       var tempPoints = pointsLeft + 1;
+      var tempNeutralPoints = neutralPoints + 1;
     } else {
-      console.log("Im not a Stormcrow");
       var tempPoints = pointsLeft;
+      var tempNeutralPoints = neutralPoints;
     }
     if (neutrals == false) {
       var filteredData = filterPoints(attachments[faction].items, tempPoints);
     } else {
-      var filteredData = filterPoints(attachments[faction].items.concat(attachments[0].items), tempPoints);
+      var neutralUnits = filterPoints(attachments[0].items, tempNeutralPoints);
+      var filteredData = filterPoints(attachments[faction].items.concat(neutralUnits), tempPoints);
     }
-    filteredData = noRepeats(filteredData, commander, NCUs, units, attachments)
+    filteredData = noRepeats(filteredData, commander, NCUs, units, haveArya)
     filteredData = attachmentMatch(filteredData, units[i].type);
     if (filteredData.length > 0) {
     const attachment = pickRandom(filteredData);
@@ -125,6 +138,9 @@ export default function Home(props) {
       units[units.length] = {name: "Summer", cost: 0, type: "Monster", attachment: "None", unique: true};
     }
     units[i].attachment = JSON.parse(JSON.stringify(attachment));
+    if (attachment.neutral == true) {
+      setNeutralPoints(tempNeutralPoints-(attachment.cost));
+    }
     setPointsLeft(tempPoints-(attachment.cost)); 
     }
   };
@@ -168,18 +184,21 @@ export default function Home(props) {
     event.preventDefault();
     setFaction(0);
     setPickedFaction(true);
+    setNeutralPoints(pointsLeft);
   }
 
   function chooseLannister (event) {
     event.preventDefault();
     setFaction(1);
     setPickedFaction(true);
+    setNeutralPoints(pointsLeft/2);
   }
 
   function chooseStark (event) {
     event.preventDefault();
     setFaction(2);
     setPickedFaction(true);
+    setNeutralPoints(pointsLeft/2);
   }
 
   function renderPage() {
@@ -281,6 +300,7 @@ export default function Home(props) {
         </Row>
         <Row>
           <h4><b>{pointsLeft}</b></h4>
+          <h4><b>{neutralPoints}</b></h4>
           {commander && <form onSubmit={clearAll}>
             <LoaderButton
               block

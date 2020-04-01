@@ -1,16 +1,16 @@
 const attachments = [
     {
       type: 'group', name: 'Neutral', items: [
-        { name: "Bolton Flayer", cost: 1, type: "Infantry", unique: false, imgFile: "" },
-        { name: "Stormcrow Lieutenant", cost: 1, type: "Infantry", unique: false, imgFile: "" },
-        { name: "Dreadfort Captain", cost: 1, type: "Infantry", unique: false, imgFile: "" },
-        { name: "Brienne", cost: 2, type: "Infantry", unique: true, imgFile: "" },
+        { name: "Bolton Flayer", cost: 1, type: "Infantry", unique: false, imgFile: "", neutral: true },
+        { name: "Stormcrow Lieutenant", cost: 1, type: "Infantry", unique: false, imgFile: "", neutral: true },
+        { name: "Dreadfort Captain", cost: 1, type: "Infantry", unique: false, imgFile: "", neutral: true },
+        { name: "Brienne", cost: 2, type: "Infantry", unique: true, imgFile: "", neutral: true },
         { name: "Bronn", cost: 2, type: "Infantry", unique: true, imgFile: "" },
-        { name: "Daario Naharis", cost: 2, type: "Infantry", unique: true, imgFile: "" },
-        { name: "Jaqen H'ghar", cost: 2, type: "Infantry", unique: true, imgFile: "" },
-        { name: "Roose Bolton", cost: 2, type: "Infantry", unique: true , imgFile: "" },
-        { name: "Ramsay Snow", cost: 3, type: "Infantry", unique: true, imgFile: "" },
-        { name: "Vargo Hoat", cost: 3, type: "Infantry", unique: true, imgFile: "" },
+        { name: "Daario Naharis", cost: 2, type: "Infantry", unique: true, imgFile: "", neutral: true },
+        { name: "Jaqen H'ghar", cost: 2, type: "Infantry", unique: true, imgFile: "", neutral: true },
+        { name: "Roose Bolton", cost: 2, type: "Infantry", unique: true , imgFile: "", neutral: true },
+        { name: "Ramsay Snow", cost: 3, type: "Infantry", unique: true, imgFile: "", neutral: true },
+        { name: "Vargo Hoat", cost: 3, type: "Infantry", unique: true, imgFile: "", neutral: true },
       ]
     },
     {
@@ -41,7 +41,7 @@ const attachments = [
         { name: "Bran Stark", cost: 2, type: "Infantry", unique: true, imgFile: "" },
         { name: "Brynden Tully", cost: 2, type: "Infantry", unique: true, imgFile: "" },
         { name: "Jojen Reed", cost: 2, type: "Infantry", unique: true , imgFile: "" },
-        // { name: "Syrio Forel", cost: 2, type: "Infantry", unique: true, imgFile: "" },
+        { name: "Syrio Forel", cost: 2, type: "Infantry", unique: true, imgFile: "" },
         { name: "Brynden Tully", cost: 3, type: "Cavalry", unique: true, imgFile: "" },
         { name: "Greatjon Umber", cost: 3, type: "Infantry", unique: true , imgFile: "" },
         { name: "Maege Mormont", cost: 3, type: "Infantry", unique: true , imgFile: "" },

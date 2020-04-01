@@ -1,12 +1,12 @@
 const combatUnits = [
     {
       type: 'group', name: 'Neutral', items: [
-        { name: "House Bolton Cutthroats", cost: 5, attachment: "None", type: "Infantry", unique: false, imgFile: "" },
-        { name: "Stormcrow Mercenaries", cost: 5, attachment: "None", type: "Infantry", unique: false, imgFile: "" },
-        { name: "Bloody Mummer Skirmishers", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "" },
-        { name: "Stormcrow Archers", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "" },
-        { name: "House Bolton Bastard's Girls", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "" },
-        { name: "House bolton Flayed Men", cost: 9, attachment: "None", type: "Cavalry", unique: false, imgFile: "" },
+        { name: "House Bolton Cutthroats", cost: 5, attachment: "None", type: "Infantry", unique: false, imgFile: "", neutral: true },
+        { name: "Stormcrow Mercenaries", cost: 5, attachment: "None", type: "Infantry", unique: false, imgFile: "", neutral: true },
+        { name: "Bloody Mummer Skirmishers", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "", neutral: true },
+        { name: "Stormcrow Archers", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "", neutral: true },
+        { name: "House Bolton Bastard's Girls", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "", neutral: true },
+        { name: "House bolton Flayed Men", cost: 9, attachment: "None", type: "Cavalry", unique: false, imgFile: "", neutral: true },
       ]
     },
     {

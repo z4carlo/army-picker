@@ -1,11 +1,11 @@
 const nonCombatUnits = [
     {
       type: 'group', name: 'Neutral', items: [
-        { name: "Lord Varys", cost: 4, type: "NCU", unique: true, imgFile: "" },
-        { name: "Petyr Baelish", cost: 4, type: "NCU", unique: true, imgFile: "" },
-        { name: "Tycho Nestoris", cost: 4, type: "NCU", unique: true, imgFile: "" },
-        { name: "Jaqen H'ghar", cost: 5, type: "NCU", unique: true, imgFile: "" },
-        { name: "Walder Frey", cost: 5, type: "NCU", unique: true, imgFile: "" }
+        { name: "Lord Varys", cost: 4, type: "NCU", unique: true, imgFile: "", neutral: true },
+        { name: "Petyr Baelish", cost: 4, type: "NCU", unique: true, imgFile: "", neutral: true },
+        { name: "Tycho Nestoris", cost: 4, type: "NCU", unique: true, imgFile: "", neutral: true },
+        { name: "Jaqen H'ghar", cost: 5, type: "NCU", unique: true, imgFile: "", neutral: true },
+        { name: "Walder Frey", cost: 5, type: "NCU", unique: true, imgFile: "", neutral: true }
       ]
     },
     {
