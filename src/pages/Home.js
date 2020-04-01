@@ -37,6 +37,8 @@ export default function Home(props) {
     if ((newcommander.type == "Infantry") || (newcommander.type == "Cavalry")) {
       if (newcommander.name == "Joffrey Baratheon") {
         units[0] = {name: "Kingsguard", cost: 6, type: "Infantry", attachment: newcommander, unique: true};
+      } else if (newcommander.name == "Eddard Stark") {
+        units[0] = {name: "Eddard's Honor Guard", cost: 7, type: "Infantry", attachment: newcommander, unique: true};
       } else if (newcommander.name == "Robb Stark") {
         units[0] = {name: "", attachment: newcommander};
         units[1] = {name: "Greywind", cost: 0, type: "Monster", attachment: "None", unique: true};

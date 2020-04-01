@@ -28,7 +28,6 @@ const combatUnits = [
         { name: "Stark Sworn Swords", cost: 5, attachment: "None", type: "Infantry", unique: false, imgFile: "" },
         { name: "House Tully Sworn Sheild", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "" },
         { name: "Stark Bowmen", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "" },
-        // { name: "Eddard's Honor Guard", cost: 7, attachment: "None", type: "Infantry", unique: true, imgFile: "" },
         { name: "House Umber Beserkers", cost: 7, attachment: "None", type: "Infantry", unique: false, imgFile: "" },
         { name: "House Umber Great Axes", cost: 7, attachment: "None", type: "Infantry", unique: false, imgFile: "" },
         { name: "Stark outriders", cost: 7, attachment: "None", type: "Cavalry", unique: false, imgFile: "" },

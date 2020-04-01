@@ -21,7 +21,7 @@ const commanders = [
       type: 'group', name: 'Stark', items: [
       { name: "Brynden Tully", cost: 0, type: "Infantry", unique: true, imgFile: "" },
       { name: "Howland Reed", cost: 0, type: "NCU", unique: true, imgFile: "" },
-      { name: "Eddard Stark", cost: 0, type: "Infantry", unique: true, imgFile: "" },
+      { name: "Eddard Stark", cost: 7, type: "Infantry", unique: true, imgFile: "" },
       { name: "Greatjon Umber", cost: 0, type: "Infantry", unique: true, imgFile: "" },
       { name: "Robb Stark", cost: 0, type: "Infantry", unique: true, imgFile: "" },
       { name: "Rodrik Cassel", cost: 0, type: "Infantry", unique: true, imgFile: "" },
