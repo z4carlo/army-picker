@@ -1,6 +1,6 @@
 const attachments = [
     {
-      type: 'group', name: 'Lannister', items: [
+      type: 'group', name: 'Neutral', items: [
         { name: "Bolton Flayer", cost: 1, type: "Infantry", unique: false, imgFile: "" },
         { name: "Stormcrow Lieutenant", cost: 1, type: "Infantry", unique: false, imgFile: "" },
         { name: "Dreadfort Captain", cost: 1, type: "Infantry", unique: false, imgFile: "" },
@@ -30,7 +30,24 @@ const attachments = [
        { name: "Gregor Clegane", cost: 3, type: "Infantry", unique: true, imgFile: "./Images/Lannister/20114f.jpg" },
        { name: "Gregor Clegane", cost: 3, type: "Cavalry", unique: true, imgFile: "./Images/Lannister/20118f.jpg" },
      ]
-    }
+    },
+    {
+      type: 'group', name: 'Stark', items: [
+        { name: "Crannogman Warden", cost: 1, type: "Infantry", unique: false, imgFile: "" },
+        { name: "Meera Reed", cost: 1, type: "Infantry", unique: true, imgFile: "" },
+        { name: "Rickon Stark", cost: 1, type: "Infantry", unique: true, imgFile: "" },
+        { name: "Sworn Sword Captain", cost: 1, type: "Infantry", unique: false, imgFile: "" },
+        { name: "Umber Champion", cost: 1, type: "Infantry", unique: false, imgFile: "" },
+        { name: "Bran Stark", cost: 2, type: "Infantry", unique: true, imgFile: "" },
+        { name: "Brynden Tully", cost: 2, type: "Infantry", unique: true, imgFile: "" },
+        { name: "Jojen Reed", cost: 2, type: "Infantry", unique: true , imgFile: "" },
+        // { name: "Syrio Forel", cost: 2, type: "Infantry", unique: true, imgFile: "" },
+        { name: "Brynden Tully", cost: 3, type: "Cavalry", unique: true, imgFile: "" },
+        { name: "Greatjon Umber", cost: 3, type: "Infantry", unique: true , imgFile: "" },
+        { name: "Maege Mormont", cost: 3, type: "Infantry", unique: true , imgFile: "" },
+        { name: "Robb Stark", cost: 3, type: "Infantry", unique: true , imgFile: "" },
+      ]
+    },
   ]
 
   export default attachments;

@@ -16,7 +16,16 @@ const nonCombatUnits = [
        { name: "Tyrion Lannister", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Lannister/30104f.jpg" },
        { name: "Tywin Lannister", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Lannister/30101f.jpg" },
      ]
-    }
+    },
+    {
+      type: 'group', name: 'Stark', items: [
+        { name: "Arya Stark", cost: 3, type: "NCU", unique: true, imgFile: "" },
+        { name: "Sansa Stark", cost: 3, type: "NCU", unique: true, imgFile: "" },
+        { name: "Catelyn Stark", cost: 4, type: "NCU", unique: true, imgFile: "" },
+        { name: "Eddard Stark", cost: 4, type: "NCU", unique: true, imgFile: "" },
+        { name: "Rodrik Cassel", cost: 4, type: "NCU", unique: true, imgFile: "" },
+      ]
+     }
   ]
 
   export default nonCombatUnits;

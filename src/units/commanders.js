@@ -16,7 +16,18 @@ const commanders = [
       { name: "Tyrion Lannister", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/Lannister/20105f.jpg" },
       { name: "Tywin Lannister", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/Lannister/20104f.jpg" }
      ]
-    }
+    },
+    {
+      type: 'group', name: 'Stark', items: [
+      { name: "Brynden Tully", cost: 0, type: "Infantry", unique: true, imgFile: "" },
+      { name: "Howland Reed", cost: 0, type: "NCU", unique: true, imgFile: "" },
+      { name: "Eddard Stark", cost: 0, type: "Infantry", unique: true, imgFile: "" },
+      { name: "Greatjon Umber", cost: 0, type: "Infantry", unique: true, imgFile: "" },
+      { name: "Robb Stark", cost: 0, type: "Infantry", unique: true, imgFile: "" },
+      { name: "Rodrik Cassel", cost: 0, type: "Infantry", unique: true, imgFile: "" },
+      { name: "Brynden Tully", cost: 0, type: "Cavalry", unique: true, imgFile: "" },
+      ]
+    },
   ]
 
   export default commanders;

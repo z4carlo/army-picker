@@ -1,7 +1,7 @@
 import React from "react";
 import Img from 'react-image';
 
-const DrawImage = ({location}) => <Img width="550" height="275" src={location} />
+const DrawImage = ({location}) => <Img width="550" height="275" src={location} />;
 
 function renderUnits (data) {
     return [].concat(data.units.map((unit, i) =>

@@ -34,9 +34,12 @@ export default function Home(props) {
       var newcommander = pickRandom(commanders[faction].items.concat(commanders[0].items));
     }
     // var newcommander = pickRandom(commanders[faction].items);
-    if (newcommander.type == ("Infantry" || "Cavalry")) {
+    if ((newcommander.type == "Infantry") || (newcommander.type == "Cavalry")) {
       if (newcommander.name == "Joffrey Baratheon") {
         units[0] = {name: "Kingsguard", cost: 6, type: "Infantry", attachment: newcommander, unique: true};
+      } else if (newcommander.name == "Robb Stark") {
+        units[0] = {name: "", attachment: newcommander};
+        units[1] = {name: "Greywind", cost: 0, type: "Monster", attachment: "None", unique: true};
       } else {
         units[0] = {name: "", attachment: newcommander};
       }
@@ -112,6 +115,13 @@ export default function Home(props) {
     filteredData = attachmentMatch(filteredData, units[i].type);
     if (filteredData.length > 0) {
     const attachment = pickRandom(filteredData);
+    if (attachment.name == "Robb Stark") {
+      units[units.length] = {name: "Greywind", cost: 0, type: "Monster", attachment: "None", unique: true};
+    } else if (attachment.name == "Rickon Stark") {
+      units[units.length] = {name: "Shaggydog", cost: 0, type: "Monster", attachment: "None", unique: true};
+    } else if (attachment.name == "Bran Stark") {
+      units[units.length] = {name: "Summer", cost: 0, type: "Monster", attachment: "None", unique: true};
+    }
     units[i].attachment = JSON.parse(JSON.stringify(attachment));
     setPointsLeft(tempPoints-(attachment.cost)); 
     }
@@ -164,6 +174,12 @@ export default function Home(props) {
     setPickedFaction(true);
   }
 
+  function chooseStark (event) {
+    event.preventDefault();
+    setFaction(2);
+    setPickedFaction(true);
+  }
+
   function renderPage() {
     return (
     <div className="Home">
@@ -188,6 +204,17 @@ export default function Home(props) {
               isLoading={isLoading}
               // disabled={!validateAdd()}
               text="Lannister"
+              loadingText="Adding…"
+            />       
+          </form>}
+          {!pickedFaction && <form onSubmit={chooseStark}>
+            <LoaderButton
+              block
+              type="submit"
+              bsSize="large"
+              isLoading={isLoading}
+              // disabled={!validateAdd()}
+              text="Stark"
               loadingText="Adding…"
             />       
           </form>}
@@ -231,7 +258,6 @@ export default function Home(props) {
           <Col xs={12} md={6}>
             <h3>Combat Units</h3>
             {units.length>0 && (units[0].name != "") &&<RenderUnits
-              combatUnits={combatUnits}
               units={units}
             />}
             {commander && <form onSubmit={addCombatUnit}>
