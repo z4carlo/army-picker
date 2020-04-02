@@ -1,9 +1,14 @@
 import React from "react";
 import Img from 'react-image';
 
-const DrawImage = ({location}) => <Img width="370" height="200" src={location} />;
+const DrawImage = ({location}) => <Img 
+width="370" height="200" 
+src={location} 
+// responsive
+/>;
 
 function renderUnits (data) {
+    console.log(data.units[0].attachment.token);
     return [].concat(data.units.map((unit, i) =>
     (
         <h4>

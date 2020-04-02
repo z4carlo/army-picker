@@ -11,3 +11,31 @@
   .Home .lander p {
     color: #999;
   }
+
+  .Home .panel {
+    border: 0;
+    margin-bottom: 28px;
+    height: 200px;
+    width: 140px;
+}
+
+.Home .panel .unit {
+  border: 0;
+  margin-bottom: 28px;
+  height: 200px;
+  width: 300px;
+}
+
+.image { 
+  position: relative; 
+  width: 100%; /* for IE 6 */
+}
+
+h1 {
+  color: white;
+  font-size: 48px;
+  position: absolute; 
+  top: 27px; 
+  left: 47px;
+  width: 100%; 
+}

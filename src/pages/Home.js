@@ -8,11 +8,13 @@ import pickRandom from "../functions/pickRandom"
 import filterPoints from "../functions/filterPoints"
 import noRepeats from "../functions/noRepeats"
 import attachmentMatch from "../functions/attachmentMatch"
-import { Grid, Row, Col, Checkbox, Table } from "react-bootstrap";
+import { Grid, Row, Col, Checkbox, Panel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton"
 import RenderUnits from "../components/renderUnits"
 import RenderNCUs from "../components/renderNCUs"
 import Img from 'react-image';
+
+// import Background from ".../public/Images/General/Background";
 
 export default function Home(props) {
 
@@ -155,21 +157,28 @@ export default function Home(props) {
   };
 
   const DrawImage = ({location}) => {console.log (location); return<Img width="140" height="200" src={location} />}
+  const DrawImage2 = ({location}) => {console.log (location); return<Img width="370" height="200" src={location} />}
+  const DrawToken = ({location}) => {console.log (location); return<Img width="150" height="150" src={location} />}
 
   function renderAttachments (units) {
     return [].concat(units.map((unit, i) =>
       (units[i].attachment === "None" ?
-        <form onSubmit={event => addAttachment(event, i)}>
-          <LoaderButton
-            block
-            type="submit"
-            bsSize="large"
-            isLoading={isLoading}
-            // disabled={!validateAdd()}
-            text="Add Attachment"
-            loadingText="Adding…"
-            />
-          </form>
+        // <form onSubmit={event => addAttachment(event, i)}>
+        //   <LoaderButton
+        //     block
+        //     type="submit"
+        //     bsSize="large"
+        //     isLoading={isLoading}
+        //     // disabled={!validateAdd()}
+        //     text="Add Attachment"
+        //     loadingText="Adding…"
+        //     />
+        //   </form>
+        <h4>
+        <Panel onClick={event => addAttachment(event, i)}>
+          <DrawImage location={"./Images/General/NonCombat-Unit.png"}/>
+        </Panel>
+        </h4>
           :
           <h4>
             <div key={i}>
@@ -199,24 +208,6 @@ export default function Home(props) {
       )))
   }
 
-  // function renderTable(NCUs) {
-  //   return(
-  //     <Table condensed responsive>
-  //       <tbody>
-  //       <RenderNCUs
-  //             nonCombatUnits={nonCombatUnits}
-  //             NCUs={NCUs}
-  //           />
-  //       </tbody>
-  //       <tbody>
-  //       {units.length>0 && (units[0].name != "") &&<RenderUnits
-  //             units={units}
-  //           />}
-  //       </tbody>
-  //     </Table>
-  //   );
-  // }
-
   function chooseNeutral (event) {
     event.preventDefault();
     setFaction(0);
@@ -244,9 +235,35 @@ export default function Home(props) {
     setPointsSet(true);
   }
 
+  function setNeutral (event) {
+    event.preventDefault();
+    setNeutrals(!neutrals);
+  }
+
+  function RenderNCUCommander() {
+    console.log("Draw NCU Commander");
+    return (
+      <div>
+        <DrawToken location={NCUs[0].token}/>
+      </div>
+    );
+  }
+
+  function RenderCUCommander() {
+    console.log("Draw CU Commander");
+    return (
+      <div>
+        <DrawToken location={units[0].attachment.token}/>
+      </div>
+    );
+  }
+
   function renderPage() {
     return (
-    <div className="Home">
+    <div className="Home" 
+    // styles={{ backgroundImage:{Background} }}
+    >
+
       <Grid>
         <Row>
           <Col xs={4} md={4}>
@@ -312,9 +329,14 @@ export default function Home(props) {
               loadingText="Adding…"
             />       
           </form>}
-          {faction != 0 && !commander && <Checkbox checked={neutrals} onChange={() => setNeutrals(!neutrals)}>
-            <p>Include Neutrals</p>
-          </Checkbox>}          
+          {faction != 0 && !commander &&<h3>Include Neutrals</h3>}
+          {faction != 0 && !commander && (neutrals == false) && <Panel onClick={event => setNeutral(event)}>
+            <DrawImage location={"./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-OFF.png"}/>
+          </Panel>}
+          {faction != 0 && !commander && (neutrals == true) && <Panel onClick={event => setNeutral(event)}>
+            <DrawImage location={"./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-ON.png"}/>
+          </Panel>
+          }     
           <Col xs={12} md={3}>
             {/* {commander && <h4>{commander[0].name}</h4>} */}
             {!commander && pickedFaction && <form onSubmit={addCommander}>
@@ -340,34 +362,22 @@ export default function Home(props) {
               nonCombatUnits={nonCombatUnits}
               NCUs={NCUs}
             />}            
-            {commander && <form onSubmit={addNCU}>
-            <LoaderButton
-              block
-              type="submit"
-              bsSize="large"
-              isLoading={isLoading}
-              // disabled={!validateAdd()}
-              text="Add NCU"
-              loadingText="Adding…"
-            />     
-            </form>}        
+            {commander && <h4>
+              <Panel onClick={addNCU}>
+                <DrawImage location={"./Images/General/NonCombat-Unit.png"}/>
+              </Panel>
+            </h4>}       
           </Col>
           <Col xs={12} md={4}>
             {commander && <h3>Combat Units</h3>}
             {units.length>0 && (units[0].name != "") &&<RenderUnits
               units={units}
             />}
-            {commander && <form onSubmit={addCombatUnit}>
-            <LoaderButton
-              block
-              type="submit"
-              bsSize="large"
-              isLoading={isLoading}
-              // disabled={!validateAdd()}
-              text="Add Combat Unit"
-              loadingText="Adding…"
-            />     
-            </form>}  
+            {commander && <h4>
+              <Panel className="unit" onClick={addCombatUnit}>
+                <DrawImage2 location={"./Images/General/Combat-Unit.png"}/>
+              </Panel>
+            </h4>}
           </Col>
           <Col xs={12} md={4}>
             <Col xs={6} md={6}>
@@ -376,13 +386,25 @@ export default function Home(props) {
             </Col>
             <Col xs={6} md={6}>
             {commander && <h3>Attachment 2</h3>}
-            <h3></h3>
             {units.length>0 && renderAttachments2(units)}
             </Col>
           </Col>
+          <Col xs={12} md={2}>
+            {commander && <h3>Commander</h3>}
+            {NCUs.length>0 && NCUs[0].token && RenderNCUCommander()}
+            {units.length>0 && units[0].attachment.token && RenderCUCommander()}    
+          
+            <div class="image">
+              {commander && <img src="./Images/General/PointCounter-Container.png" width="150" height="150"/>}
+              <h1><b>{pointsLeft}</b></h1>
+              {commander && <h3>Points Remaining</h3>}
+            </div>
+
+            {commander && neutrals && <h3>Neutrals On</h3>}
+            {commander && !neutrals && <h3>Neutrals Off</h3>}
+          </Col>
         </Row>
         <Row>
-          <h4><b>{pointsLeft}</b></h4>
           {commander && <form onSubmit={clearAll}>
             <LoaderButton
               block
