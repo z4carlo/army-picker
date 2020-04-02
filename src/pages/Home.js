@@ -395,9 +395,10 @@ export default function Home(props) {
             {units.length>0 && units[0].attachment.token && RenderCUCommander()}    
           
             <div class="image">
+              {commander && <h3>Points Remaining</h3>}
               {commander && <img src="./Images/General/PointCounter-Container.png" width="150" height="150"/>}
               <h1><b>{pointsLeft}</b></h1>
-              {commander && <h3>Points Remaining</h3>}
+
             </div>
 
             {commander && neutrals && <h3>Neutrals On</h3>}
