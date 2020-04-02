@@ -13,22 +13,40 @@
   }
 
   .Home .panel {
-    border: 0;
-    margin-bottom: 28px;
+    border: 0px;
+    margin-top: 0px;
+    margin-bottom: 25px;
     height: 200px;
-    width: 140px;
+    width: 0px;
+    color: transparent;
 }
 
 .Home .panel .unit {
   border: 0;
   margin-bottom: 28px;
-  height: 200px;
+  height: 215px;
   width: 300px;
 }
 
 .image { 
   position: relative; 
   width: 100%; /* for IE 6 */
+}
+
+.image2 { 
+  position: relative;
+  top: 10px;
+  left: 100px;
+  width: 100%; /* for IE 6 */
+}
+
+h5 {
+  color: white;
+  font-size: 48px;
+  position: absolute; 
+  top: 40px; 
+  left: 47px;
+  width: 100%; 
 }
 
 h1 {
@@ -38,4 +56,14 @@ h1 {
   top: 88px; 
   left: 47px;
   width: 100%; 
+}
+
+h3 {
+  color: white;
+}
+
+h4 {
+  margin-top: 0px;
+  font-size: 14px;
+  color: white;
 }

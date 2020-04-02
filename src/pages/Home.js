@@ -14,8 +14,6 @@ import RenderUnits from "../components/renderUnits"
 import RenderNCUs from "../components/renderNCUs"
 import Img from 'react-image';
 
-// import Background from ".../public/Images/General/Background";
-
 export default function Home(props) {
 
   const [commander, setCommander] = useState(false);
@@ -158,26 +156,16 @@ export default function Home(props) {
 
   const DrawImage = ({location}) => {console.log (location); return<Img width="140" height="200" src={location} />}
   const DrawImage2 = ({location}) => {console.log (location); return<Img width="370" height="200" src={location} />}
+  const DrawImage3 = ({location}) => {console.log (location); return<Img width="200" height="100" src={location} />}
   const DrawToken = ({location}) => {console.log (location); return<Img width="150" height="150" src={location} />}
 
   function renderAttachments (units) {
     return [].concat(units.map((unit, i) =>
       (units[i].attachment === "None" ?
-        // <form onSubmit={event => addAttachment(event, i)}>
-        //   <LoaderButton
-        //     block
-        //     type="submit"
-        //     bsSize="large"
-        //     isLoading={isLoading}
-        //     // disabled={!validateAdd()}
-        //     text="Add Attachment"
-        //     loadingText="Adding…"
-        //     />
-        //   </form>
         <h4>
-        <Panel onClick={event => addAttachment(event, i)}>
-          <DrawImage location={"./Images/General/NonCombat-Unit.png"}/>
-        </Panel>
+          <Panel onClick={event => addAttachment(event, i)}>
+            <DrawImage location={"./Images/General/NonCombat-Unit.png"}/>
+          </Panel>
         </h4>
           :
           <h4>
@@ -193,10 +181,11 @@ export default function Home(props) {
     return [].concat(units.map((unit, i) =>
       (units[i].attachment === "None" || units[i].attachment.attachment2 === "None" ?
           <h4>
-            <div key={i}>
-              <DrawImage location={"./Images/General/NonCombat-Unit.png"}/>
-            </div>
-            None
+            <Panel>
+              <DrawImage location=""/>
+            </Panel>
+            <h4></h4>
+            {/* None */}
           </h4>
           :
           <h4>
@@ -260,83 +249,72 @@ export default function Home(props) {
 
   function renderPage() {
     return (
-    <div className="Home" 
-    // styles={{ backgroundImage:{Background} }}
+    <div className="Home"   
+    // styles={{ backgroundImage:"/Images/General/Background.png"} }
     >
 
       <Grid>
         <Row>
+          {!pointsSet && <h3>Choose Points Limit</h3>}
           <Col xs={4} md={4}>
-            {!pointsSet && <form onSubmit={event => setTotal(event, 30)}>
-            <LoaderButton
-              block
-              type="submit"
-              bsSize="large"
-              text="30 Points"
-            />     
-            </form>}
+          <div class="image2">
+          {!pointsSet && <Panel onClick={event => setTotal(event, 30)}>
+            <DrawToken location={"./Images/General/PointCounter-Container.png"}/>
+          </Panel>}
+              {!pointsSet && <h5><b>30</b></h5>}          
+          </div>
           </Col>
           <Col xs={4} md={4}>
-          {!pointsSet && <form onSubmit={event => setTotal(event, 40)}>
-            <LoaderButton
-              block
-              type="submit"
-              bsSize="large"
-              text="40 Points"
-            />     
-            </form>}
+          <div class="image2">
+          {!pointsSet && <Panel onClick={event => setTotal(event, 40)}>
+            <DrawToken location={"./Images/General/PointCounter-Container.png"}/>
+          </Panel>}
+              {!pointsSet && <h5><b>40</b></h5>}          
+          </div>
           </Col>
           <Col xs={4} md={4}>
-          {!pointsSet && <form onSubmit={event => setTotal(event, 50)}>
-            <LoaderButton
-              block
-              type="submit"
-              bsSize="large"
-              text="50 Points"
-            />
-            </form>}
+          <div class="image2">
+          {!pointsSet && <Panel onClick={event => setTotal(event, 50)}>
+            <DrawToken location={"./Images/General/PointCounter-Container.png"}/>
+          </Panel>}
+              {!pointsSet && <h5><b>50</b></h5>}          
+          </div>
           </Col>
-          {!pickedFaction && pointsSet && <form onSubmit={chooseNeutral}>
-            <LoaderButton
-              block
-              type="submit"
-              bsSize="large"
-              isLoading={isLoading}
-              // disabled={!validateAdd()}
-              text="Neutral"
-              loadingText="Adding…"
-            />     
-          </form>}
-          {!pickedFaction && pointsSet && <form onSubmit={chooseLannister}>
-            <LoaderButton
-              block
-              type="submit"
-              bsSize="large"
-              isLoading={isLoading}
-              // disabled={!validateAdd()}
-              text="Lannister"
-              loadingText="Adding…"
-            />       
-          </form>}
-          {!pickedFaction && pointsSet && <form onSubmit={chooseStark}>
-            <LoaderButton
-              block
-              type="submit"
-              bsSize="large"
-              isLoading={isLoading}
-              // disabled={!validateAdd()}
-              text="Stark"
-              loadingText="Adding…"
-            />       
-          </form>}
+          {!pickedFaction && pointsSet && <h3>Choose Faction</h3>}
+          <Col xs={4} md={4}>
+          <div class="image2">
+          {!pickedFaction && pointsSet && <Panel onClick={chooseNeutral}>
+            <DrawToken location={"./Images/General/PointCounter-Container.png"}/>
+          </Panel>}
+              {!pickedFaction && pointsSet &&  <h5><b>Neutral</b></h5>}          
+          </div>
+          </Col>
+          <Col xs={4} md={4}>
+          <div class="image2">
+          {!pickedFaction && pointsSet && <Panel onClick={chooseLannister}>
+            <DrawToken location={"./Images/General/PointCounter-Container.png"}/>
+          </Panel>}
+              {!pickedFaction && pointsSet &&  <h5><b>Lannister</b></h5>}          
+          </div>
+          </Col>
+          <Col xs={4} md={4}>
+          <div class="image2">
+          {!pickedFaction && pointsSet && <Panel onClick={chooseStark}>
+            <DrawToken location={"./Images/General/PointCounter-Container.png"}/>
+          </Panel>}
+              {!pickedFaction && pointsSet &&  <h5><b>Stark</b></h5>}          
+          </div>
+          </Col>
+          <Col xs={12} md={6}>
           {faction != 0 && !commander &&<h3>Include Neutrals</h3>}
           {faction != 0 && !commander && (neutrals == false) && <Panel onClick={event => setNeutral(event)}>
-            <DrawImage location={"./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-OFF.png"}/>
+            <DrawImage3 location={"./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-OFF.png"}/>
           </Panel>}
           {faction != 0 && !commander && (neutrals == true) && <Panel onClick={event => setNeutral(event)}>
-            <DrawImage location={"./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-ON.png"}/>
+            <DrawImage3 location={"./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-ON.png"}/>
           </Panel>
-          }     
+          }
+          </Col> 
           <Col xs={12} md={3}>
             {/* {commander && <h4>{commander[0].name}</h4>} */}
             {!commander && pickedFaction && <form onSubmit={addCommander}>
@@ -356,6 +334,32 @@ export default function Home(props) {
           {renderTable(NCUs)}
         </Row> */}
         <Row>
+          <Col xs={12} md={2}>
+            {commander && <h3>Commander</h3>}
+            {NCUs.length>0 && NCUs[0].token && RenderNCUCommander()}
+            {units.length>0 && units[0].attachment.token && RenderCUCommander()}    
+          
+            <div class="image">
+              {commander && <h3>Points Remaining</h3>}
+              {commander && <img src="./Images/General/PointCounter-Container.png" width="150" height="150"/>}
+              {commander && <h1><b>{pointsLeft}</b></h1>}
+
+            </div>
+
+            {commander && neutrals && <h3>Neutrals On</h3>}
+            {commander && !neutrals && <h3>Neutrals Off</h3>}
+            {commander && <form onSubmit={clearAll}>
+            <LoaderButton
+              block
+              type="submit"
+              bsSize="large"
+              isLoading={isLoading}
+              // disabled={!validateAdd()}
+              text="Clear All"
+              loadingText="Adding…"
+            />     
+            </form>}
+          </Col>
           <Col xs={12} md={2}>
           {commander && <h3>NCUs</h3>}
             {NCUs.length>0 &&<RenderNCUs
@@ -380,43 +384,14 @@ export default function Home(props) {
             </h4>}
           </Col>
           <Col xs={12} md={4}>
+            {commander && <h3>Attachments</h3>}
             <Col xs={6} md={6}>
-            {commander && <h3>Attachment 1</h3>}
             {units.length>0 && renderAttachments(units)}
             </Col>
             <Col xs={6} md={6}>
-            {commander && <h3>Attachment 2</h3>}
             {units.length>0 && renderAttachments2(units)}
             </Col>
           </Col>
-          <Col xs={12} md={2}>
-            {commander && <h3>Commander</h3>}
-            {NCUs.length>0 && NCUs[0].token && RenderNCUCommander()}
-            {units.length>0 && units[0].attachment.token && RenderCUCommander()}    
-          
-            <div class="image">
-              {commander && <h3>Points Remaining</h3>}
-              {commander && <img src="./Images/General/PointCounter-Container.png" width="150" height="150"/>}
-              <h1><b>{pointsLeft}</b></h1>
-
-            </div>
-
-            {commander && neutrals && <h3>Neutrals On</h3>}
-            {commander && !neutrals && <h3>Neutrals Off</h3>}
-          </Col>
-        </Row>
-        <Row>
-          {commander && <form onSubmit={clearAll}>
-            <LoaderButton
-              block
-              type="submit"
-              bsSize="large"
-              isLoading={isLoading}
-              // disabled={!validateAdd()}
-              text="Clear All"
-              loadingText="Adding…"
-            />     
-            </form>}
         </Row>
       </Grid>
     </div>
