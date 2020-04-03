@@ -1,10 +1,10 @@
 const commanders = [
     {
       type: 'group', name: 'Neutral', items: [
-      { name: "Ramsay Snow", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/Neutral/Commander-Cards/NEUTRAL-RAMSAY-C.png", attachment2: {name: "Reek", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/Neutral/Attachment-Cards/NEUTRAL-Reek.png"}, neutral: true },
-      { name: "Roose Bolton", cost: 0, type: "NCU", unique: true, imgFile: "./Images/Neutral/Commander-Cards/NEUTRAL-ROOSE-C.png", attachment2: "None", neutral: true },
-      { name: "Vargo Hoat", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/Neutral/Commander-Cards/NEUTRAL-VARGO-C.png", attachment2: "None", neutral: true },
-      { name: "Daario Naharis", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/Neutral/Commander-Cards/NEUTRAL-DAARIO-C.png", attachment2: "None", neutral: true }
+      { name: "Ramsay Snow", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/Neutral/Commander-Cards/NEUTRAL-RAMSAY-C.png", token: "./Images/Neutral/Tokens/ASOIAF-NEUTRAL-RAMSAY.png", attachment2: {name: "Reek", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/Neutral/Attachment-Cards/NEUTRAL-Reek.png"}, neutral: true },
+      { name: "Roose Bolton", cost: 0, type: "NCU", unique: true, imgFile: "./Images/Neutral/Commander-Cards/NEUTRAL-ROOSE-C.png", token: "./Images/Neutral/Tokens/ASOIAF-NEUTRAL-ROOSE.png", attachment2: "None", neutral: true },
+      { name: "Vargo Hoat", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/Neutral/Commander-Cards/NEUTRAL-VARGO-C.png", token: "./Images/Neutral/Tokens/ASOIAF-NEUTRAL-VARGO.png", attachment2: "None", neutral: true },
+      { name: "Daario Naharis", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/Neutral/Commander-Cards/NEUTRAL-DAARIO-C.png", token: "./Images/Neutral/Tokens/ASOIAF-NEUTRAL-DAARIO.png", attachment2: "None", neutral: true }
       ]
     },
     {

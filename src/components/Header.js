@@ -1,8 +1,6 @@
 import React from "react";
 
 var style = {
-    backgroundColor: "Grey",
-    // borderTop: "1px solid #E7E7E7",
     textAlign: "center",
     padding: "20px",
     position: "fixed",
@@ -25,9 +23,9 @@ function Header () {
             <div>
                 <div style={phantom}>
                 </div>
-                <div style={style}>
+                {/* <div style={style}>
                     Header
-                </div>
+                </div> */}
             </div>
         );
     };

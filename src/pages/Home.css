@@ -42,37 +42,54 @@
 }
 
 .image { 
-  position: relative; 
+  position: relative;
   width: 100%; /* for IE 6 */
 }
 
 .image2 { 
   position: relative;
-  top: 10px;
-  left: 100px;
-  width: 100%; /* for IE 6 */
+  /* top: 10px; */
+  left: 25px;
+  /* width: 100%; for IE 6 */
+}
+
+.image3 { 
+  position: relative;
+  /* top: 10px; */
+  left: 25px;
+  top: 30px;
+  /* width: 100%; for IE 6 */
+}
+
+.image4 { 
+  position: absolute;
+  margin-top: 180px;
+  top: 0px;
+  left: 0px;
+  width: 100%;
 }
 
 h5 {
   color: white;
   font-size: 48px;
   position: absolute; 
-  top: 40px; 
-  left: 47px;
+  top: 38px; 
+  left: -18px;
   width: 100%; 
 }
 
 h1 {
   color: white;
-  font-size: 48px;
-  position: absolute; 
-  top: 65px; 
-  left: 47px;
+  font-size: 2.5vw;
+  position: relative;
+  transform: translateY(-225%);
+  left: 0px;
   width: 100%; 
 }
 
 h3 {
   color: white;
+  font-size: 1.2vw;
 }
 
 h4 {

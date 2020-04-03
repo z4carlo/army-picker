@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Home.css";
 import commanders from "../units/commanders"
 import combatUnits from "../units/combatUnits"
@@ -30,13 +30,16 @@ export default function Home(props) {
   const [neutralPoints, setNeutralPoints] = useState(0);
   const [haveArya, setHaveArya] = useState(false);
 
+  useEffect(() => {}, [...units.map(unit => unit.items && unit.items.map(item => item.attachment))]);
+
   var fixedTop = {
     padding: "20px",
     position: "fixed",
     left: "20%",
     top: "0px",
-    height: "260px",
+    height: "auto",
     width: "60%",
+    textAlign: "center",
   };
 
   var fixedBackground = {
@@ -45,8 +48,9 @@ export default function Home(props) {
     position: "fixed",
     left: "0px",
     top: "0px",
-    height: "260px",
+    height: "250px",
     width: "100%",
+    opacity: "0.8",
   };
 
   var fixedTopBuffer = {
@@ -165,6 +169,7 @@ export default function Home(props) {
       units[units.length] = {name: "Summer", cost: 0, type: "Monster", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Summer.png"};
     }
     units[i].attachment = JSON.parse(JSON.stringify(attachment));
+    setUnits(units);
     if (attachment.neutral === true) {
       setNeutralPoints(tempNeutralPoints-(attachment.cost));
     }
@@ -183,8 +188,9 @@ export default function Home(props) {
   const DrawImage = ({location}) => {console.log (location); return<Img width="84%" height="auto" src={location} />}
   const DrawImage2 = ({location}) => {console.log (location); return<Img width="100%" height="auto" src={location} />}
   const DrawImage3 = ({location}) => {console.log (location); return<Img width="200" height="100" src={location} />}
-  const DrawToken = ({location}) => {console.log (location); return<Img width="150" height="150" src={location} />}
-  const DrawTokenWide = ({location}) => {console.log (location); return<Img width="180" height="150" src={location} />}
+  const DrawToken = ({location}) => {console.log (location); return<Img width="45%" height="auto" src={location} />}
+  const DrawTokenSmall = ({location}) => {console.log (location); return<Img width="40%" height="auto" src={location} />}
+  const DrawTokenCommander = ({location}) => {console.log (location); return<Img width="50%" height="auto" src={location} />}
 
   function renderAttachments (units) {
     return [].concat(units.map((unit, i) =>
@@ -254,7 +260,7 @@ export default function Home(props) {
     console.log("Draw NCU Commander");
     return (
       <div>
-        <DrawToken location={NCUs[0].token}/>
+        <DrawTokenCommander location={NCUs[0].token}/>
       </div>
     );
   }
@@ -263,7 +269,7 @@ export default function Home(props) {
     console.log("Draw CU Commander");
     return (
       <div>
-        <DrawToken location={units[0].attachment.token}/>
+        <DrawTokenCommander location={units[0].attachment.token}/>
       </div>
     );
   }
@@ -351,7 +357,8 @@ export default function Home(props) {
         </Row>
         <div style={fixedBackground}></div>
         <div style={fixedTop}>
-          {!pointsSet && <h3>Choose Points Limit</h3>}
+        <Row>
+          {!pointsSet && <h3>First Choose Points Limit</h3>}
           <Col xs={4} md={4}>
           <div class="image2">
           {!pointsSet && <Panel onClick={event => setTotal(event, 30)}>
@@ -376,26 +383,25 @@ export default function Home(props) {
               {!pointsSet && <h5><b>50</b></h5>}          
           </div>
           </Col>
-          {!pickedFaction && pointsSet && <h3>Choose Faction</h3>}
+          {!pickedFaction && pointsSet && <h3>Now Choose Faction</h3>}
           <Col xs={4} md={4}>
           <div class="image2">
           {!pickedFaction && pointsSet && <Panel onClick={chooseNeutral}>
-            <DrawToken location={"./Images/General/PointCounter-Container.png"}/>
-          </Panel>}
-              {!pickedFaction && pointsSet &&  <h5><b>Neutral</b></h5>}          
-          </div>
-          </Col>
-          <Col xs={4} md={4}>
-          <div class="image2">
-          {!pickedFaction && pointsSet && <Panel onClick={chooseLannister}>
-            <DrawToken location={"./Images/General/SIGIL-LANNISTER.png"}/>
+            {<DrawTokenSmall location={"./Images/General/NEUTRAL-SIGIL.png"}/>}
           </Panel>}       
           </div>
           </Col>
           <Col xs={4} md={4}>
           <div class="image2">
+          {!pickedFaction && pointsSet && <Panel onClick={chooseLannister}>
+            <DrawTokenSmall location={"./Images/General/SIGIL-LANNISTER.png"}/>
+          </Panel>}       
+          </div>
+          </Col>
+          <Col xs={4} md={4}>
+          <div class="image3">
           {!pickedFaction && pointsSet && <Panel onClick={chooseStark}>
-            <DrawTokenWide location={"./Images/General/STARK-SIGIL.png"}/>
+            <DrawTokenSmall location={"./Images/General/STARK-SIGIL.png"}/>
           </Panel>}          
           </div>
           </Col>
@@ -421,16 +427,18 @@ export default function Home(props) {
             </form>} 
           </Col>
           <Col xs={3} md={3}>
-          {commander && <h3>Faction</h3>}
+            {commander && <h3>Faction</h3>}
+            {commander && faction === 0 && <DrawToken location={"./Images/General/NEUTRAL-SIGIL.png"}/>}
             {commander && faction === 1 && <DrawToken location={"./Images/General/SIGIL-LANNISTER.png"}/>}
-            {commander && faction === 2 && <DrawTokenWide location={"./Images/General/STARK-SIGIL.png"}/>}
+            {commander && faction === 2 && <DrawToken location={"./Images/General/STARK-SIGIL.png"}/>}
           </Col>
           <Col xs={3} md={3}>
+            <div>
             <div class="image">
               {commander && <h3>Points Remaining</h3>}
-              {commander && <img src="./Images/General/PointCounter-Container.png" width="150" height="150"/>}
+              {commander && <img src="./Images/General/PointCounter-Container.png" width="50%" height="auto"/>}
               {commander && <h1><b>{pointsLeft}</b></h1>}
-
+            </div>
             </div>
           </Col>
           <Col xs={3} md={3}>
@@ -452,6 +460,10 @@ export default function Home(props) {
             />     
             </form>}
           </Col>
+          </Row>
+            <div class="image4">
+                {commander && <img src="./Images/General/PointCounter-Container.png" width="10%" height="10%"/>}
+              </div>
           </div>
       </Grid>
     </div>
