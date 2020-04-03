@@ -15,6 +15,7 @@ import RenderNCUs from "../components/renderNCUs"
 import Img from 'react-image';
 import Footer from "../components/Footer.js"
 import Header from "../components/Header.js";
+import CreatedBy from "../components/CreatedBy.js"
 
 export default function Home(props) {
 
@@ -346,6 +347,7 @@ export default function Home(props) {
         </Row>
         <Row>
           <Footer/>
+          <CreatedBy/>
         </Row>
         <div style={fixedBackground}></div>
         <div style={fixedTop}>
