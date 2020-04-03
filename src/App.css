@@ -1,12 +1,12 @@
 .App {
   /* margin-top: 15px; */
   background-image: url("/Images/General/Background.png");
-  background-size: 100%;
+  background-size: cover;
   width: 100%;
-  min-height: 937px;
+  min-height: 1800px;
+  background-repeat: repeat-y;
 }
 
 .App .navbar-brand {
   font-weight: bold;
 }
-

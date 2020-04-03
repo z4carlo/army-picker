@@ -8,11 +8,13 @@ import pickRandom from "../functions/pickRandom"
 import filterPoints from "../functions/filterPoints"
 import noRepeats from "../functions/noRepeats"
 import attachmentMatch from "../functions/attachmentMatch"
-import { Grid, Row, Col, Panel } from "react-bootstrap";
+import { Grid, Row, Col, Panel } from "react-bootstrap"
 import LoaderButton from "../components/LoaderButton"
 import RenderUnits from "../components/renderUnits"
 import RenderNCUs from "../components/renderNCUs"
 import Img from 'react-image';
+import Footer from "../components/Footer.js"
+import Header from "../components/Header.js";
 
 export default function Home(props) {
 
@@ -26,6 +28,32 @@ export default function Home(props) {
   const [neutrals, setNeutrals] = useState(false);
   const [neutralPoints, setNeutralPoints] = useState(0);
   const [haveArya, setHaveArya] = useState(false);
+
+  var fixedTop = {
+    padding: "20px",
+    position: "fixed",
+    left: "20%",
+    top: "0px",
+    height: "260px",
+    width: "60%",
+  };
+
+  var fixedBackground = {
+    backgroundColor: "Black",
+    padding: "20px",
+    position: "fixed",
+    left: "0px",
+    top: "0px",
+    height: "260px",
+    width: "100%",
+  };
+
+  var fixedTopBuffer = {
+    display: 'block',
+    padding: '0px',
+    height: '130px',
+    width: '100%',
+  };
 
   function addCommander(event) {
     event.preventDefault();
@@ -151,8 +179,8 @@ export default function Home(props) {
     // setNCUs();
   };
 
-  const DrawImage = ({location}) => {console.log (location); return<Img width="140" height="200" src={location} />}
-  const DrawImage2 = ({location}) => {console.log (location); return<Img width="370" height="200" src={location} />}
+  const DrawImage = ({location}) => {console.log (location); return<Img width="84%" height="auto" src={location} />}
+  const DrawImage2 = ({location}) => {console.log (location); return<Img width="100%" height="auto" src={location} />}
   const DrawImage3 = ({location}) => {console.log (location); return<Img width="200" height="100" src={location} />}
   const DrawToken = ({location}) => {console.log (location); return<Img width="150" height="150" src={location} />}
   const DrawTokenWide = ({location}) => {console.log (location); return<Img width="180" height="150" src={location} />}
@@ -160,38 +188,32 @@ export default function Home(props) {
   function renderAttachments (units) {
     return [].concat(units.map((unit, i) =>
       (units[i].attachment === "None" ?
-        <h4>
+        // <h4>
           <Panel onClick={event => addAttachment(event, i)}>
             <DrawImage location={"./Images/General/NonCombat-Unit.png"}/>
           </Panel>
-        </h4>
+        // </h4>
           :
-          <h4>
-            <div key={i}>
+          // <h4>
+            <Panel>
               <DrawImage location={units[i].attachment.imgFile}/>
-            </div>
-            {units[i].attachment.name}
-          </h4>
+            {/* {units[i].attachment.name}             */}
+            </Panel>
+          // </h4>
       )))
   }
 
   function renderAttachments2 (units) {
     return [].concat(units.map((unit, i) =>
       (units[i].attachment === "None" || units[i].attachment.attachment2 === "None" ?
-          <h4>
             <Panel>
               <DrawImage location=""/>
+              None
             </Panel>
-            <h4></h4>
-            {/* None */}
-          </h4>
           :
-          <h4>
-            <div key={i}>
+            <Panel>
               <DrawImage location={units[i].attachment.attachment2.imgFile}/>
-            </div>
-            {units[i].attachment.attachment2.name}
-          </h4>
+            </Panel>
       )))
   }
 
@@ -253,6 +275,80 @@ export default function Home(props) {
 
       <Grid>
         <Row>
+          <Header/>
+        </Row>
+        <Row>
+
+          <div style={fixedTopBuffer}></div>
+        </Row>
+        <Row>
+          <Col xs={12} md={2}>
+            {/* {commander && <h3>Faction</h3>}
+            {commander && faction === 1 && <DrawToken location={"./Images/General/SIGIL-LANNISTER.png"}/>}
+            {commander && faction === 2 && <DrawTokenWide location={"./Images/General/STARK-SIGIL.png"}/>}
+            {commander && <h3>Commander</h3>}
+            {NCUs.length>0 && NCUs[0].token && RenderNCUCommander()}
+            {units.length>0 && units[0].attachment.token && RenderCUCommander()}    
+          
+            <div class="image">
+              {commander && <h3>Points Remaining</h3>}
+              {commander && <img src="./Images/General/PointCounter-Container.png" width="150" height="150"/>}
+              {commander && <h1><b>{pointsLeft}</b></h1>}
+
+            </div>
+
+            {commander && neutrals && <h3>Neutrals On</h3>}
+            {commander && !neutrals && <h3>Neutrals Off</h3>}
+            {commander && <form onSubmit={clearAll}>
+            <LoaderButton
+              block
+              type="submit"
+              bsSize="large"
+              text="Clear All"
+              loadingText="Adding…"
+            />     
+            </form>} */}
+          </Col>
+          <Col xs={12} md={2}>
+          {commander && <h3>NCUs</h3>}
+            {NCUs.length>0 &&<RenderNCUs
+              nonCombatUnits={nonCombatUnits}
+              NCUs={NCUs}
+            />}            
+            {commander && <h4>
+              <Panel onClick={addNCU}>
+                <DrawImage location={"./Images/General/NonCombat-Unit.png"}/>
+              </Panel>
+            </h4>}       
+          </Col>
+          <Col xs={12} md={4}>
+            {commander && <h3>Combat Units</h3>}
+            {units.length>0 && (units[0].name !== "") &&<RenderUnits
+              units={units}
+            />}
+            {commander && <h4>
+              <Panel className="unit" onClick={addCombatUnit}>
+                <DrawImage2 location={"./Images/General/Combat-Unit.png"}/>
+              </Panel>
+            </h4>}
+          </Col>
+          {/* <Col xs={12} md={4}> */}
+            {/* {commander && <h3>Attachments</h3>} */}
+            <Col xs={6} md={2}>
+            {commander && <h3>Attachments</h3>}
+            {units.length>0 && renderAttachments(units)}
+            </Col>
+            <Col xs={6} md={2}>
+            {commander && <h6>Spacer</h6>}
+            {units.length>0 && renderAttachments2(units)}
+            </Col>
+          {/* </Col> */}
+        </Row>
+        <Row>
+          <Footer/>
+        </Row>
+        <div style={fixedBackground}></div>
+        <div style={fixedTop}>
           {!pointsSet && <h3>Choose Points Limit</h3>}
           <Col xs={4} md={4}>
           <div class="image2">
@@ -311,7 +407,7 @@ export default function Home(props) {
           </Panel>
           }
           </Col> 
-          <Col xs={12} md={3}>
+          <Col xs={12} md={6}>
             {!commander && pickedFaction && <form onSubmit={addCommander}>
             <LoaderButton
               block
@@ -322,26 +418,29 @@ export default function Home(props) {
             />     
             </form>} 
           </Col>
-        </Row>
-        <Row>
-          <Col xs={12} md={2}>
-            {commander && <h3>Faction</h3>}
+          <Col xs={3} md={3}>
+          {commander && <h3>Faction</h3>}
             {commander && faction === 1 && <DrawToken location={"./Images/General/SIGIL-LANNISTER.png"}/>}
             {commander && faction === 2 && <DrawTokenWide location={"./Images/General/STARK-SIGIL.png"}/>}
-            {commander && <h3>Commander</h3>}
-            {NCUs.length>0 && NCUs[0].token && RenderNCUCommander()}
-            {units.length>0 && units[0].attachment.token && RenderCUCommander()}    
-          
+          </Col>
+          <Col xs={3} md={3}>
             <div class="image">
               {commander && <h3>Points Remaining</h3>}
               {commander && <img src="./Images/General/PointCounter-Container.png" width="150" height="150"/>}
               {commander && <h1><b>{pointsLeft}</b></h1>}
 
             </div>
-
-            {commander && neutrals && <h3>Neutrals On</h3>}
+          </Col>
+          <Col xs={3} md={3}>
+            {commander && <h3>Commander</h3>}
+            {NCUs.length>0 && NCUs[0].token && RenderNCUCommander()}
+            {units.length>0 && units[0].attachment.token && RenderCUCommander()}
+          </Col>
+          <Col xs={3} md={3}>
+          {commander && neutrals && <h3>Neutrals On</h3>}
             {commander && !neutrals && <h3>Neutrals Off</h3>}
             {commander && <form onSubmit={clearAll}>
+              
             <LoaderButton
               block
               type="submit"
@@ -351,39 +450,7 @@ export default function Home(props) {
             />     
             </form>}
           </Col>
-          <Col xs={12} md={2}>
-          {commander && <h3>NCUs</h3>}
-            {NCUs.length>0 &&<RenderNCUs
-              nonCombatUnits={nonCombatUnits}
-              NCUs={NCUs}
-            />}            
-            {commander && <h4>
-              <Panel onClick={addNCU}>
-                <DrawImage location={"./Images/General/NonCombat-Unit.png"}/>
-              </Panel>
-            </h4>}       
-          </Col>
-          <Col xs={12} md={4}>
-            {commander && <h3>Combat Units</h3>}
-            {units.length>0 && (units[0].name !== "") &&<RenderUnits
-              units={units}
-            />}
-            {commander && <h4>
-              <Panel className="unit" onClick={addCombatUnit}>
-                <DrawImage2 location={"./Images/General/Combat-Unit.png"}/>
-              </Panel>
-            </h4>}
-          </Col>
-          <Col xs={12} md={4}>
-            {commander && <h3>Attachments</h3>}
-            <Col xs={6} md={6}>
-            {units.length>0 && renderAttachments(units)}
-            </Col>
-            <Col xs={6} md={6}>
-            {units.length>0 && renderAttachments2(units)}
-            </Col>
-          </Col>
-        </Row>
+          </div>
       </Grid>
     </div>
   );

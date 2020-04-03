@@ -15,9 +15,12 @@
   .Home .panel {
     border: 0px;
     margin-top: 0px;
-    margin-bottom: 25px;
-    height: 200px;
-    width: 0px;
+    margin-bottom: 10px;
+    margin-left: 0px;
+    margin-right: 0px;
+    height: 205px;
+    width: 90%;
+    background-color: transparent;
     color: transparent;
 }
 
@@ -26,6 +29,16 @@
   margin-bottom: 28px;
   height: 215px;
   width: 300px;
+}
+
+.Home .col-md-2 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.Home .col-md-4 {
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .image { 
@@ -53,7 +66,7 @@ h1 {
   color: white;
   font-size: 48px;
   position: absolute; 
-  top: 88px; 
+  top: 65px; 
   left: 47px;
   width: 100%; 
 }
@@ -66,4 +79,11 @@ h4 {
   margin-top: 0px;
   font-size: 14px;
   color: white;
+}
+
+h6 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 24px;
+  opacity: 0;
 }
