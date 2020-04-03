@@ -10,7 +10,7 @@ var style = {
     bottom: "0",
     height: "100px",
     width: "100%",
-    opacity: "0.4",
+    // opacity: "0.4",
     color: "White",
 };
 
@@ -18,7 +18,7 @@ var style = {
 function CreatedBy () {
         return (
             <div style={style}>
-                Brought to you by <b>Mythicos Studios</b> and <Link to="//asoiaf-stats.com"><b>asoiaf-stats.com</b></Link>
+                Brought to you by <b>Mythicos Studios</b> and <a href="//asoiaf-stats.com" ><b>asoiaf-stats.com</b></a>
             </div>
         );
     };
