@@ -8,7 +8,7 @@ import pickRandom from "../functions/pickRandom"
 import filterPoints from "../functions/filterPoints"
 import noRepeats from "../functions/noRepeats"
 import attachmentMatch from "../functions/attachmentMatch"
-import { Grid, Row, Col, Checkbox, Panel } from "react-bootstrap";
+import { Grid, Row, Col, Panel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton"
 import RenderUnits from "../components/renderUnits"
 import RenderNCUs from "../components/renderNCUs"
@@ -19,7 +19,6 @@ export default function Home(props) {
   const [commander, setCommander] = useState(false);
   const [units, setUnits] = useState([]);
   const [NCUs, setNCUs] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [pointsLeft, setPointsLeft] = useState(0);
   const [pointsSet, setPointsSet] = useState(false);
   const [faction, setFaction] = useState(0);
@@ -30,26 +29,24 @@ export default function Home(props) {
 
   function addCommander(event) {
     event.preventDefault();
-    // var newcommander;
-    if (neutrals == false) {
+    if (neutrals === false) {
       var newcommander = pickRandom(commanders[faction].items);
     } else {
-      var newcommander = pickRandom(commanders[faction].items.concat(commanders[0].items));
+      newcommander = pickRandom(commanders[faction].items.concat(commanders[0].items));
     }
-    // var newcommander = pickRandom(commanders[faction].items);
-    if ((newcommander.type == "Infantry") || (newcommander.type == "Cavalry")) {
-      if (newcommander.name == "Joffrey Baratheon") {
+    if ((newcommander.type === "Infantry") || (newcommander.type === "Cavalry")) {
+      if (newcommander.name === "Joffrey Baratheon") {
         units[0] = {name: "Kingsguard", cost: 6, type: "Infantry", attachment: newcommander, attachment2: "None", unique: true, imgFile: "./Images/Lannister/CombatUnit-Cards/LAN-CombatUnit-Kingsguard.png"};
-      } else if (newcommander.name == "Eddard Stark") {
+      } else if (newcommander.name === "Eddard Stark") {
         units[0] = {name: "Eddard's Honor Guard", cost: 7, type: "Infantry", attachment: newcommander, attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-HonorGuard.png"};
-      } else if (newcommander.name == "Robb Stark") {
+      } else if (newcommander.name === "Robb Stark") {
         units[0] = {name: "", attachment: newcommander};
         units[1] = {name: "Greywind", cost: 0, type: "Monster", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Greywind.png"};
       } else {
         units[0] = {name: "", attachment: newcommander, attachment2: "None",};
       }
     }
-    if (newcommander.type == ("NCU")) {
+    if (newcommander.type === ("NCU")) {
       NCUs[0] = newcommander;
     }
     setPointsLeft(pointsLeft-(newcommander.cost));
@@ -58,21 +55,21 @@ export default function Home(props) {
 
   function addCombatUnit(event) {
     event.preventDefault();
-    if (neutrals == false) {
+    if (neutrals === false) {
       var filteredData = filterPoints(combatUnits[faction].items, pointsLeft);
     } else {
       var neutralUnits = filterPoints(combatUnits[0].items, neutralPoints);
-      var filteredData = filterPoints(combatUnits[faction].items.concat(neutralUnits), pointsLeft);
+      filteredData = filterPoints(combatUnits[faction].items.concat(neutralUnits), pointsLeft);
     }
     filteredData = noRepeats(filteredData, commander, NCUs, units, attachments);
     if (filteredData.length > 0) {
-      if (units.length>0 && units[0].name == "") {
+      if (units.length>0 && units[0].name === "") {
         filteredData = attachmentMatch(filteredData, units[0].attachment.type);
       }
     }
     var newUnit = JSON.parse(JSON.stringify(pickRandom(filteredData)));
     if (filteredData.length > 0) {
-      if (units.length>0 && units[0].name == "") {
+      if (units.length>0 && units[0].name === "") {
         newUnit.attachment = units[0].attachment;
         units[0] = newUnit;
       }
@@ -80,7 +77,7 @@ export default function Home(props) {
         const unit = units.concat(newUnit);
         setUnits (unit);
       }
-      if (newUnit.neutral == true) {
+      if (newUnit.neutral === true) {
         setNeutralPoints(neutralPoints-(newUnit.cost));
       }
       setPointsLeft(pointsLeft-(newUnit.cost));
@@ -89,20 +86,20 @@ export default function Home(props) {
 
   function addNCU(event) {
     event.preventDefault();
-    if (neutrals == false) {
+    if (neutrals === false) {
       var filteredData = filterPoints(nonCombatUnits[faction].items, pointsLeft);
     } else {
       var neutralUnits = filterPoints(nonCombatUnits[0].items, neutralPoints);
-      var filteredData = filterPoints(nonCombatUnits[faction].items.concat(neutralUnits), pointsLeft);
+      filteredData = filterPoints(nonCombatUnits[faction].items.concat(neutralUnits), pointsLeft);
     }
     filteredData = noRepeats(filteredData, commander, NCUs, units, attachments);
     if (filteredData.length > 0) {
     const NCU = NCUs.concat(pickRandom(filteredData));
     setNCUs (NCU);
-    if (NCU[NCU.length-1].name == "Arya Stark") {
+    if (NCU[NCU.length-1].name === "Arya Stark") {
       setHaveArya(true);
     }
-    if (NCU[NCU.length-1].neutral == true) {
+    if (NCU[NCU.length-1].neutral === true) {
       setNeutralPoints(neutralPoints-(NCU[NCU.length-1].cost));
     }
     setPointsLeft(pointsLeft-(NCU[NCU.length-1].cost));
@@ -115,31 +112,31 @@ export default function Home(props) {
       var tempPoints = pointsLeft + 1;
       var tempNeutralPoints = neutralPoints + 1;
     } else if (units[i].name === "Stormcrow Archers") {
-      var tempPoints = pointsLeft + 1;
-      var tempNeutralPoints = neutralPoints + 1;
+      tempPoints = pointsLeft + 1;
+      tempNeutralPoints = neutralPoints + 1;
     } else {
-      var tempPoints = pointsLeft;
-      var tempNeutralPoints = neutralPoints;
+      tempPoints = pointsLeft;
+      tempNeutralPoints = neutralPoints;
     }
-    if (neutrals == false) {
+    if (neutrals === false) {
       var filteredData = filterPoints(attachments[faction].items, tempPoints);
     } else {
       var neutralUnits = filterPoints(attachments[0].items, tempNeutralPoints);
-      var filteredData = filterPoints(attachments[faction].items.concat(neutralUnits), tempPoints);
+      filteredData = filterPoints(attachments[faction].items.concat(neutralUnits), tempPoints);
     }
     filteredData = noRepeats(filteredData, commander, NCUs, units, haveArya)
     filteredData = attachmentMatch(filteredData, units[i].type);
     if (filteredData.length > 0) {
     const attachment = pickRandom(filteredData);
-    if (attachment.name == "Robb Stark") {
+    if (attachment.name === "Robb Stark") {
       units[units.length] = {name: "Greywind", cost: 0, type: "Monster", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Greywind.png"};
-    } else if (attachment.name == "Rickon Stark") {
+    } else if (attachment.name === "Rickon Stark") {
       units[units.length] = {name: "Shaggydog", cost: 0, type: "Monster", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Shaggydog.png"};
-    } else if (attachment.name == "Bran Stark") {
+    } else if (attachment.name === "Bran Stark") {
       units[units.length] = {name: "Summer", cost: 0, type: "Monster", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Summer.png"};
     }
     units[i].attachment = JSON.parse(JSON.stringify(attachment));
-    if (attachment.neutral == true) {
+    if (attachment.neutral === true) {
       setNeutralPoints(tempNeutralPoints-(attachment.cost));
     }
     setPointsLeft(tempPoints-(attachment.cost)); 
@@ -158,6 +155,7 @@ export default function Home(props) {
   const DrawImage2 = ({location}) => {console.log (location); return<Img width="370" height="200" src={location} />}
   const DrawImage3 = ({location}) => {console.log (location); return<Img width="200" height="100" src={location} />}
   const DrawToken = ({location}) => {console.log (location); return<Img width="150" height="150" src={location} />}
+  const DrawTokenWide = ({location}) => {console.log (location); return<Img width="180" height="150" src={location} />}
 
   function renderAttachments (units) {
     return [].concat(units.map((unit, i) =>
@@ -292,49 +290,44 @@ export default function Home(props) {
           <Col xs={4} md={4}>
           <div class="image2">
           {!pickedFaction && pointsSet && <Panel onClick={chooseLannister}>
-            <DrawToken location={"./Images/General/PointCounter-Container.png"}/>
-          </Panel>}
-              {!pickedFaction && pointsSet &&  <h5><b>Lannister</b></h5>}          
+            <DrawToken location={"./Images/General/SIGIL-LANNISTER.png"}/>
+          </Panel>}       
           </div>
           </Col>
           <Col xs={4} md={4}>
           <div class="image2">
           {!pickedFaction && pointsSet && <Panel onClick={chooseStark}>
-            <DrawToken location={"./Images/General/PointCounter-Container.png"}/>
-          </Panel>}
-              {!pickedFaction && pointsSet &&  <h5><b>Stark</b></h5>}          
+            <DrawTokenWide location={"./Images/General/STARK-SIGIL.png"}/>
+          </Panel>}          
           </div>
           </Col>
           <Col xs={12} md={6}>
-          {faction != 0 && !commander &&<h3>Include Neutrals</h3>}
-          {faction != 0 && !commander && (neutrals == false) && <Panel onClick={event => setNeutral(event)}>
+          {faction !== 0 && !commander &&<h3>Include Neutrals</h3>}
+          {faction !== 0 && !commander && (neutrals === false) && <Panel onClick={event => setNeutral(event)}>
             <DrawImage3 location={"./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-OFF.png"}/>
           </Panel>}
-          {faction != 0 && !commander && (neutrals == true) && <Panel onClick={event => setNeutral(event)}>
+          {faction !== 0 && !commander && (neutrals === true) && <Panel onClick={event => setNeutral(event)}>
             <DrawImage3 location={"./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-ON.png"}/>
           </Panel>
           }
           </Col> 
           <Col xs={12} md={3}>
-            {/* {commander && <h4>{commander[0].name}</h4>} */}
             {!commander && pickedFaction && <form onSubmit={addCommander}>
             <LoaderButton
               block
               type="submit"
               bsSize="large"
-              isLoading={isLoading}
-              // disabled={!validateAdd()}
               text="Add Commander"
               loadingText="Adding…"
             />     
             </form>} 
           </Col>
         </Row>
-        {/* <Row>
-          {renderTable(NCUs)}
-        </Row> */}
         <Row>
           <Col xs={12} md={2}>
+            {commander && <h3>Faction</h3>}
+            {commander && faction === 1 && <DrawToken location={"./Images/General/SIGIL-LANNISTER.png"}/>}
+            {commander && faction === 2 && <DrawTokenWide location={"./Images/General/STARK-SIGIL.png"}/>}
             {commander && <h3>Commander</h3>}
             {NCUs.length>0 && NCUs[0].token && RenderNCUCommander()}
             {units.length>0 && units[0].attachment.token && RenderCUCommander()}    
@@ -353,8 +346,6 @@ export default function Home(props) {
               block
               type="submit"
               bsSize="large"
-              isLoading={isLoading}
-              // disabled={!validateAdd()}
               text="Clear All"
               loadingText="Adding…"
             />     
@@ -374,7 +365,7 @@ export default function Home(props) {
           </Col>
           <Col xs={12} md={4}>
             {commander && <h3>Combat Units</h3>}
-            {units.length>0 && (units[0].name != "") &&<RenderUnits
+            {units.length>0 && (units[0].name !== "") &&<RenderUnits
               units={units}
             />}
             {commander && <h4>
