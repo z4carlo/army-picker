@@ -1,31 +1,20 @@
 import React from "react";
 
 var style = {
-    textAlign: "center",
-    padding: "20px",
+    backgroundImage: "url('./Images/General/Header-1.png')",
+    backgroundSize: "100% 120%",
     position: "fixed",
-    left: "0",
-    top: "0",
-    height: "120px",
-    width: "100%",
-    opacity: "0.5",
+    left: "20%",
+    top: "0px",
+    height: "200px",
+    width: "60%",
 };
-
-var phantom = {
-    display: 'block',
-    padding: '0px',
-    height: '120px',
-    width: '100%',
-  }
 
 function Header () {
         return (
             <div>
-                <div style={phantom}>
+                <div style={style}>
                 </div>
-                {/* <div style={style}>
-                    Header
-                </div> */}
             </div>
         );
     };

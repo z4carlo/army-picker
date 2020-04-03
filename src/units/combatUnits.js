@@ -5,7 +5,7 @@ const combatUnits = [
         { name: "Stormcrow Mercenaries", cost: 5, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Neutral/CombatUnit-Cards/NEUTRAL-CombatUnit-StormCrowMercenaries.png", neutral: true },
         { name: "Bloody Mummer Skirmishers", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Neutral/CombatUnit-Cards/NEUTRAL-CombatUnit-MummerSkirmishers.png", neutral: true },
         { name: "Stormcrow Archers", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Neutral/CombatUnit-Cards/NEUTRAL-CombatUnit-StormCrowArchers.png", neutral: true },
-        { name: "House Bolton Bastard's Girls", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Neutral/CombatUnit-Cards/NEUTRAL-CombatUnit-BastardsGirls.png", neutral: true },
+        { name: "House Bolton Bastard's Girls", cost: 7, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Neutral/CombatUnit-Cards/NEUTRAL-CombatUnit-BastardsGirls.png", neutral: true },
         { name: "House Bolton Blackguards", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Neutral/CombatUnit-Cards/NEUTRAL-CombatUnit-BlackGuards.png", neutral: true },
         { name: "Bloody Mummer Zorse Riders", cost: 7, attachment: "None", type: "Cavalry", unique: false, imgFile: "./Images/Neutral/CombatUnit-Cards/NEUTRAL-CombatUnit-ZorseRiders.png", neutral: true },
         { name: "House bolton Flayed Men", cost: 9, attachment: "None", type: "Cavalry", unique: false, imgFile: "./Images/Neutral/CombatUnit-Cards/NEUTRAL-CombatUnit-FlayedMen.png", neutral: true },

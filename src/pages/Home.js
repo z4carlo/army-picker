@@ -29,34 +29,36 @@ export default function Home(props) {
   const [neutrals, setNeutrals] = useState(false);
   const [neutralPoints, setNeutralPoints] = useState(0);
   const [haveArya, setHaveArya] = useState(false);
-
-  useEffect(() => {}, [...units.map(unit => unit.items && unit.items.map(item => item.attachment))]);
+  const [forceUpdate, setForceUpdate] = useState(0);
 
   var fixedTop = {
-    padding: "20px",
+    padding: "0px",
     position: "fixed",
     left: "20%",
-    top: "0px",
+    top: "200px",
     height: "auto",
     width: "60%",
     textAlign: "center",
   };
 
   var fixedBackground = {
-    backgroundColor: "Black",
+    // backgroundColor: "Black",
+    // backgroundImage: "./Images/General/Faction_Background.png",
+    backgroundImage: "url('./Images/General/Faction_Background.png')",
+    backgroundSize: "100% 100%",
     padding: "20px",
     position: "fixed",
-    left: "0px",
-    top: "0px",
-    height: "250px",
-    width: "100%",
+    left: "20%",
+    top: "200px",
+    height: "200px",
+    width: "60%",
     opacity: "0.8",
   };
 
   var fixedTopBuffer = {
     display: 'block',
     padding: '0px',
-    height: '130px',
+    height: '410px',
     width: '100%',
   };
 
@@ -173,7 +175,8 @@ export default function Home(props) {
     if (attachment.neutral === true) {
       setNeutralPoints(tempNeutralPoints-(attachment.cost));
     }
-    setPointsLeft(tempPoints-(attachment.cost)); 
+    setPointsLeft(tempPoints-(attachment.cost));
+    setForceUpdate(forceUpdate + 1);
     }
   };
 
@@ -282,9 +285,6 @@ export default function Home(props) {
 
       <Grid>
         <Row>
-          <Header/>
-        </Row>
-        <Row>
 
           <div style={fixedTopBuffer}></div>
         </Row>
@@ -354,6 +354,7 @@ export default function Home(props) {
         <Row>
           <Footer/>
           <CreatedBy/>
+          <Header/>
         </Row>
         <div style={fixedBackground}></div>
         <div style={fixedTop}>
