@@ -279,9 +279,10 @@ export default function Home(props) {
 
   function renderPage() {
     return (
-    <div className="Home"   
-    // styles={{ backgroundImage:"/Images/General/Background.png"} }
-    >
+    <div>
+    {/* // <div className="Home"> */}
+    {/* // styles={{ backgroundImage:"/Images/General/Background.png"} }
+    // >} */}
 
       <Grid>
         <Row>

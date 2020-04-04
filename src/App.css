@@ -1,10 +1,14 @@
 .App {
   /* margin-top: 15px; */
-  background-image: url("/Images/General/Background-Tile.png");
-  /* background-size: cover; */
+  background-color: black;
+  /* background-image: url("/Images/General/Background-Tile.png"); */
+  background-size: cover;
   width: 100%;
+  /* left: 20%; */
   min-height: 1800px;
   /* background-repeat: repeat-y; */
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .App .navbar-brand {

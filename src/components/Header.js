@@ -1,13 +1,13 @@
 import React from "react";
 
 var style = {
-    backgroundImage: "url('./Images/General/Header-Wide.png')",
-    backgroundSize: "100% 100%",
+    backgroundImage: "url('./Images/General/Header-1.png')",
+    backgroundSize: "100% 120%",
     position: "fixed",
-    left: "0%",
+    left: "20%",
     top: "0px",
     height: "200px",
-    width: "100%",
+    width: "60%",
 };
 
 function Header () {

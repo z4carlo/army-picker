@@ -1,3 +1,28 @@
+.Home {
+  /* margin-top: 15px; */
+  /* background-color: black; */
+  /* background-image: url("/Images/General/Background.png"); */
+  /* background-size: cover; */
+  background-size: 100%;
+  width: 100%;
+  margin-left: 0%;
+  min-height: 1800px;
+  background-repeat: repeat-y;
+}
+
+
+.Home .container {
+  /* margin-top: 15px; */
+  /* background-color: black; */
+  background-image: url("/Images/General/Background.png");
+  /* background-size: cover; */
+  background-size: 100%;
+  width: 60%;
+  margin-left: 20%;
+  min-height: 1800px;
+  background-repeat: repeat-y;
+}
+
 .Home .lander {
     padding: 80px 0;
     text-align: center;
