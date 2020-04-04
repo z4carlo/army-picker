@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Home.css";
 import commanders from "../units/commanders"
 import combatUnits from "../units/combatUnits"
