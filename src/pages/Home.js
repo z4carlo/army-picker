@@ -9,7 +9,6 @@ import filterPoints from "../functions/filterPoints"
 import noRepeats from "../functions/noRepeats"
 import attachmentMatch from "../functions/attachmentMatch"
 import { Grid, Row, Col, Panel } from "react-bootstrap"
-import LoaderButton from "../components/LoaderButton"
 import RenderUnits from "../components/renderUnits"
 import RenderNCUs from "../components/renderNCUs"
 import Img from 'react-image';
@@ -289,11 +288,6 @@ export default function Home(props) {
 
   function renderPage() {
     return (
-    <div>
-    {/* // <div className="Home"> */}
-    {/* // styles={{ backgroundImage:"/Images/General/Background.png"} }
-    // >} */}
-
       <Grid>
         <Row>
 
@@ -472,7 +466,6 @@ export default function Home(props) {
             </div>
           </div>
       </Grid>
-    </div>
   );
   }
   

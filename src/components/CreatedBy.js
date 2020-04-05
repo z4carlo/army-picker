@@ -17,7 +17,7 @@ var style = {
 function CreatedBy () {
         return (
             <div style={style}>
-                Brought to you by <b>Mythicos Studios</b> and <a href="//asoiaf-stats.com" ><b>asoiaf-stats.com</b></a>
+                Brought to you by <a href="//mythicosstudios.com"><b>Mythicos Studios</b></a> and <a href="//asoiaf-stats.com" ><b>asoiaf-stats.com</b></a>
             </div>
         );
     };
