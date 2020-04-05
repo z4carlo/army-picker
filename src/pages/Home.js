@@ -394,6 +394,7 @@ export default function Home(props) {
             {!commander && pickedFaction && <Panel onClick={addCommander}>
               <h3>Lets Get Started</h3>
               <img src="./Images/General/ASOIAF-RANDOMBUILDER-ADD-COMMANDER.png" width="20%" height="auto"/>
+              <h3>Add Commander</h3>
             </Panel>}
           </Col>
           <Col xs={12} md={6}>
