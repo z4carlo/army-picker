@@ -5,10 +5,10 @@ var style = {
     backgroundImage: "url('./Images/General/Header-Blank.jpg')",
     backgroundSize: "100% 100%",
     position: "fixed",
-    left: "20%",
     top: "0px",
     height: "200px",
     width: "60%",
+    left: "20%",
 };
 
 var center = {
