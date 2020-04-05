@@ -402,8 +402,7 @@ export default function Home(props) {
             <div class="image3">
             <DrawImage3 location={"./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-ON.png"}/>
             </div>          
-          </Panel>
-          }
+          </Panel>}
           </Col>
           <Col xs={3} md={3}>
             {commander && <h3>Faction</h3>}
@@ -418,11 +417,6 @@ export default function Home(props) {
                 {max === 40 && commander && <img src="./Images/General/PointCounter-Container2-40PTS.png" width="50%" height="auto"/>}
                 {max === 50 && commander && <img src="./Images/General/PointCounter-Container2-50PTS.png" width="50%" height="auto"/>}
             </div>
-            {/* <div class="image">
-              {commander && <h3>Points Remaining</h3>}
-              {commander && <img src="./Images/General/PointCounter-Container.png" width="50%" height="auto"/>}
-              {commander && <h1><b>{pointsLeft}</b></h1>}
-            </div> */}
           </Col>
           <Col xs={3} md={3}>
             {commander && <h3>Commander</h3>}
@@ -434,36 +428,18 @@ export default function Home(props) {
             {/* {commander && neutrals &&  <DrawImage3 location={"./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-ON.png"}/>} */}
             {commander && !neutrals && faction !== 0 && <h3>Neutrals Off</h3>}
             {/* {commander && !neutrals &&  <DrawImage3 location={"./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-OFF.png"}/>} */}
-          }
-
             <div class="image2">
             {commander && <Panel onClick={clearAll}>
               <h3>Clear All</h3>
               <DrawTrash location={"./Images/General/Clear-All.png"}/>
-            </Panel>} 
+            </Panel>}
             </div>
-            
-            {/* {commander && <form onSubmit={clearAll}>
-              
-            <LoaderButton
-              block
-              type="submit"
-              bsSize="large"
-              text="Clear All"
-              loadingText="Adding…"
-            />     
-            </form>} */}
           </Col>
           </Row>
-            {/* <div class="image4">
-                {max === 30 && commander && <img src="./Images/General/PointCounter-Container2-30PTS.png" width="10%" height="10%"/>}
-                {max === 40 && commander && <img src="./Images/General/PointCounter-Container2-40PTS.png" width="10%" height="10%"/>}
-                {max === 50 && commander && <img src="./Images/General/PointCounter-Container2-50PTS.png" width="10%" height="10%"/>}
-              </div> */}
-            <div class="image4">
+            {commander && <div class="image4">
               {commander && <img src="./Images/General/PointCounter-Container.png" width="auto" height="120px"/>}
               {commander && <h1><b>{pointsLeft}</b></h1>}
-            </div>
+            </div>}
           </div>
       </Grid>
   );
