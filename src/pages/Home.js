@@ -58,7 +58,7 @@ export default function Home(props) {
   var fixedTopBuffer = {
     display: 'block',
     padding: '0px',
-    height: '410px',
+    height: '430px',
     width: '100%',
   };
 
@@ -438,7 +438,7 @@ export default function Home(props) {
           </Row>
             {commander && <div class="image4">
               {commander && <img src="./Images/General/PointCounter-Container.png" width="auto" height="120px"/>}
-              {commander && <h1><b>{pointsLeft}</b></h1>}
+              {commander && <h1>{pointsLeft}</h1>}
             </div>}
           </div>
       </Grid>

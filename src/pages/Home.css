@@ -109,18 +109,20 @@ h5 {
 
 h1 {
   color: white;
-  font-size: 44px;
+  font-size: 40px;
   position: relative;
   /* transform: translateY(-225%); */
-  top: -105px;
+  top: -100px;
   left: 0px;
-  width: 100%; 
+  width: 100%;
+  font-family: DDCHardware;
 }
 
 h3 {
   color: white;
   font-size: 1.2vw;
   margin-top: 0px;
+  font-family: DDCHardware;  
 }
 
 h4 {
