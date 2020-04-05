@@ -81,17 +81,21 @@
 .image3 { 
   position: relative;
   /* top: 10px; */
-  left: 25px;
-  top: 30px;
+  left: 50px;
+  top: 20px;
   /* width: 100%; for IE 6 */
 }
 
 .image4 { 
   position: absolute;
-  margin-top: 120px;
-  top: 0px;
-  left: 0px;
-  width: 100%;
+  margin-top: 0px;
+  top: 120px;
+  left: 30%;
+  width: 40%;
+  height: 50px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 h5 {
@@ -108,6 +112,7 @@ h1 {
   font-size: 2.5vw;
   position: relative;
   transform: translateY(-225%);
+  top: 5px;
   left: 0px;
   width: 100%; 
 }

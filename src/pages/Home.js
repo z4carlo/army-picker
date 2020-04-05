@@ -30,6 +30,7 @@ export default function Home(props) {
   const [neutralPoints, setNeutralPoints] = useState(0);
   const [haveArya, setHaveArya] = useState(false);
   const [forceUpdate, setForceUpdate] = useState(0);
+  const [max, setMax] = useState(0);
 
   var fixedTop = {
     padding: "0px",
@@ -181,17 +182,25 @@ export default function Home(props) {
   };
 
   function clearAll(event) {
-    return
-    // event.preventDefault();
-    // setCommander();
-    // setUnits();
-    // setNCUs();
+    event.preventDefault();
+    setCommander(false);
+    setUnits([]);
+    setNCUs([]);
+    setPointsLeft(0);
+    setPointsSet(false);
+    setFaction(0);
+    setPickedFaction(false);
+    setNeutrals(false);
+    setNeutralPoints(0);
+    setHaveArya(false);
+    setMax(0);
   };
 
   const DrawImage = ({location}) => {console.log (location); return<Img width="84%" height="auto" src={location} />}
   const DrawImage2 = ({location}) => {console.log (location); return<Img width="100%" height="auto" src={location} />}
   const DrawImage3 = ({location}) => {console.log (location); return<Img width="200" height="100" src={location} />}
   const DrawToken = ({location}) => {console.log (location); return<Img width="45%" height="auto" src={location} />}
+  const DrawTrash = ({location}) => {console.log (location); return<Img width="20%" height="auto" src={location} />}
   const DrawTokenSmall = ({location}) => {console.log (location); return<Img width="40%" height="auto" src={location} />}
   const DrawTokenCommander = ({location}) => {console.log (location); return<Img width="50%" height="auto" src={location} />}
 
@@ -252,6 +261,7 @@ export default function Home(props) {
     event.preventDefault();
     setPointsLeft(points);
     setPointsSet(true);
+    setMax(points);
   }
 
   function setNeutral (event) {
@@ -291,31 +301,7 @@ export default function Home(props) {
         </Row>
         <Row>
           <Col xs={12} md={2}>
-            {/* {commander && <h3>Faction</h3>}
-            {commander && faction === 1 && <DrawToken location={"./Images/General/SIGIL-LANNISTER.png"}/>}
-            {commander && faction === 2 && <DrawTokenWide location={"./Images/General/STARK-SIGIL.png"}/>}
-            {commander && <h3>Commander</h3>}
-            {NCUs.length>0 && NCUs[0].token && RenderNCUCommander()}
-            {units.length>0 && units[0].attachment.token && RenderCUCommander()}    
-          
-            <div class="image">
-              {commander && <h3>Points Remaining</h3>}
-              {commander && <img src="./Images/General/PointCounter-Container.png" width="150" height="150"/>}
-              {commander && <h1><b>{pointsLeft}</b></h1>}
-
-            </div>
-
-            {commander && neutrals && <h3>Neutrals On</h3>}
-            {commander && !neutrals && <h3>Neutrals Off</h3>}
-            {commander && <form onSubmit={clearAll}>
-            <LoaderButton
-              block
-              type="submit"
-              bsSize="large"
-              text="Clear All"
-              loadingText="Adding…"
-            />     
-            </form>} */}
+            
           </Col>
           <Col xs={12} md={2}>
           {commander && <h3>NCUs</h3>}
@@ -364,25 +350,22 @@ export default function Home(props) {
           <Col xs={4} md={4}>
           <div class="image2">
           {!pointsSet && <Panel onClick={event => setTotal(event, 30)}>
-            <DrawToken location={"./Images/General/PointCounter-Container.png"}/>
-          </Panel>}
-              {!pointsSet && <h5><b>30</b></h5>}          
+            <DrawTokenSmall location={"./Images/General/PointCounter-Container2-30PTS.png"}/>
+          </Panel>}     
           </div>
           </Col>
           <Col xs={4} md={4}>
           <div class="image2">
           {!pointsSet && <Panel onClick={event => setTotal(event, 40)}>
-            <DrawToken location={"./Images/General/PointCounter-Container.png"}/>
-          </Panel>}
-              {!pointsSet && <h5><b>40</b></h5>}          
+            <DrawTokenSmall location={"./Images/General/PointCounter-Container2-40PTS.png"}/>
+          </Panel>}  
           </div>
           </Col>
           <Col xs={4} md={4}>
           <div class="image2">
           {!pointsSet && <Panel onClick={event => setTotal(event, 50)}>
-            <DrawToken location={"./Images/General/PointCounter-Container.png"}/>
-          </Panel>}
-              {!pointsSet && <h5><b>50</b></h5>}          
+            <DrawTokenSmall location={"./Images/General/PointCounter-Container2-50PTS.png"}/>
+          </Panel>}    
           </div>
           </Col>
           {!pickedFaction && pointsSet && <h3>Now Choose Faction</h3>}
@@ -401,32 +384,31 @@ export default function Home(props) {
           </div>
           </Col>
           <Col xs={4} md={4}>
-          <div class="image3">
+          <div class="image2">
           {!pickedFaction && pointsSet && <Panel onClick={chooseStark}>
             <DrawTokenSmall location={"./Images/General/STARK-SIGIL.png"}/>
           </Panel>}          
           </div>
           </Col>
           <Col xs={12} md={6}>
+            {!commander && pickedFaction && <Panel onClick={addCommander}>
+              <h3>Lets Get Started</h3>
+              <img src="./Images/General/ASOIAF-RANDOMBUILDER-ADD-COMMANDER.png" width="20%" height="auto"/>
+            </Panel>}
+          </Col>
+          <Col xs={12} md={6}>
           {faction !== 0 && !commander &&<h3>Include Neutrals</h3>}
           {faction !== 0 && !commander && (neutrals === false) && <Panel onClick={event => setNeutral(event)}>
+            <div class="image3">
             <DrawImage3 location={"./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-OFF.png"}/>
+            </div>
           </Panel>}
           {faction !== 0 && !commander && (neutrals === true) && <Panel onClick={event => setNeutral(event)}>
+            <div class="image3">
             <DrawImage3 location={"./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-ON.png"}/>
+            </div>          
           </Panel>
           }
-          </Col> 
-          <Col xs={12} md={6}>
-            {!commander && pickedFaction && <form onSubmit={addCommander}>
-            <LoaderButton
-              block
-              type="submit"
-              bsSize="large"
-              text="Add Commander"
-              loadingText="Adding…"
-            />     
-            </form>} 
           </Col>
           <Col xs={3} md={3}>
             {commander && <h3>Faction</h3>}
@@ -435,13 +417,17 @@ export default function Home(props) {
             {commander && faction === 2 && <DrawToken location={"./Images/General/STARK-SIGIL.png"}/>}
           </Col>
           <Col xs={3} md={3}>
-            <div>
             <div class="image">
+              {commander && <h3>Total Army Size</h3>}
+                {max === 30 && commander && <img src="./Images/General/PointCounter-Container2-30PTS.png" width="50%" height="auto"/>}
+                {max === 40 && commander && <img src="./Images/General/PointCounter-Container2-40PTS.png" width="50%" height="auto"/>}
+                {max === 50 && commander && <img src="./Images/General/PointCounter-Container2-50PTS.png" width="50%" height="auto"/>}
+            </div>
+            {/* <div class="image">
               {commander && <h3>Points Remaining</h3>}
               {commander && <img src="./Images/General/PointCounter-Container.png" width="50%" height="auto"/>}
               {commander && <h1><b>{pointsLeft}</b></h1>}
-            </div>
-            </div>
+            </div> */}
           </Col>
           <Col xs={3} md={3}>
             {commander && <h3>Commander</h3>}
@@ -449,9 +435,20 @@ export default function Home(props) {
             {units.length>0 && units[0].attachment.token && RenderCUCommander()}
           </Col>
           <Col xs={3} md={3}>
-          {commander && neutrals && <h3>Neutrals On</h3>}
+            {commander && neutrals && <h3>Neutrals On</h3>}
+            {/* {commander && neutrals &&  <DrawImage3 location={"./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-ON.png"}/>} */}
             {commander && !neutrals && <h3>Neutrals Off</h3>}
-            {commander && <form onSubmit={clearAll}>
+            {/* {commander && !neutrals &&  <DrawImage3 location={"./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-OFF.png"}/>} */}
+          }
+
+            <div class="image2">
+            {commander && <Panel onClick={clearAll}>
+              <h3>Clear All</h3>
+              <DrawTrash location={"./Images/General/Clear-All.png"}/>
+            </Panel>} 
+            </div>
+            
+            {/* {commander && <form onSubmit={clearAll}>
               
             <LoaderButton
               block
@@ -460,12 +457,18 @@ export default function Home(props) {
               text="Clear All"
               loadingText="Adding…"
             />     
-            </form>}
+            </form>} */}
           </Col>
           </Row>
+            {/* <div class="image4">
+                {max === 30 && commander && <img src="./Images/General/PointCounter-Container2-30PTS.png" width="10%" height="10%"/>}
+                {max === 40 && commander && <img src="./Images/General/PointCounter-Container2-40PTS.png" width="10%" height="10%"/>}
+                {max === 50 && commander && <img src="./Images/General/PointCounter-Container2-50PTS.png" width="10%" height="10%"/>}
+              </div> */}
             <div class="image4">
-                {commander && <img src="./Images/General/PointCounter-Container.png" width="10%" height="10%"/>}
-              </div>
+              {commander && <img src="./Images/General/PointCounter-Container.png" width="auto" height="120px"/>}
+              {commander && <h1><b>{pointsLeft}</b></h1>}
+            </div>
           </div>
       </Grid>
     </div>

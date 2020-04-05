@@ -6,10 +6,10 @@ var style = {
     textAlign: "right",
     padding: "20px",
     position: "fixed",
-    left: "0",
+    left: "20%",
     bottom: "0",
     height: "100px",
-    width: "100%",
+    width: "60%",
     opacity: "0.4",
     color: "White",
 };
