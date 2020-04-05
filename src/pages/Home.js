@@ -438,7 +438,7 @@ export default function Home(props) {
           <Col xs={3} md={3}>
             {commander && neutrals && <h3>Neutrals On</h3>}
             {/* {commander && neutrals &&  <DrawImage3 location={"./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-ON.png"}/>} */}
-            {commander && !neutrals && <h3>Neutrals Off</h3>}
+            {commander && !neutrals && faction !== 0 && <h3>Neutrals Off</h3>}
             {/* {commander && !neutrals &&  <DrawImage3 location={"./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-OFF.png"}/>} */}
           }
 
