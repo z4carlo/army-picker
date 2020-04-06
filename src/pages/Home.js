@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Home.css";
+import ReactGA from 'react-ga';
 import commanders from "../units/commanders"
 import combatUnits from "../units/combatUnits"
 import nonCombatUnits from "../units/nonCombatUnits"
@@ -17,6 +18,9 @@ import Header from "../components/Header.js";
 import CreatedBy from "../components/CreatedBy.js"
 
 export default function Home(props) {
+  useEffect(() => {
+    ReactGA.pageview('/home');
+  },[]);
 
   const [commander, setCommander] = useState(false);
   const [units, setUnits] = useState([]);

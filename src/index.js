@@ -5,6 +5,9 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './fonts/DDCHardware-Regular.otf';
+import ReactGA from "react-ga";
+
+ReactGA.initialize('UA-151639126-3');
 
 ReactDOM.render(
   <Router>
