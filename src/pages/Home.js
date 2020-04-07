@@ -8,6 +8,7 @@ import attachments from "../units/attachments"
 import pickRandom from "../functions/pickRandom"
 import filterPoints from "../functions/filterPoints"
 import noRepeats from "../functions/noRepeats"
+import chaosOptions from "../functions/chaosOptions"
 import attachmentMatch from "../functions/attachmentMatch"
 import { Grid, Row, Col, Panel } from "react-bootstrap"
 import RenderUnits from "../components/renderUnits"
@@ -34,6 +35,7 @@ export default function Home(props) {
   const [haveArya, setHaveArya] = useState(false);
   const [forceUpdate, setForceUpdate] = useState(0);
   const [max, setMax] = useState(0);
+  const [chaos, setChaos] = useState(false);
 
   var fixedTop = {
     padding: "0px",
@@ -68,8 +70,10 @@ export default function Home(props) {
 
   function addCommander(event) {
     event.preventDefault();
-    if (neutrals === false) {
-      var newcommander = pickRandom(commanders[faction].items);
+    if (chaos === true) {
+      var newcommander = pickRandom(chaosOptions(commanders));
+    } else if (neutrals === false) {
+      newcommander = pickRandom(commanders[faction].items);
     } else {
       newcommander = pickRandom(commanders[faction].items.concat(commanders[0].items));
     }
@@ -94,8 +98,10 @@ export default function Home(props) {
 
   function addCombatUnit(event) {
     event.preventDefault();
-    if (neutrals === false) {
-      var filteredData = filterPoints(combatUnits[faction].items, pointsLeft);
+    if (chaos === true) {
+      var filteredData = filterPoints(chaosOptions(combatUnits), pointsLeft)
+    } else if (neutrals === false) {
+      filteredData = filterPoints(combatUnits[faction].items, pointsLeft);
     } else {
       var neutralUnits = filterPoints(combatUnits[0].items, neutralPoints);
       filteredData = filterPoints(combatUnits[faction].items.concat(neutralUnits), pointsLeft);
@@ -125,7 +131,9 @@ export default function Home(props) {
 
   function addNCU(event) {
     event.preventDefault();
-    if (neutrals === false) {
+    if (chaos === true) {
+      var filteredData = filterPoints(chaosOptions(nonCombatUnits), pointsLeft)
+    } else if (neutrals === false) {
       var filteredData = filterPoints(nonCombatUnits[faction].items, pointsLeft);
     } else {
       var neutralUnits = filterPoints(nonCombatUnits[0].items, neutralPoints);
@@ -157,7 +165,9 @@ export default function Home(props) {
       tempPoints = pointsLeft;
       tempNeutralPoints = neutralPoints;
     }
-    if (neutrals === false) {
+    if (chaos === true) {
+      var filteredData = filterPoints(chaosOptions(attachments), tempPoints)
+    } else if (neutrals === false) {
       var filteredData = filterPoints(attachments[faction].items, tempPoints);
     } else {
       var neutralUnits = filterPoints(attachments[0].items, tempNeutralPoints);
@@ -197,6 +207,7 @@ export default function Home(props) {
     setNeutralPoints(0);
     setHaveArya(false);
     setMax(0);
+    setChaos(false);
   };
 
   const DrawImage = ({location}) => {console.log (location); return<Img width="84%" height="auto" src={location} />}
@@ -206,6 +217,7 @@ export default function Home(props) {
   const DrawTrash = ({location}) => {console.log (location); return<Img width="20%" height="auto" src={location} />}
   const DrawTokenSmall = ({location}) => {console.log (location); return<Img width="40%" height="auto" src={location} />}
   const DrawTokenCommander = ({location}) => {console.log (location); return<Img width="50%" height="auto" src={location} />}
+  const DrawTokenFaction = ({location}) => {console.log (location); return<Img width="60%" height="auto" src={location} />}
 
   function renderAttachments (units) {
     return [].concat(units.map((unit, i) =>
@@ -237,6 +249,18 @@ export default function Home(props) {
               <DrawImage location={units[i].attachment.attachment2.imgFile}/>
             </Panel>
       )))
+  }
+
+  function chooseChaos (event) {
+    event.preventDefault();
+    console.log(commanders.length);
+    const faction = (Math.floor(Math.random()*commanders.length));
+    console.log(faction);
+    setFaction(faction);
+    setPickedFaction(true);
+    setChaos(true);
+    setNeutralPoints(pointsLeft);
+    addCommander(event);
   }
 
   function chooseNeutral (event) {
@@ -367,24 +391,32 @@ export default function Home(props) {
           </div>
           </Col>
           {!pickedFaction && pointsSet && <h3>Now Choose Faction</h3>}
-          <Col xs={4} md={4}>
+          <Col xs={4} md={3}>
           <div class="image2">
           {!pickedFaction && pointsSet && <Panel onClick={chooseNeutral}>
-            {<DrawTokenSmall location={"./Images/General/NEUTRAL-SIGIL.png"}/>}
+            {<DrawTokenFaction location={"./Images/General/NEUTRAL-SIGIL.png"}/>}
           </Panel>}       
           </div>
           </Col>
-          <Col xs={4} md={4}>
+          <Col xs={4} md={3}>
           <div class="image2">
           {!pickedFaction && pointsSet && <Panel onClick={chooseLannister}>
-            <DrawTokenSmall location={"./Images/General/SIGIL-LANNISTER.png"}/>
+            <DrawTokenFaction location={"./Images/General/SIGIL-LANNISTER.png"}/>
           </Panel>}       
           </div>
           </Col>
-          <Col xs={4} md={4}>
+          <Col xs={4} md={3}>
           <div class="image2">
           {!pickedFaction && pointsSet && <Panel onClick={chooseStark}>
-            <DrawTokenSmall location={"./Images/General/STARK-SIGIL.png"}/>
+            <DrawTokenFaction location={"./Images/General/STARK-SIGIL.png"}/>
+          </Panel>}          
+          </div>
+          </Col>
+          <Col xs={4} md={3}>
+          <div class="image2">
+          {!pickedFaction && pointsSet && <Panel onClick={chooseChaos}>
+            <h3>Chaos Mode!</h3>
+            <img src="./Images/General/ASOIAF-RANDOMBUILDER-ADD-COMMANDER.png" width="30%" height="auto"/>
           </Panel>}          
           </div>
           </Col>
@@ -409,7 +441,8 @@ export default function Home(props) {
           </Panel>}
           </Col>
           <Col xs={3} md={3}>
-            {commander && <h3>Faction</h3>}
+            {chaos && commander && <h3>Tactics Deck</h3>}
+            {!chaos && commander && <h3>Faction</h3>}
             {commander && faction === 0 && <DrawToken location={"./Images/General/NEUTRAL-SIGIL.png"}/>}
             {commander && faction === 1 && <DrawToken location={"./Images/General/SIGIL-LANNISTER.png"}/>}
             {commander && faction === 2 && <DrawToken location={"./Images/General/STARK-SIGIL.png"}/>}
