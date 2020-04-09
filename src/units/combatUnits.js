@@ -49,15 +49,15 @@ const combatUnits = [
     ]
     },
     {
-      type: 'group', name: 'Nights Watch', items: [
-        { name: "Free Folk Raiders", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Crannogman-Trackers.png" },
-        { name: "Free Folk Trappers", cost: 4, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-SwornSwords.png" },
-        { name: "Spearwives", cost: 4, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-TullyShields.png" },
-        { name: "Cave Dweller Savages", cost: 5, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Bowmen.png" },
-        { name: "Followers of Bone", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Beserkers.png" },
-        { name: "Thenn Warriors", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Outriders.png" },
-        { name: "Savage Giant", cost: 7, attachment: "None", type: "Monster", unique: false, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Outriders.png" },
-        { name: "Bonelords Chosen", cost: 10, attachment: { name: "Rattleshirt", cost: 2, type: "Infantry", unique: true, imgFile: "./Images/Stark/Attachment-Cards/STARK-SwordCaptain.png", attachment2: "None" }, type: "Infantry", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Beserkers.png" },   
+      type: 'group', name: 'FreeFolk', items: [
+        { name: "Free Folk Raiders", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/FreeFolk/CombatUnit-Cards/FF-CombatUnit-Raider.png" },
+        { name: "Free Folk Trappers", cost: 4, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/FreeFolk/CombatUnit-Cards/FF-CombatUnit-Trappers.png" },
+        { name: "Spearwives", cost: 4, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/FreeFolk/CombatUnit-Cards/FF-CombatUnit-Spearwives.png" },
+        { name: "Cave Dweller Savages", cost: 5, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/FreeFolk/CombatUnit-Cards/FF-CombatUnit-CaveDweller.png" },
+        { name: "Followers of Bone", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/FreeFolk/CombatUnit-Cards/FF-CombatUnit-FollowersBone.png" },
+        { name: "Thenn Warriors", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/FreeFolk/CombatUnit-Cards/FF-CombatUnit-Thenn.png" },
+        { name: "Savage Giant", cost: 7, attachment: "None", type: "Monster", unique: false, imgFile: "./Images/FreeFolk/CombatUnit-Cards/FF-CombatUnit-Giant.png" },
+        // { name: "Bonelords Chosen", cost: 10, attachment: { name: "Rattleshirt", cost: 2, type: "Infantry", unique: true, imgFile: "./Images/FreeFolk/Attachment-Cards/Rattleshirt-A.png", attachment2: "None" }, type: "Infantry", unique: true, imgFile: "./Images/FreeFolk/CombatUnit-Cards/FF-CombatUnit-Chosen.png" },   
         ]
       },
   ]

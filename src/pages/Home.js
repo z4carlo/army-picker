@@ -83,7 +83,7 @@ export default function Home(props) {
       } else if (newcommander.name === "Eddard Stark") {
         units[0] = {name: "Eddard's Honor Guard", cost: 7, type: "Infantry", attachment: newcommander, attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-HonorGuard.png"};
       } else if (newcommander.name === "Rattleshirt") {
-        units[0] = { name: "Bonelords Chosen", cost: 8, type:"Infantry", attachment: newcommander, attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Beserkers.png" };
+        units[0] = { name: "Bonelords Chosen", cost: 8, type:"Infantry", attachment: newcommander, attachment2: "None", unique: true, imgFile: "./Images/FreeFolk/CombatUnit-Cards/FF-CombatUnit-Chosen.png" };
       } else if (newcommander.name === "Robb Stark") {
         units[0] = {name: "", attachment: newcommander};
         units[1] = {name: "Greywind", cost: 0, type: "Monster", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Greywind.png"};
@@ -124,7 +124,11 @@ export default function Home(props) {
         units[0] = newUnit;
       }
       else {
-        const unit = units.concat(newUnit);
+        var unit = units.concat(newUnit);
+        if(newUnit.name === "Free Folk Raiders") {
+          var newUnit2 = JSON.parse(JSON.stringify(newUnit));
+          unit = units.concat(newUnit).concat(newUnit2);
+        }
         setUnits (unit);
       }
       if (newUnit.neutral === true) {
@@ -224,7 +228,7 @@ export default function Home(props) {
   const DrawTrash = ({location}) => {console.log (location); return<Img width="20%" height="auto" src={location} />}
   const DrawTokenSmall = ({location}) => {console.log (location); return<Img width="40%" height="auto" src={location} />}
   const DrawTokenCommander = ({location}) => {console.log (location); return<Img width="50%" height="auto" src={location} />}
-  const DrawTokenFaction = ({location}) => {console.log (location); return<Img width="60%" height="auto" src={location} />}
+  const DrawTokenFaction = ({location}) => {console.log (location); return<Img width="80%" height="auto" src={location} />}
 
   function renderAttachments (units) {
     return [].concat(units.map((unit, i) =>
@@ -296,6 +300,13 @@ export default function Home(props) {
     setFaction(3);
     setPickedFaction(true);
     setNeutralPoints(pointsLeft/2);
+  }
+
+  function chooseFF (event) {
+    event.preventDefault();
+    setFaction(4);
+    setPickedFaction(true);
+    setNeutralPoints(0);
   }
 
   function setTotal (event, points) {
@@ -407,36 +418,51 @@ export default function Home(props) {
         </Row>}
         {pointsSet && <Row>
           {!pickedFaction && pointsSet && <h3>Now Choose Faction</h3>}
-          <Col xs={4} md={3}>
+          <Col xs={4} md={2}>
           <div class="image2">
           {!pickedFaction && pointsSet && <Panel onClick={chooseNeutral}>
             {<DrawTokenFaction location={"./Images/General/NEUTRAL-SIGIL.png"}/>}
           </Panel>}       
           </div>
           </Col>
-          <Col xs={4} md={3}>
+          <Col xs={4} md={2}>
           <div class="image2">
           {!pickedFaction && pointsSet && <Panel onClick={chooseLannister}>
             <DrawTokenFaction location={"./Images/General/SIGIL-LANNISTER.png"}/>
           </Panel>}       
           </div>
           </Col>
-          <Col xs={4} md={3}>
+          <Col xs={4} md={2}>
           <div class="image2">
           {!pickedFaction && pointsSet && <Panel onClick={chooseStark}>
             <DrawTokenFaction location={"./Images/General/STARK-SIGIL.png"}/>
           </Panel>}          
           </div>
           </Col>
-          <Col xs={4} md={3}>
+          <Col xs={4} md={2}>
           <div class="image2">
           {!pickedFaction && pointsSet && <Panel onClick={chooseNW}>
             <DrawTokenFaction location={"./Images/General/NW-SIGIL.png"}/>
           </Panel>}        
           </div>
           </Col>
+          <Col xs={4} md={2}>
+          <div class="image2">
+          {!pickedFaction && pointsSet && <Panel onClick={chooseFF}>
+            <DrawTokenFaction location={"./Images/General/FF-SIGIL.png"}/>
+          </Panel>}        
+          </div>
+          </Col>
+          <Col xs={4} md={2}>
+          <div class="image2">
+          {!pickedFaction && pointsSet && <Panel onClick={chooseChaos}>
+            <h3>Chaos Mode!</h3>
+            <img src="./Images/General/CHAOS.png" width="50%" height="auto"/>
+          </Panel>}          
+          </div>
+          </Col>
         </Row>}
-        {pointsSet && <Row>
+        {/* {pointsSet && <Row>
           <Col xs={12} md={12}>
           <div class="imageChaos">
           {!pickedFaction && pointsSet && <Panel onClick={chooseChaos}>
@@ -445,7 +471,7 @@ export default function Home(props) {
           </Panel>}          
           </div>
           </Col>
-        </Row>}
+        </Row>} */}
         <Row>
           <Col xs={12} md={6}>
             {!commander && pickedFaction && <Panel onClick={addCommander}>
@@ -455,13 +481,13 @@ export default function Home(props) {
             </Panel>}
           </Col>
           <Col xs={12} md={6}>
-          {faction !== 0 && !commander &&<h3>Include Neutrals</h3>}
-          {faction !== 0 && !commander && (neutrals === false) && <Panel onClick={event => setNeutral(event)}>
+          {faction !== 0 && faction !== 4 && !commander &&<h3>Include Neutrals</h3>}
+          {faction !== 0 && faction !== 4 && !commander && (neutrals === false) && <Panel onClick={event => setNeutral(event)}>
             <div class="image3">
             <DrawImage3 location={"./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-OFF.png"}/>
             </div>
           </Panel>}
-          {faction !== 0 && !commander && (neutrals === true) && <Panel onClick={event => setNeutral(event)}>
+          {faction !== 0 && faction !== 4 && !commander && (neutrals === true) && <Panel onClick={event => setNeutral(event)}>
             <div class="image3">
             <DrawImage3 location={"./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-ON.png"}/>
             </div>          
@@ -474,6 +500,7 @@ export default function Home(props) {
             {commander && faction === 1 && <DrawToken location={"./Images/General/SIGIL-LANNISTER.png"}/>}
             {commander && faction === 2 && <DrawToken location={"./Images/General/STARK-SIGIL.png"}/>}
             {commander && faction === 3 && <DrawToken location={"./Images/General/NW-SIGIL.png"}/>}
+            {commander && faction === 4 && <DrawToken location={"./Images/General/FF-SIGIL.png"}/>}
           </Col>
           <Col xs={3} md={3}>
             <div class="image">

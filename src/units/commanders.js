@@ -39,12 +39,12 @@ const commanders = [
     },
     {
       type: 'group', name: 'Free Folk', items: [
-      { name: "Harma", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/Stark/Commander-Cards/STARK-BryndenTully-C.png", token: "./Images/Stark/Tokens/ASOIAF-STARK-C-TULLY.png", attachment2: "None" },
-      { name: "Mance Rayder", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/Stark/Commander-Cards/STARK-HowlandReed.png", token: "./Images/Stark/Tokens/ASOIAF-STARK-HOWLAND-REED.png" },
-      { name: "Rattleshirt", cost: 8, type: "Infantry", unique: true, imgFile: "./Images/Stark/Commander-Cards/STARK-Eddard-C.png", token: "./Images/Stark/Tokens/ASOIAF-STARK-EDDARD.png", attachment2: "None" },
-      { name: "Styr", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/Stark/Commander-Cards/STARK-ATCH-C-GREATJON.png", token: "./Images/Stark/Tokens/ASOIAF-STARK-C-GREATJON.png", attachment2: "None" },
-      { name: "The Weeper", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/Stark/Commander-Cards/STARK-ROBB-C.png", token: "./Images/Stark/Tokens/ASOIAF-STARK-ATCH-C-ROBB.png", attachment2: "None" },
-      { name: "Tormund Giantsbane", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/Stark/Commander-Cards/STARK-ROBB-C.png", token: "./Images/Stark/Tokens/ASOIAF-STARK-ATCH-C-ROBB.png", attachment2: "None" },
+      { name: "Harma", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/FreeFolk/Commander-Cards/Harma-C.png", token: "./Images/FreeFolk/Tokens/ASOIAF-FF-HARMA.png", attachment2: {name: "Harma's Bannerman", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/FreeFolk/Attachment-Cards/Bannerman-A.png"} },
+      { name: "Mance Rayder", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/FreeFolk/Commander-Cards/Mance-C.png", token: "./Images/FreeFolk/Tokens/ASOIAF-FF-C-RAYDER.png", attachment2: "None" },
+      { name: "Rattleshirt", cost: 8, type: "Infantry", unique: true, imgFile: "./Images/FreeFolk/Commander-Cards/Rattle-C.png", token: "./Images/FreeFolk/Tokens/ASOIAF-FF-RATTLESHIRT.png", attachment2: "None" },
+      { name: "Styr", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/FreeFolk/Commander-Cards/Styr-C.png", token: "./Images/FreeFolk/Tokens/ASOIAF-FF-STYR.png", attachment2: "None" },
+      { name: "The Weeper", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/FreeFolk/Commander-Cards/Weeper-C.png", token: "./Images/FreeFolk/Tokens/ASOIAF-FF-WEEPER.png", attachment2: "None" },
+      { name: "Tormund Giantsbane", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/FreeFolk/Commander-Cards/Tormund-C.png", token: "./Images/FreeFolk/Tokens/ASOIAF-FF-C-TORMUND.png", attachment2: "None" },
       ]
     },
   ]

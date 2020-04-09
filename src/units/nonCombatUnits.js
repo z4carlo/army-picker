@@ -38,11 +38,11 @@ const nonCombatUnits = [
      },
      {
       type: 'group', name: 'Free Folk', items: [
-        { name: "Craster", cost: 3, type: "NCU", unique: true, imgFile: "./Images/Stark/NCU/Stark-Arya-NCU.png" },
-        { name: "Lady Val", cost: 3, type: "NCU", unique: true, imgFile: "./Images/Stark/NCU/Stark-Sansa.png" },
-        { name: "Ygritte", cost: 3, type: "NCU", unique: true, imgFile: "./Images/Stark/NCU-Cards/Stark-Catelyn.png" },
-        { name: "Mance Rayder", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Stark/NCU-Cards/Stark-EddardStark-NCU.png" },
-        { name: "Styr", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Stark/NCU-Cards/Stark-RodrikCassel-NCU.png" },
+        { name: "Craster", cost: 3, type: "NCU", unique: true, imgFile: "./Images/FreeFolk/NCU/Craster-NCU.png" },
+        { name: "Lady Val", cost: 3, type: "NCU", unique: true, imgFile: "./Images/FreeFolk/NCU/VAL-NCU.png" },
+        { name: "Ygritte", cost: 3, type: "NCU", unique: true, imgFile: "./Images/FreeFolk/NCU/Ygritte-NCU.png" },
+        { name: "Mance Rayder", cost: 4, type: "NCU", unique: true, imgFile: "./Images/FreeFolk/NCU/Mance-NCU.png" },
+        { name: "Styr", cost: 4, type: "NCU", unique: true, imgFile: "./Images/FreeFolk/NCU/Styr-NCU.png" },
       ]
      },
   ]
