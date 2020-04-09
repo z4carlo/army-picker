@@ -35,7 +35,31 @@ const combatUnits = [
         { name: "Stark outriders", cost: 7, attachment: "None", type: "Cavalry", unique: false, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Outriders.png" },
         { name: "House Tully Cavaliers", cost: 9, attachment: "None", type: "Cavalry", unique: false, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Tully-Cavaliers.png" },
     ]
-   }
+   },
+   {
+    type: 'group', name: 'Nights Watch', items: [
+      { name: "Conscripts", cost: 4, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/NightsWatch/CombatUnit-Cards/NW-CombatUnit-Conscripts.png" },
+      { name: "Builder Crossbowmen", cost: 7, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/NightsWatch/CombatUnit-Cards/NW-CombatUnit-Xbow.png" },
+      { name: "Sworn Brothers", cost: 7, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/NightsWatch/CombatUnit-Cards/NW-CombatUnit-SwornBrothers.png" },
+      { name: "Ranger Hunters", cost: 8, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/NightsWatch/CombatUnit-Cards/NW-CombatUnit-RangerHunters.png" },
+      { name: "Veterans of the Watch", cost: 7, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/NightsWatch/CombatUnit-Cards/NW-CombatUnit-Veterans.png" },
+      { name: "Ranger Trackers", cost: 6, attachment: "None", type: "Cavalry", unique: false, imgFile: "./Images/NightsWatch/CombatUnit-Cards/NW-CombatUnit-RangerTrackers.png" },
+      { name: "Builder Scorpion Crew", cost: 7, attachment: "None", type: "War Machine", unique: false, imgFile: "./Images/NightsWatch/CombatUnit-Cards/NW-CombatUnit-Builder-ScorpionCrew.png" },
+      { name: "Builder Stone Throwers", cost: 10, attachment: "None", type: "War Machine", unique: false, imgFile: "./Images/NightsWatch/CombatUnit-Cards/NW-CombatUnit-Builder-StoneThrower.png" }, 
+    ]
+    },
+    {
+      type: 'group', name: 'Nights Watch', items: [
+        { name: "Free Folk Raiders", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Crannogman-Trackers.png" },
+        { name: "Free Folk Trappers", cost: 4, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-SwornSwords.png" },
+        { name: "Spearwives", cost: 4, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-TullyShields.png" },
+        { name: "Cave Dweller Savages", cost: 5, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Bowmen.png" },
+        { name: "Followers of Bone", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Beserkers.png" },
+        { name: "Thenn Warriors", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Outriders.png" },
+        { name: "Savage Giant", cost: 7, attachment: "None", type: "Monster", unique: false, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Outriders.png" },
+        { name: "Bonelords Chosen", cost: 10, attachment: { name: "Rattleshirt", cost: 2, type: "Infantry", unique: true, imgFile: "./Images/Stark/Attachment-Cards/STARK-SwordCaptain.png", attachment2: "None" }, type: "Infantry", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Beserkers.png" },   
+        ]
+      },
   ]
 
   export default combatUnits;

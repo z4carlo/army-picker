@@ -98,6 +98,13 @@
   margin-right: auto;
 }
 
+.imageChaos { 
+  position: relative;
+  /* top: 10px; */
+  left: 60px;
+  /* width: 100%; for IE 6 */
+}
+
 h5 {
   color: white;
   font-size: 48px;

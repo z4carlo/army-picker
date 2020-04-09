@@ -49,6 +49,34 @@ const attachments = [
         { name: "Robb Stark", cost: 3, type: "Infantry", unique: true , imgFile: "./Images/Stark/Attachment-Cards/STARK-RobbStark-A.png", attachment2: "None" },
       ]
     },
+    {
+      type: 'group', name: 'Nights Watch', items: [
+        { name: "Othell Yarwyck", cost: 1, type: "Infantry", unique: true, imgFile: "./Images/NightsWatch/Attachment-Cards/NW-Yarwyck-A.png", attachment2: "None" },
+        { name: "Watch Captain", cost: 1, type: "Infantry", unique: false, imgFile: "./Images/NightsWatch/Attachment-Cards/NW-WatchCaptain.png", attachment2: "None" },
+        { name: "Watch Recruiter", cost: 1, type: "Infantry", unique: false, imgFile: "./Images/NightsWatch/Attachment-Cards/NW-WatchRecruiter.png", attachment2: "None" },
+        { name: "Alliser Thorne", cost: 2, type: "Infantry", unique: true, imgFile: "./Images/NightsWatch/Attachment-Cards/NW-Thorne-A.png", attachment2: "None" },
+        { name: "Grenn", cost: 2, type: "Infantry", unique: true, imgFile: "./Images/NightsWatch/Attachment-Cards/NW-Grenn-A.png", attachment2: "None" },
+        { name: "Pypar", cost: 2, type: "Infantry", unique: true, imgFile: "./Images/NightsWatch/Attachment-Cards/NW-Pypar-A.png", attachment2: "None" },
+        { name: "Qhorin Halfhand", cost: 2, type: "Infantry", unique: true, imgFile: "./Images/NightsWatch/Attachment-Cards/NW-Qhorin-A.png", attachment2: "None" },
+        { name: "Jon Snow", cost: 3, type: "Infantry", unique: true , imgFile: "./Images/NightsWatch/Attachment-Cards/NW-Snow-A.png", attachment2: "None" },
+      ]
+    },
+    {
+      type: 'group', name: 'Free Folk', items: [
+        { name: "Cave Dweller Alpha", cost: 1, type: "Infantry", unique: false, imgFile: "./Images/Stark/Attachment-Cards/STARK-CrannogmanWarden-A.png", attachment2: "None" },
+        { name: "Champion of Bone", cost: 1, type: "Infantry", unique: false, imgFile: "./Images/Stark/Attachment-Cards/STARK-MeeraReed-A.png", attachment2: "None" },
+        { name: "Chosen of Styr", cost: 1, type: "Infantry", unique: false, imgFile: "./Images/Stark/Attachment-Cards/STARK-Rickon-A.png", attachment2: "None" },
+        { name: "Harma", cost: 1, type: "Infantry", unique: true, imgFile: "./Images/Stark/Attachment-Cards/STARK-SwordCaptain.png", attachment2: {name: "Harma's Bannerman", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/Stark/Attachment-Cards/STARK-Osha-A.png"} },
+        { name: "Jarl", cost: 1, type: "Infantry", unique: true, imgFile: "./Images/Stark/Attachment-Cards/STARK-UmberChampion.png", attachment2: "None" },
+        { name: "Raid Leader", cost: 1, type: "Infantry", unique: false, imgFile: "./Images/Stark/Attachment-Cards/STARK-BranHodor-A.png", attachment2: "None" },
+        { name: "Skin Changer", cost: 1, type: "Infantry", unique: false, imgFile: "./Images/Stark/Attachment-Cards/STARK-BryndenTully-A.png", attachment2: "None" },
+        { name: "Spearwife Matriarch", cost: 1, type: "Infantry", unique: false, imgFile: "./Images/Stark/Attachment-Cards/STARK-JojenReed-A.png", attachment2: "None" },
+        { name: "Rattleshirt", cost: 2, type: "Infantry", unique: true, imgFile: "./Images/Stark/Attachment-Cards/STARK-SwordCaptain.png", attachment2: "None" },
+        { name: "The Weeper", cost: 2, type: "Infantry", unique: true, imgFile: "./Images/Stark/Attachment-Cards/STARK-SwordCaptain.png", attachment2: "None" },
+        { name: "Tormund Giantsbane", cost: 2, type: "Infantry", unique: true, imgFile: "./Images/Stark/Attachment-Cards/STARK-SwordCaptain.png", attachment2: "None" },
+        { name: "Ygritte", cost: 2, type: "Infantry", unique: true, imgFile: "./Images/Stark/Attachment-Cards/STARK-SwordCaptain.png", attachment2: "None" },
+      ]
+    },
   ]
 
   export default attachments;

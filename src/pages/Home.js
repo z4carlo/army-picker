@@ -82,9 +82,14 @@ export default function Home(props) {
         units[0] = {name: "Kingsguard", cost: 6, type: "Infantry", attachment: newcommander, attachment2: "None", unique: true, imgFile: "./Images/Lannister/CombatUnit-Cards/LAN-CombatUnit-Kingsguard.png"};
       } else if (newcommander.name === "Eddard Stark") {
         units[0] = {name: "Eddard's Honor Guard", cost: 7, type: "Infantry", attachment: newcommander, attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-HonorGuard.png"};
+      } else if (newcommander.name === "Rattleshirt") {
+        units[0] = { name: "Bonelords Chosen", cost: 8, type:"Infantry", attachment: newcommander, attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Beserkers.png" };
       } else if (newcommander.name === "Robb Stark") {
         units[0] = {name: "", attachment: newcommander};
         units[1] = {name: "Greywind", cost: 0, type: "Monster", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Greywind.png"};
+      } else if (newcommander.name === "Jon Snow") {
+        units[0] = {name: "", attachment: newcommander};
+        units[1] = {name: "Ghost", cost: 0, type: "Monster", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/NightsWatch/CombatUnit-Cards/NW-CombatUnit-Ghost.png"};
       } else {
         units[0] = {name: "", attachment: newcommander, attachment2: "None",};
       }
@@ -183,6 +188,8 @@ export default function Home(props) {
       units[units.length] = {name: "Shaggydog", cost: 0, type: "Monster", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Shaggydog.png"};
     } else if (attachment.name === "Bran Stark") {
       units[units.length] = {name: "Summer", cost: 0, type: "Monster", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Summer.png"};
+    } else if (attachment.name === "Jon Snow") {
+      units[units.length] = {name: "Ghost", cost: 0, type: "Monster", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/NightsWatch/CombatUnit-Cards/NW-CombatUnit-Ghost.png"};
     }
     units[i].attachment = JSON.parse(JSON.stringify(attachment));
     setUnits(units);
@@ -284,6 +291,13 @@ export default function Home(props) {
     setNeutralPoints(pointsLeft/2);
   }
 
+  function chooseNW (event) {
+    event.preventDefault();
+    setFaction(3);
+    setPickedFaction(true);
+    setNeutralPoints(pointsLeft/2);
+  }
+
   function setTotal (event, points) {
     event.preventDefault();
     setPointsLeft(points);
@@ -367,7 +381,7 @@ export default function Home(props) {
         </Row>
         <div style={fixedBackground}></div>
         <div style={fixedTop}>
-        <Row>
+        {!pointsSet && <Row>
           {!pointsSet && <h3>First Choose Points Limit</h3>}
           <Col xs={4} md={4}>
           <div class="image2">
@@ -390,6 +404,8 @@ export default function Home(props) {
           </Panel>}    
           </div>
           </Col>
+        </Row>}
+        {pointsSet && <Row>
           {!pickedFaction && pointsSet && <h3>Now Choose Faction</h3>}
           <Col xs={4} md={3}>
           <div class="image2">
@@ -414,12 +430,23 @@ export default function Home(props) {
           </Col>
           <Col xs={4} md={3}>
           <div class="image2">
+          {!pickedFaction && pointsSet && <Panel onClick={chooseNW}>
+            <DrawTokenFaction location={"./Images/General/NW-SIGIL.png"}/>
+          </Panel>}        
+          </div>
+          </Col>
+        </Row>}
+        {pointsSet && <Row>
+          <Col xs={12} md={12}>
+          <div class="imageChaos">
           {!pickedFaction && pointsSet && <Panel onClick={chooseChaos}>
-            <h3>Chaos Mode!</h3>
-            <img src="./Images/General/ASOIAF-RANDOMBUILDER-ADD-COMMANDER.png" width="30%" height="auto"/>
+            <h3>OR Chaos Mode!</h3>
+            <img src="./Images/General/CHAOS.png" width="10%" height="auto"/>
           </Panel>}          
           </div>
           </Col>
+        </Row>}
+        <Row>
           <Col xs={12} md={6}>
             {!commander && pickedFaction && <Panel onClick={addCommander}>
               <h3>Lets Get Started</h3>
@@ -446,6 +473,7 @@ export default function Home(props) {
             {commander && faction === 0 && <DrawToken location={"./Images/General/NEUTRAL-SIGIL.png"}/>}
             {commander && faction === 1 && <DrawToken location={"./Images/General/SIGIL-LANNISTER.png"}/>}
             {commander && faction === 2 && <DrawToken location={"./Images/General/STARK-SIGIL.png"}/>}
+            {commander && faction === 3 && <DrawToken location={"./Images/General/NW-SIGIL.png"}/>}
           </Col>
           <Col xs={3} md={3}>
             <div class="image">

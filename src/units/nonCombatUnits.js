@@ -25,7 +25,26 @@ const nonCombatUnits = [
         { name: "Eddard Stark", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Stark/NCU-Cards/Stark-EddardStark-NCU.png" },
         { name: "Rodrik Cassel", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Stark/NCU-Cards/Stark-RodrikCassel-NCU.png" },
       ]
-     }
+     },
+     {
+      type: 'group', name: 'Nights Watch', items: [
+        { name: "Craster", cost: 3, type: "NCU", unique: true, imgFile: "./Images/NightsWatch/NCU/NW-NCU-CRASTER.png" },
+        { name: "Aemon", cost: 4, type: "NCU", unique: true, imgFile: "./Images/NightsWatch/NCU/NW-NCU-Aemon.png" },
+        { name: "Bowen Marsh", cost: 4, type: "NCU", unique: true, imgFile: "./Images/NightsWatch/NCU/NW-NCU-Marsh.png" },
+        { name: "Donal Noye", cost: 4, type: "NCU", unique: true, imgFile: "./Images/NightsWatch/NCU/NW-NCU-Noye.png" },
+        { name: "Jeor Mormont", cost: 4, type: "NCU", unique: true, imgFile: "./Images/NightsWatch/NCU/NW-NCU-Jeor.png" },
+        { name: "Qhorin Halfhand", cost: 4, type: "NCU", unique: true, imgFile: "./Images/NightsWatch/NCU/NW-NCU-HalfHand.png" },
+      ]
+     },
+     {
+      type: 'group', name: 'Free Folk', items: [
+        { name: "Craster", cost: 3, type: "NCU", unique: true, imgFile: "./Images/Stark/NCU/Stark-Arya-NCU.png" },
+        { name: "Lady Val", cost: 3, type: "NCU", unique: true, imgFile: "./Images/Stark/NCU/Stark-Sansa.png" },
+        { name: "Ygritte", cost: 3, type: "NCU", unique: true, imgFile: "./Images/Stark/NCU-Cards/Stark-Catelyn.png" },
+        { name: "Mance Rayder", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Stark/NCU-Cards/Stark-EddardStark-NCU.png" },
+        { name: "Styr", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Stark/NCU-Cards/Stark-RodrikCassel-NCU.png" },
+      ]
+     },
   ]
 
   export default nonCombatUnits;

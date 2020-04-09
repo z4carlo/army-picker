@@ -28,6 +28,25 @@ const commanders = [
       { name: "Brynden Tully", cost: 0, type: "Cavalry", unique: true, imgFile: "./Images/Stark/Commander-Cards/STARK-BryndenTully-Mounted-C.png", token: "./Images/Stark/Tokens/ASOIAF-STARK-C-TULLY.png", attachment2: "None" },
       ]
     },
+    {
+      type: 'group', name: 'Nights Watch', items: [
+      { name: "Alliser Thorne", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/NightsWatch/Commander-Cards/NW-Thorne-C.png", token: "./Images/NightsWatch/Tokens/ASOIAF-NW-THORNE.png", attachment2: "None" },
+      { name: "Othell Yarwyck", cost: 0, type: "NCU", unique: true, imgFile: "./Images/NightsWatch/Commander-Cards/NW-Yarwyck-C.png", token: "./Images/NightsWatch/Tokens/ASOIAF-NW-YARWYCK.png" },
+      { name: "Donal Noye", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/NightsWatch/Commander-Cards/NW-Noye-C.png", token: "./Images/NightsWatch/Tokens/ASOIAF-NW-NOYE.png", attachment2: "None" },
+      { name: "Jeor Mormont", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/NightsWatch/Commander-Cards/NW-Jeor-C.png", token: "./Images/NightsWatch/Tokens/ASOIAF-NW-JEOR.png", attachment2: "None" },
+      { name: "Jon Snow", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/NightsWatch/Commander-Cards/NW-Snow-C.png", token: "./Images/NightsWatch/Tokens/ASOIAF-NW-JON.png", attachment2: "None" },
+      ]
+    },
+    {
+      type: 'group', name: 'Free Folk', items: [
+      { name: "Harma", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/Stark/Commander-Cards/STARK-BryndenTully-C.png", token: "./Images/Stark/Tokens/ASOIAF-STARK-C-TULLY.png", attachment2: "None" },
+      { name: "Mance Rayder", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/Stark/Commander-Cards/STARK-HowlandReed.png", token: "./Images/Stark/Tokens/ASOIAF-STARK-HOWLAND-REED.png" },
+      { name: "Rattleshirt", cost: 8, type: "Infantry", unique: true, imgFile: "./Images/Stark/Commander-Cards/STARK-Eddard-C.png", token: "./Images/Stark/Tokens/ASOIAF-STARK-EDDARD.png", attachment2: "None" },
+      { name: "Styr", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/Stark/Commander-Cards/STARK-ATCH-C-GREATJON.png", token: "./Images/Stark/Tokens/ASOIAF-STARK-C-GREATJON.png", attachment2: "None" },
+      { name: "The Weeper", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/Stark/Commander-Cards/STARK-ROBB-C.png", token: "./Images/Stark/Tokens/ASOIAF-STARK-ATCH-C-ROBB.png", attachment2: "None" },
+      { name: "Tormund Giantsbane", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/Stark/Commander-Cards/STARK-ROBB-C.png", token: "./Images/Stark/Tokens/ASOIAF-STARK-ATCH-C-ROBB.png", attachment2: "None" },
+      ]
+    },
   ]
 
   export default commanders;
