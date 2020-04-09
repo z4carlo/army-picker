@@ -22,7 +22,7 @@ const commanders = [
       { name: "Brynden Tully", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/Stark/Commander-Cards/STARK-BryndenTully-C.png", token: "./Images/Stark/Tokens/ASOIAF-STARK-C-TULLY.png", attachment2: "None" },
       { name: "Howland Reed", cost: 0, type: "NCU", unique: true, imgFile: "./Images/Stark/Commander-Cards/STARK-HowlandReed.png", token: "./Images/Stark/Tokens/ASOIAF-STARK-HOWLAND-REED.png" },
       { name: "Eddard Stark", cost: 7, type: "Infantry", unique: true, imgFile: "./Images/Stark/Commander-Cards/STARK-Eddard-C.png", token: "./Images/Stark/Tokens/ASOIAF-STARK-EDDARD.png", attachment2: "None" },
-      { name: "Greatjon Umber", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/Stark/Commander-Cards/STARK-ATCH-C-GREATJON.png", token: "./Images/Stark/Tokens/ASOIAF-STARK-C-GREATJON.png", attachment2: "None" },
+      { name: "Greatjon Umber", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/Stark/Commander-Cards/STARK-GREATJON-C.png", token: "./Images/Stark/Tokens/ASOIAF-STARK-ATCH-C-GREATJON.png", attachment2: "None" },
       { name: "Robb Stark", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/Stark/Commander-Cards/STARK-ROBB-C.png", token: "./Images/Stark/Tokens/ASOIAF-STARK-ATCH-C-ROBB.png", attachment2: "None" },
       { name: "Rodrik Cassel", cost: 0, type: "Infantry", unique: true, imgFile: "./Images/Stark/Commander-Cards/STARK-RodrikCassel-C.png", token: "./Images/Stark/Tokens/ASOIAF-STARK-RODRIK.png", attachment2: "None" },
       { name: "Brynden Tully", cost: 0, type: "Cavalry", unique: true, imgFile: "./Images/Stark/Commander-Cards/STARK-BryndenTully-Mounted-C.png", token: "./Images/Stark/Tokens/ASOIAF-STARK-C-TULLY.png", attachment2: "None" },
