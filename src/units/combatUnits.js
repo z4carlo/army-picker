@@ -42,7 +42,7 @@ const combatUnits = [
       { name: "Builder Crossbowmen", cost: 7, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/NightsWatch/CombatUnit-Cards/NW-CombatUnit-Xbow.png" },
       { name: "Sworn Brothers", cost: 7, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/NightsWatch/CombatUnit-Cards/NW-CombatUnit-SwornBrothers.png" },
       { name: "Ranger Hunters", cost: 8, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/NightsWatch/CombatUnit-Cards/NW-CombatUnit-RangerHunters.png" },
-      { name: "Veterans of the Watch", cost: 7, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/NightsWatch/CombatUnit-Cards/NW-CombatUnit-Veterans.png" },
+      { name: "Veterans of the Watch", cost: 8, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/NightsWatch/CombatUnit-Cards/NW-CombatUnit-Veterans.png" },
       { name: "Ranger Trackers", cost: 6, attachment: "None", type: "Cavalry", unique: false, imgFile: "./Images/NightsWatch/CombatUnit-Cards/NW-CombatUnit-RangerTrackers.png" },
       { name: "Builder Scorpion Crew", cost: 7, attachment: "None", type: "War Machine", unique: false, imgFile: "./Images/NightsWatch/CombatUnit-Cards/NW-CombatUnit-Builder-ScorpionCrew.png" },
       { name: "Builder Stone Throwers", cost: 10, attachment: "None", type: "War Machine", unique: false, imgFile: "./Images/NightsWatch/CombatUnit-Cards/NW-CombatUnit-Builder-StoneThrower.png" }, 
