@@ -3,20 +3,13 @@ import React from "react";
 // import { Navbar } from "react-bootstrap";
 import "./App.css";
 import Routes from "./Routes";
+import { Grid } from "react-bootstrap"
 
 function App(props) {
   return (
-    <div className="App container">
-      {/* <Navbar fluid collapseOnSelect>
-        <Navbar.Header>
-          <Navbar.Brand> */}
-            {/* <Link to="/">Random Army Picker</Link> */}
-          {/* </Navbar.Brand>
-          <Navbar.Toggle />
-        </Navbar.Header>
-      </Navbar> */}
+    <Grid>
       <Routes />
-    </div>
+    </Grid>
   );
 }
 

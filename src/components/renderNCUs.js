@@ -10,7 +10,6 @@ function renderUnits (data) {
         
             <Panel>
                 <DrawImage location={data.NCUs[i].imgFile}/>
-                {/* <h4>{data.NCUs[i].name}</h4> */}
             </Panel>
         
     )))

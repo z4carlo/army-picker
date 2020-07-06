@@ -4,11 +4,10 @@ import "./Header.css";
 var style = {
     backgroundImage: "url('./Images/General/Header-Blank.jpg')",
     backgroundSize: "100% 100%",
-    position: "fixed",
+    // position: "fixed",
     top: "0px",
     height: "200px",
-    width: "60%",
-    left: "20%",
+    width: "auto%",
 };
 
 var center = {

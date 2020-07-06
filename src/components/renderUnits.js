@@ -5,7 +5,7 @@ import { Panel } from "react-bootstrap";
 const DrawImage = ({location}) => <Img 
 width="100%" height="auto" 
 src={location} 
-// responsive
+responsive
 />;
 
 function renderUnits (data) {
@@ -14,8 +14,7 @@ function renderUnits (data) {
     (
         
         <Panel>
-            <DrawImage location={data.units[i].imgFile}/>
-            
+            <DrawImage location={data.units[i].imgFile}/>    
         </Panel>
         // <h4>{data.units[i].name}</h4>
     )))
