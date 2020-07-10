@@ -1,17 +1,18 @@
 import React from "react";
+import { Button } from "react-bootstrap"
 import Img from 'react-image';
-import { Panel } from "react-bootstrap";
 
-const DrawImage = ({location}) => <Img width="84%" height="auto" src={location} />
+const DrawImage = ({location}) => <Img width="93%" height="auto" src={location} />
 
-function renderUnits (data) {
-    return [].concat(data.NCUs.map((NCU, i) =>
+function renderUnits ({NCUs, removeNCU}) {
+    return [].concat(NCUs.map((NCU, i) =>
     (
-        
-            <Panel>
-                <DrawImage location={data.NCUs[i].imgFile}/>
-            </Panel>
-        
+        <div>
+            <DrawImage location={NCUs[i].imgFile}/>
+            <div onClick={event => removeNCU(event, i)}>
+                <Button bsStyle="primary">Remove</Button>
+            </div>
+        </div>
     )))
 }
 

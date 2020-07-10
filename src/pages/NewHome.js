@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Home.css";
+import "./NewHome.css";
 import ReactGA from 'react-ga';
 import commanders from "../units/commanders"
 import combatUnits from "../units/combatUnits"
@@ -10,13 +10,17 @@ import filterPoints from "../functions/filterPoints"
 import noRepeats from "../functions/noRepeats"
 import chaosOptions from "../functions/chaosOptions"
 import attachmentMatch from "../functions/attachmentMatch"
-import { Grid, Row, Col, Panel } from "react-bootstrap"
+import { Row, Col, Button } from "react-bootstrap"
 import RenderUnits from "../components/renderUnits"
 import RenderNCUs from "../components/renderNCUs"
 import Img from 'react-image';
+import FactionRow from "../components/ChooseFaction"
+import PointsRow from "../components/ChoosePoints"
 import Footer from "../components/Footer.js"
 import Header from "../components/Header.js";
+import HeaderSpacer from "../components/HeaderSpacer.js";
 import CreatedBy from "../components/CreatedBy.js"
+import listOptions from "../functions/listOptions"
 
 export default function Home(props) {
   useEffect(() => {
@@ -37,37 +41,6 @@ export default function Home(props) {
   const [max, setMax] = useState(0);
   const [chaos, setChaos] = useState(false);
 
-  var fixedTop = {
-    padding: "0px",
-    position: "fixed",
-    left: "20%",
-    top: "200px",
-    height: "auto",
-    width: "60%",
-    textAlign: "center",
-  };
-
-  var fixedBackground = {
-    // backgroundColor: "Black",
-    // backgroundImage: "./Images/General/Faction_Background.png",
-    backgroundImage: "url('./Images/General/Faction_Background.png')",
-    backgroundSize: "100% 100%",
-    padding: "20px",
-    position: "fixed",
-    left: "20%",
-    top: "200px",
-    height: "200px",
-    width: "60%",
-    opacity: "0.8",
-  };
-
-  var fixedTopBuffer = {
-    display: 'block',
-    padding: '0px',
-    height: '430px',
-    width: '100%',
-  };
-
   function addCommander(event) {
     event.preventDefault();
     if (chaos === true) {
@@ -86,10 +59,10 @@ export default function Home(props) {
         units[0] = { name: "Bonelords Chosen", cost: 8, type:"Infantry", attachment: newcommander, attachment2: "None", unique: true, imgFile: "./Images/FreeFolk/CombatUnit-Cards/FF-CombatUnit-Chosen.png" };
       } else if (newcommander.name === "Robb Stark") {
         units[0] = {name: "", attachment: newcommander};
-        units[1] = {name: "Greywind", cost: 0, type: "Monster", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Greywind.png"};
+        units[1] = {name: "Greywind", cost: 0, type: "Solo", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Greywind.png"};
       } else if (newcommander.name === "Jon Snow") {
         units[0] = {name: "", attachment: newcommander};
-        units[1] = {name: "Ghost", cost: 0, type: "Monster", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/NightsWatch/CombatUnit-Cards/NW-CombatUnit-Ghost.png"};
+        units[1] = {name: "Ghost", cost: 0, type: "Solo", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/NightsWatch/CombatUnit-Cards/NW-CombatUnit-Ghost.png"};
       } else {
         units[0] = {name: "", attachment: newcommander, attachment2: "None",};
       }
@@ -138,6 +111,20 @@ export default function Home(props) {
     }
   };
 
+  function removeCU(event, i) {
+    event.preventDefault();
+    removeAttach(event,i);
+    if (units[i].neutral === true) {
+      setNeutralPoints(neutralPoints+(units[i].cost));
+    }
+    setPointsLeft(pointsLeft+(units[i].cost));
+    console.log(pointsLeft);
+    const removedCU = units.splice(i,1);
+    setUnits (units);
+    setForceUpdate(forceUpdate + 1);
+  };
+
+
   function addNCU(event) {
     event.preventDefault();
     if (chaos === true) {
@@ -160,6 +147,21 @@ export default function Home(props) {
     }
     setPointsLeft(pointsLeft-(NCU[NCU.length-1].cost));
     }
+  };
+
+  function removeNCU(event, i) {
+    event.preventDefault();
+    console.log(NCUs, i)
+    if (NCUs[i].name === "Arya Stark") {
+      setHaveArya(false);
+    }
+    if (NCUs[i].neutral === true) {
+      setNeutralPoints(neutralPoints+(NCUs[i].cost));
+    }
+    setPointsLeft(pointsLeft+(NCUs[i].cost));
+    const removedNCU = NCUs.splice(i,1);
+    console.log(removedNCU)
+    setNCUs (NCUs);
   };
 
   function addAttachment(event, i) {
@@ -187,13 +189,13 @@ export default function Home(props) {
     if (filteredData.length > 0) {
     const attachment = pickRandom(filteredData);
     if (attachment.name === "Robb Stark") {
-      units[units.length] = {name: "Greywind", cost: 0, type: "Monster", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Greywind.png"};
+      units.splice((i+1), 0, {name: "Greywind", cost: 0, type: "Solo", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Greywind.png"});
     } else if (attachment.name === "Rickon Stark") {
-      units[units.length] = {name: "Shaggydog", cost: 0, type: "Monster", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Shaggydog.png"};
-    } else if (attachment.name === "Bran Stark") {
-      units[units.length] = {name: "Summer", cost: 0, type: "Monster", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Summer.png"};
+      units.splice((i+1), 0, {name: "Shaggydog", cost: 0, type: "Solo", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Shaggydog.png"});
+    } else if (attachment.name === "Bran and Hodor") {
+      units.splice((i+1), 0, {name: "Summer", cost: 0, type: "Solo", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Summer.png"});
     } else if (attachment.name === "Jon Snow") {
-      units[units.length] = {name: "Ghost", cost: 0, type: "Monster", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/NightsWatch/CombatUnit-Cards/NW-CombatUnit-Ghost.png"};
+      units.splice((i+1), 0, {name: "Ghost", cost: 0, type: "Solo", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/NightsWatch/CombatUnit-Cards/NW-CombatUnit-Ghost.png"});
     }
     units[i].attachment = JSON.parse(JSON.stringify(attachment));
     setUnits(units);
@@ -203,6 +205,28 @@ export default function Home(props) {
     setPointsLeft(tempPoints-(attachment.cost));
     setForceUpdate(forceUpdate + 1);
     }
+  };
+
+  function removeAttach(event, i) {
+    event.preventDefault();
+    console.log("HERE");
+    if (units[i].attachment.name === "Robb Stark" && units[i+1] !== undefined && units[i+1].name === "Greywind") {
+      units.splice((i+1), 1);
+    } else if (units[i].attachment.name === "Rickon Stark" && units[i+1] !== undefined && units[i+1].name === "Shaggydog") {
+      units.splice((i+1), 1);
+    } else if (units[i].attachment.name === "Bran and Hodor" && units[i+1] !== undefined && units[i+1].name === "Summer") {
+      units.splice((i+1), 1);
+    } else if (units[i].attachment.name === "Jon Snow" && units[i+1] !== undefined && units[i+1].name === "Ghost") {
+      units.splice((i+1), 1);
+    }  
+    if (units[i].attachment.neutral === true) {
+      setNeutralPoints(neutralPoints+(units[i].attachment.cost));
+    }
+    setPointsLeft(pointsLeft+(units[i].attachment.cost));
+    console.log(pointsLeft);
+    units[i].attachment = "None";
+    setUnits(units);
+    setForceUpdate(forceUpdate + 1);
   };
 
   function clearAll(event) {
@@ -221,45 +245,47 @@ export default function Home(props) {
     setChaos(false);
   };
 
-  const DrawImage = ({location}) => {console.log (location); return<Img width="84%" height="auto" src={location} />}
-  const DrawImage2 = ({location}) => {console.log (location); return<Img width="100%" height="auto" src={location} />}
-  const DrawImage3 = ({location}) => {console.log (location); return<Img width="200" height="100" src={location} />}
+  const DrawImage = ({location}) => {return<Img width="93%" height="auto" src={location} />}
+  const DrawImage2 = ({location}) => {return<Img width="100%" height="auto" src={location} />}
+  const DrawImage3 = ({location}) => {return<Img width="200" height="100" src={location} />}
   const DrawToken = ({location}) => {console.log (location); return<Img width="45%" height="auto" src={location} />}
   const DrawTrash = ({location}) => {console.log (location); return<Img width="20%" height="auto" src={location} />}
-  const DrawTokenSmall = ({location}) => {console.log (location); return<Img width="40%" height="auto" src={location} />}
-  const DrawTokenCommander = ({location}) => {console.log (location); return<Img width="50%" height="auto" src={location} />}
+  const DrawTokenSmall = ({location}) => {console.log (location); return<Img width="40%" height="auto" src={location} class="mx-auto"/>}
+  const DrawTokenCommander = ({location}) => {return<Img class="header-logo mx-auto" src={location} />}
   const DrawTokenFaction = ({location}) => {console.log (location); return<Img width="80%" height="auto" src={location} />}
 
   function renderAttachments (units) {
     return [].concat(units.map((unit, i) =>
-      (units[i].attachment === "None" ?
-        // <h4>
-          <Panel onClick={event => addAttachment(event, i)}>
-            <DrawImage location={"./Images/General/NonCombat-Unit.png"}/>
-          </Panel>
-        // </h4>
-          :
-          // <h4>
-            <Panel>
-              <DrawImage location={units[i].attachment.imgFile}/>
-            {/* {units[i].attachment.name}             */}
-            </Panel>
-          // </h4>
-      )))
-  }
-
-  function renderAttachments2 (units) {
-    return [].concat(units.map((unit, i) =>
-      (units[i].attachment === "None" || units[i].attachment.attachment2 === "None" ?
-            <Panel>
-              <DrawImage location=""/>
-              None
-            </Panel>
-          :
-            <Panel>
+      <Row>
+        <Col xs={6}>
+          {units[i].attachment === "None" ?
+            <div onClick={event => addAttachment(event, i)}>
+              <DrawImage location={"./Images/General/NonCombat-Unit.png"}/>
+            </div>
+            :
+            <div>
+              <div>
+                <DrawImage location={units[i].attachment.imgFile}/>
+              </div>
+              <div onClick={event => removeAttach(event, i)}>
+                  <Button bsStyle="primary">Remove</Button>
+              </div>
+            </div>
+          }
+        </Col>
+        <Col xs={6}>
+          {units[i].attachment === "None" || units[i].attachment.attachment2 === "None" ?
+            <div>
+              <DrawImage location={""}/>
+            </div>
+            :
+            <div>
               <DrawImage location={units[i].attachment.attachment2.imgFile}/>
-            </Panel>
-      )))
+            </div>
+          }
+        </Col>
+      </Row>
+      ))
   }
 
   function chooseChaos (event) {
@@ -274,39 +300,15 @@ export default function Home(props) {
     addCommander(event);
   }
 
-  function chooseNeutral (event) {
+  const chooseFaction = (event, faction) => {
     event.preventDefault();
-    setFaction(0);
+    setFaction(faction);
     setPickedFaction(true);
-    setNeutralPoints(pointsLeft);
-  }
-
-  function chooseLannister (event) {
-    event.preventDefault();
-    setFaction(1);
-    setPickedFaction(true);
-    setNeutralPoints(pointsLeft/2);
-  }
-
-  function chooseStark (event) {
-    event.preventDefault();
-    setFaction(2);
-    setPickedFaction(true);
-    setNeutralPoints(pointsLeft/2);
-  }
-
-  function chooseNW (event) {
-    event.preventDefault();
-    setFaction(3);
-    setPickedFaction(true);
-    setNeutralPoints(pointsLeft/2);
-  }
-
-  function chooseFF (event) {
-    event.preventDefault();
-    setFaction(4);
-    setPickedFaction(true);
-    setNeutralPoints(0);
+    if (event.value === 0) {
+      setNeutralPoints(pointsLeft);
+    } else {
+      setNeutralPoints(pointsLeft/2);
+    }
   }
 
   function setTotal (event, points) {
@@ -341,200 +343,121 @@ export default function Home(props) {
 
   function renderPage() {
     return (
-      <div class="container">
-        <Header block/>
-        <Row>
-          <div style={fixedTopBuffer}></div>
-        </Row>
-        <Row>
+    <div class="background-100">
+      <Header block />
+      <HeaderSpacer/>
+      {!pointsSet && <PointsRow setTotal={setTotal}/>}
+      {pointsSet && <FactionRow pickedFaction={pickedFaction} chooseFaction={chooseFaction} chooseChaos={chooseChaos}/>}
+
+      <Row>
+        <Col xs={12} md={6}>
+          {!commander && pickedFaction && <div onClick={addCommander}>
+            <h3>Lets Get Started</h3>
+              <img src="./Images/General/ASOIAF-RANDOMBUILDER-ADD-COMMANDER.png" class="header-logo mx-auto"/>
+            <h3>Add Commander</h3>
+          </div>}
+        </Col>
+        <Col xs={12} md={6}>
+        {faction !== 0 && faction !== 4 && !commander &&<h3>Include Neutrals</h3>}
+        {faction !== 0 && faction !== 4 && !commander && (neutrals === false) && <div onClick={event => setNeutral(event)}>
+          <img src="./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-OFF.png" class="header-logo mx-auto"/>
+        </div>}
+        {faction !== 0 && faction !== 4 && !commander && (neutrals === true) && <div onClick={event => setNeutral(event)}>
+          <img src="./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-ON.png" class="header-logo mx-auto"/>     
+        </div>}
+        </Col>
+        <Col xs={3} md={3}>
+          {chaos && commander && <h3>Tactics Deck</h3>}
+          {!chaos && commander && <h3>Faction</h3>}
+          {commander && faction === 0 && <img src="./Images/General/Neutral.png" class="header-logo mx-auto" />}
+          {commander && faction === 1 && <img src="./Images/General/Lannister.png" class="header-logo mx-auto" />}
+          {commander && faction === 2 && <img src="./Images/General/Stark.png" class="header-logo mx-auto" />}
+          {commander && faction === 3 && <img src="./Images/General/NightsWatch.png" class="header-logo mx-auto" />}
+          {commander && faction === 4 && <img src="./Images/General/FreeFolk.png" class="header-logo mx-auto" />}
+          {commander && faction === 5 && <img src="./Images/General/Baratheon.png" class="header-logo mx-auto" />}
+          {commander && faction === 6 && <img src="./Images/General/Targaryen.png" class="header-logo mx-auto" />}
+        </Col>
+        <Col xs={3} md={3}>
+          <div class="image">
+            {commander && <h3>Total Army Size</h3>}
+              {max === 30 && commander && <img src="./Images/General/PointCounter-Container2-30PTS.png" class="header-logo mx-auto"/>}
+              {max === 40 && commander && <img src="./Images/General/PointCounter-Container2-40PTS.png" class="header-logo mx-auto"/>}
+              {max === 50 && commander && <img src="./Images/General/PointCounter-Container2-50PTS.png" class="header-logo mx-auto"/>}
+          </div>
+        </Col>
+        <Col xs={3} md={3}>
+          {commander && <h3>Commander</h3>}
+          {NCUs.length>0 && NCUs[0].token && RenderNCUCommander()}
+          {units.length>0 && units[0].attachment.token && RenderCUCommander()}
+        </Col>
+        <Col xs={3} md={3}>
+          {commander && neutrals && <div>
+            <h3>Neutrals On</h3>
+            <img src="./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-ON.png" class="header-logo mx-auto"/>
+          </div>}
+          {commander && !neutrals && <div>
+            <h3>Neutrals Off</h3>
+            <img src="./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-OFF.png" class="header-logo mx-auto"/>
+          </div>}
+          <div class="image2">
+          {commander && <div onClick={clearAll}>
+            <h3>Clear All</h3>
+            <img src="./Images/General/Clear-All.png" class="header-logo mx-auto"/>
+          </div>}
+          </div>
+        </Col>
+      </Row>
+
+          <Row>
           <Col xs={12} md={2}>
           </Col>
           <Col xs={12} md={2}>
           {commander && <h3>NCUs</h3>}
             {NCUs.length>0 &&<RenderNCUs
-              nonCombatUnits={nonCombatUnits}
+              // nonCombatUnits={nonCombatUnits}
               NCUs={NCUs}
+              removeNCU={removeNCU}
             />}            
             {commander && <h4>
-              <Panel onClick={addNCU}>
+              <div onClick={addNCU}>
                 <DrawImage location={"./Images/General/NonCombat-Unit.png"}/>
-              </Panel>
+              </div>
             </h4>}       
           </Col>
           <Col xs={12} md={4}>
             {commander && <h3>Combat Units</h3>}
+            <Row>
+              <div>
+                <listOptions options={commander}/>
+              </div>
+            </Row>
             {units.length>0 && (units[0].name !== "") &&<RenderUnits
               units={units}
+              removeCU={removeCU}
             />}
             {commander && <h4>
-              <Panel className="unit" onClick={addCombatUnit}>
+              <div className="unit" onClick={addCombatUnit}>
                 <DrawImage2 location={"./Images/General/Combat-Unit.png"}/>
-              </Panel>
+              </div>
             </h4>}
           </Col>
-          {/* <Col xs={12} md={4}> */}
-            {/* {commander && <h3>Attachments</h3>} */}
-            <Col xs={6} md={2}>
-            {commander && <h3>Attachments</h3>}
-            {units.length>0 && renderAttachments(units)}
-            </Col>
-            <Col xs={6} md={2}>
-            {commander && <h6>Spacer</h6>}
-            {units.length>0 && renderAttachments2(units)}
-            </Col>
-          {/* </Col> */}
+          <Col xs={12} md={4}>
+            <Row>
+              <Col xs={12}>
+                {commander && <h3>Attachments</h3>}
+                {units.length>0 && renderAttachments(units)}
+              </Col>
+            </Row>
+          </Col>
         </Row>
-        <Row>
-          <Footer/>
-          <CreatedBy/>
-        </Row>
-        <div style={fixedBackground}></div>
-        <div style={fixedTop}>
-        {!pointsSet && <Row>
-          {!pointsSet && <h3>First Choose Points Limit</h3>}
-          <Col xs={4} md={4}>
-          <div class="image2">
-          {!pointsSet && <Panel onClick={event => setTotal(event, 30)}>
-            <DrawTokenSmall location={"./Images/General/PointCounter-Container2-30PTS.png"}/>
-          </Panel>}     
-          </div>
-          </Col>
-          <Col xs={4} md={4}>
-          <div class="image2">
-          {!pointsSet && <Panel onClick={event => setTotal(event, 40)}>
-            <DrawTokenSmall location={"./Images/General/PointCounter-Container2-40PTS.png"}/>
-          </Panel>}  
-          </div>
-          </Col>
-          <Col xs={4} md={4}>
-          <div class="image2">
-          {!pointsSet && <Panel onClick={event => setTotal(event, 50)}>
-            <DrawTokenSmall location={"./Images/General/PointCounter-Container2-50PTS.png"}/>
-          </Panel>}    
-          </div>
-          </Col>
-        </Row>}
-        {pointsSet && <Row>
-          {!pickedFaction && pointsSet && <h3>Now Choose Faction</h3>}
-          <Col xs={4} md={2}>
-          <div class="image2">
-          {!pickedFaction && pointsSet && <Panel onClick={chooseNeutral}>
-            {<DrawTokenFaction location={"./Images/General/NEUTRAL-SIGIL.png"}/>}
-          </Panel>}       
-          </div>
-          </Col>
-          <Col xs={4} md={2}>
-          <div class="image2">
-          {!pickedFaction && pointsSet && <Panel onClick={chooseLannister}>
-            <DrawTokenFaction location={"./Images/General/SIGIL-LANNISTER.png"}/>
-          </Panel>}       
-          </div>
-          </Col>
-          <Col xs={4} md={2}>
-          <div class="image2">
-          {!pickedFaction && pointsSet && <Panel onClick={chooseStark}>
-            <DrawTokenFaction location={"./Images/General/STARK-SIGIL.png"}/>
-          </Panel>}          
-          </div>
-          </Col>
-          <Col xs={4} md={2}>
-          <div class="image2">
-          {!pickedFaction && pointsSet && <Panel onClick={chooseNW}>
-            <DrawTokenFaction location={"./Images/General/NW-SIGIL.png"}/>
-          </Panel>}        
-          </div>
-          </Col>
-          <Col xs={4} md={2}>
-          <div class="image2">
-          {!pickedFaction && pointsSet && <Panel onClick={chooseFF}>
-            <DrawTokenFaction location={"./Images/General/FF-SIGIL.png"}/>
-          </Panel>}        
-          </div>
-          </Col>
-          <Col xs={4} md={2}>
-          <div class="image2">
-          {!pickedFaction && pointsSet && <Panel onClick={chooseChaos}>
-            <h3>Chaos Mode!</h3>
-            <img src="./Images/General/CHAOS.png" width="50%" height="auto"/>
-          </Panel>}          
-          </div>
-          </Col>
-        </Row>}
-        {/* {pointsSet && <Row>
-          <Col xs={12} md={12}>
-          <div class="imageChaos">
-          {!pickedFaction && pointsSet && <Panel onClick={chooseChaos}>
-            <h3>OR Chaos Mode!</h3>
-            <img src="./Images/General/CHAOS.png" width="10%" height="auto"/>
-          </Panel>}          
-          </div>
-          </Col>
-        </Row>} */}
-        <Row>
-          <Col xs={12} md={6}>
-            {!commander && pickedFaction && <Panel onClick={addCommander}>
-              <h3>Lets Get Started</h3>
-              <img src="./Images/General/ASOIAF-RANDOMBUILDER-ADD-COMMANDER.png" width="20%" height="auto"/>
-              <h3>Add Commander</h3>
-            </Panel>}
-          </Col>
-          <Col xs={12} md={6}>
-          {faction !== 0 && faction !== 4 && !commander &&<h3>Include Neutrals</h3>}
-          {faction !== 0 && faction !== 4 && !commander && (neutrals === false) && <Panel onClick={event => setNeutral(event)}>
-            <div class="image3">
-            <DrawImage3 location={"./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-OFF.png"}/>
-            </div>
-          </Panel>}
-          {faction !== 0 && faction !== 4 && !commander && (neutrals === true) && <Panel onClick={event => setNeutral(event)}>
-            <div class="image3">
-            <DrawImage3 location={"./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-ON.png"}/>
-            </div>          
-          </Panel>}
-          </Col>
-          <Col xs={3} md={3}>
-            {chaos && commander && <h3>Tactics Deck</h3>}
-            {!chaos && commander && <h3>Faction</h3>}
-            {commander && faction === 0 && <DrawToken location={"./Images/General/NEUTRAL-SIGIL.png"}/>}
-            {commander && faction === 1 && <DrawToken location={"./Images/General/SIGIL-LANNISTER.png"}/>}
-            {commander && faction === 2 && <DrawToken location={"./Images/General/STARK-SIGIL.png"}/>}
-            {commander && faction === 3 && <DrawToken location={"./Images/General/NW-SIGIL.png"}/>}
-            {commander && faction === 4 && <DrawToken location={"./Images/General/FF-SIGIL.png"}/>}
-          </Col>
-          <Col xs={3} md={3}>
-            <div class="image">
-              {commander && <h3>Total Army Size</h3>}
-                {max === 30 && commander && <img src="./Images/General/PointCounter-Container2-30PTS.png" width="50%" height="auto"/>}
-                {max === 40 && commander && <img src="./Images/General/PointCounter-Container2-40PTS.png" width="50%" height="auto"/>}
-                {max === 50 && commander && <img src="./Images/General/PointCounter-Container2-50PTS.png" width="50%" height="auto"/>}
-            </div>
-          </Col>
-          <Col xs={3} md={3}>
-            {commander && <h3>Commander</h3>}
-            {NCUs.length>0 && NCUs[0].token && RenderNCUCommander()}
-            {units.length>0 && units[0].attachment.token && RenderCUCommander()}
-          </Col>
-          <Col xs={3} md={3}>
-            {commander && neutrals && <h3>Neutrals On</h3>}
-            {/* {commander && neutrals &&  <DrawImage3 location={"./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-ON.png"}/>} */}
-            {commander && !neutrals && faction !== 0 && <h3>Neutrals Off</h3>}
-            {/* {commander && !neutrals &&  <DrawImage3 location={"./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-OFF.png"}/>} */}
-            <div class="image2">
-            {commander && <Panel onClick={clearAll}>
-              <h3>Clear All</h3>
-              <DrawTrash location={"./Images/General/Clear-All.png"}/>
-            </Panel>}
-            </div>
-          </Col>
-          </Row>
-            {commander && <div class="image4">
-              {commander && <img src="./Images/General/PointCounter-Container.png" width="auto" height="120px"/>}
-              {commander && <h1>{pointsLeft}</h1>}
-            </div>}
-          </div>
+        {commander && <div class="image4">
+        {commander && <img src="./Images/General/PointCounter-Container.png" width="auto" height="120px"/>}
+        {commander && <h1>{pointsLeft}</h1>}
+        </div>}
     </div>
   );
   }
-  
+
   return (
   <div className="Home">
     {renderPage()}

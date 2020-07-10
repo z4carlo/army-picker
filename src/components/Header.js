@@ -1,32 +1,20 @@
 import React from "react";
 import "./Header.css";
-
-var style = {
-    backgroundImage: "url('./Images/General/Header-Blank.jpg')",
-    backgroundSize: "100% 100%",
-    // position: "fixed",
-    top: "0px",
-    height: "200px",
-    width: "auto%",
-};
-
-var center = {
-    display: "block",
-    marginLeft: "auto",
-    marginRight: "auto",
-    width: "auto",
-    height: "200px",
-  }
+import { Row, Col} from "react-bootstrap"
 
 function Header () {
         return (
-            <div>
-                <div style={style}>
+            <Row>
+             <Col xs={12}>
+               <div class="position-relative">
+                   <div class="header-style">
 
-                    <img src="./Images/General/LOGO.png" style={center}/>
+                       <img src="./Images/General/LOGO.png" class="header-logo mx-auto" />
 
-                </div>
-            </div>
+                   </div>
+               </div>
+             </Col>
+            </Row>
         );
     };
 
