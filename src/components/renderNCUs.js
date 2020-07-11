@@ -5,6 +5,7 @@ import Img from 'react-image';
 const DrawImage = ({location}) => <Img width="93%" height="auto" src={location} />
 
 function renderUnits ({NCUs, removeNCU}) {
+    console.log(NCUs);
     return [].concat(NCUs.map((NCU, i) =>
     (
         <div>

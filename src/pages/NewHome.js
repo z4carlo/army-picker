@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./NewHome.css";
-import ReactGA from 'react-ga';
+import ReactGA, { set } from 'react-ga';
 import commanders from "../units/commanders"
 import combatUnits from "../units/combatUnits"
 import nonCombatUnits from "../units/nonCombatUnits"
@@ -20,7 +20,9 @@ import Footer from "../components/Footer.js"
 import Header from "../components/Header.js";
 import HeaderSpacer from "../components/HeaderSpacer.js";
 import CreatedBy from "../components/CreatedBy.js"
-import listOptions from "../functions/listOptions"
+import ListCUOptions from "../functions/ListCUOptions"
+import ListNCUOptions from "../functions/ListNCUOptions"
+import ListAttachOptions from "../functions/ListAttachOptions"
 
 export default function Home(props) {
   useEffect(() => {
@@ -111,6 +113,27 @@ export default function Home(props) {
     }
   };
 
+  function addCU(event, i) {
+    event.preventDefault();
+    var newUnit = JSON.parse(JSON.stringify(combatUnits[faction].items[i]));
+    if (units.length>0 && units[0].name === "") {
+      newUnit.attachment = units[0].attachment;
+      units[0] = newUnit;
+    }
+    else {
+      var unit = units.concat(newUnit);
+      if(newUnit.name === "Free Folk Raiders") {
+        var newUnit2 = JSON.parse(JSON.stringify(newUnit));
+        unit = units.concat(newUnit).concat(newUnit2);
+      }
+      setUnits (unit);
+    }
+    if (newUnit.neutral === true) {
+      setNeutralPoints(neutralPoints-(newUnit.cost));
+    }
+    setPointsLeft(pointsLeft-(newUnit.cost));
+  };
+
   function removeCU(event, i) {
     event.preventDefault();
     removeAttach(event,i);
@@ -118,35 +141,23 @@ export default function Home(props) {
       setNeutralPoints(neutralPoints+(units[i].cost));
     }
     setPointsLeft(pointsLeft+(units[i].cost));
-    console.log(pointsLeft);
     const removedCU = units.splice(i,1);
     setUnits (units);
     setForceUpdate(forceUpdate + 1);
   };
 
-
-  function addNCU(event) {
+  function addNCU(event, i) {
     event.preventDefault();
-    if (chaos === true) {
-      var filteredData = filterPoints(chaosOptions(nonCombatUnits), pointsLeft)
-    } else if (neutrals === false) {
-      var filteredData = filterPoints(nonCombatUnits[faction].items, pointsLeft);
-    } else {
-      var neutralUnits = filterPoints(nonCombatUnits[0].items, neutralPoints);
-      filteredData = filterPoints(nonCombatUnits[faction].items.concat(neutralUnits), pointsLeft);
-    }
-    filteredData = noRepeats(filteredData, commander, NCUs, units, attachments);
-    if (filteredData.length > 0) {
-    const NCU = NCUs.concat(pickRandom(filteredData));
-    setNCUs (NCU);
-    if (NCU[NCU.length-1].name === "Arya Stark") {
+    var newUnit = JSON.parse(JSON.stringify(nonCombatUnits[faction].items[i]));
+    var NCU = NCUs.concat(newUnit);
+    if (newUnit.name === "Arya Stark") {
       setHaveArya(true);
     }
-    if (NCU[NCU.length-1].neutral === true) {
-      setNeutralPoints(neutralPoints-(NCU[NCU.length-1].cost));
+    if (newUnit.neutral === true) {
+      setNeutralPoints(neutralPoints-(newUnit.cost));
     }
-    setPointsLeft(pointsLeft-(NCU[NCU.length-1].cost));
-    }
+    setPointsLeft(pointsLeft-(newUnit.cost));
+    setNCUs(NCU);
   };
 
   function removeNCU(event, i) {
@@ -164,52 +175,39 @@ export default function Home(props) {
     setNCUs (NCUs);
   };
 
-  function addAttachment(event, i) {
+  function addAttachment(event, i, j) {
     event.preventDefault();
-    if (units[i].name === "Stormcrow Mercenaries") {
+    if (units[j].name === "Stormcrow Mercenaries") {
       var tempPoints = pointsLeft + 1;
       var tempNeutralPoints = neutralPoints + 1;
-    } else if (units[i].name === "Stormcrow Archers") {
+    } else if (units[j].name === "Stormcrow Archers") {
       tempPoints = pointsLeft + 1;
       tempNeutralPoints = neutralPoints + 1;
     } else {
       tempPoints = pointsLeft;
       tempNeutralPoints = neutralPoints;
     }
-    if (chaos === true) {
-      var filteredData = filterPoints(chaosOptions(attachments), tempPoints)
-    } else if (neutrals === false) {
-      var filteredData = filterPoints(attachments[faction].items, tempPoints);
-    } else {
-      var neutralUnits = filterPoints(attachments[0].items, tempNeutralPoints);
-      filteredData = filterPoints(attachments[faction].items.concat(neutralUnits), tempPoints);
-    }
-    filteredData = noRepeats(filteredData, commander, NCUs, units, haveArya)
-    filteredData = attachmentMatch(filteredData, units[i].type);
-    if (filteredData.length > 0) {
-    const attachment = pickRandom(filteredData);
+    const attachment = attachments[faction].items[i];
     if (attachment.name === "Robb Stark") {
-      units.splice((i+1), 0, {name: "Greywind", cost: 0, type: "Solo", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Greywind.png"});
+      units.splice((j+1), 0, {name: "Greywind", cost: 0, type: "Solo", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Greywind.png"});
     } else if (attachment.name === "Rickon Stark") {
-      units.splice((i+1), 0, {name: "Shaggydog", cost: 0, type: "Solo", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Shaggydog.png"});
+      units.splice((j+1), 0, {name: "Shaggydog", cost: 0, type: "Solo", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Shaggydog.png"});
     } else if (attachment.name === "Bran and Hodor") {
-      units.splice((i+1), 0, {name: "Summer", cost: 0, type: "Solo", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Summer.png"});
+      units.splice((j+1), 0, {name: "Summer", cost: 0, type: "Solo", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Summer.png"});
     } else if (attachment.name === "Jon Snow") {
-      units.splice((i+1), 0, {name: "Ghost", cost: 0, type: "Solo", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/NightsWatch/CombatUnit-Cards/NW-CombatUnit-Ghost.png"});
+      units.splice((j+1), 0, {name: "Ghost", cost: 0, type: "Solo", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/NightsWatch/CombatUnit-Cards/NW-CombatUnit-Ghost.png"});
     }
-    units[i].attachment = JSON.parse(JSON.stringify(attachment));
+    units[j].attachment = JSON.parse(JSON.stringify(attachment));
     setUnits(units);
     if (attachment.neutral === true) {
       setNeutralPoints(tempNeutralPoints-(attachment.cost));
     }
     setPointsLeft(tempPoints-(attachment.cost));
     setForceUpdate(forceUpdate + 1);
-    }
   };
 
   function removeAttach(event, i) {
     event.preventDefault();
-    console.log("HERE");
     if (units[i].attachment.name === "Robb Stark" && units[i+1] !== undefined && units[i+1].name === "Greywind") {
       units.splice((i+1), 1);
     } else if (units[i].attachment.name === "Rickon Stark" && units[i+1] !== undefined && units[i+1].name === "Shaggydog") {
@@ -255,32 +253,32 @@ export default function Home(props) {
   const DrawTokenFaction = ({location}) => {console.log (location); return<Img width="80%" height="auto" src={location} />}
 
   function renderAttachments (units) {
-    return [].concat(units.map((unit, i) =>
+    return [].concat(units.map((unit, j) =>
       <Row>
         <Col xs={6}>
-          {units[i].attachment === "None" ?
-            <div onClick={event => addAttachment(event, i)}>
-              <DrawImage location={"./Images/General/NonCombat-Unit.png"}/>
+          {units[j].attachment === "None" ?
+            <div>
+              <ListAttachOptions units={attachments[faction]} addAttachment={addAttachment} j={j}/>
             </div>
             :
             <div>
               <div>
-                <DrawImage location={units[i].attachment.imgFile}/>
+                <DrawImage location={units[j].attachment.imgFile}/>
               </div>
-              <div onClick={event => removeAttach(event, i)}>
+              <div onClick={event => removeAttach(event, j)}>
                   <Button bsStyle="primary">Remove</Button>
               </div>
             </div>
           }
         </Col>
         <Col xs={6}>
-          {units[i].attachment === "None" || units[i].attachment.attachment2 === "None" ?
+          {units[j].attachment === "None" || units[j].attachment.attachment2 === "None" ?
             <div>
               <DrawImage location={""}/>
             </div>
             :
             <div>
-              <DrawImage location={units[i].attachment.attachment2.imgFile}/>
+              <DrawImage location={units[j].attachment.attachment2.imgFile}/>
             </div>
           }
         </Col>
@@ -417,27 +415,22 @@ export default function Home(props) {
               // nonCombatUnits={nonCombatUnits}
               NCUs={NCUs}
               removeNCU={removeNCU}
-            />}            
+            />}
             {commander && <h4>
-              <div onClick={addNCU}>
-                <DrawImage location={"./Images/General/NonCombat-Unit.png"}/>
+              <div>
+                <ListNCUOptions units={nonCombatUnits[faction]} addNCU={addNCU}/>
               </div>
-            </h4>}       
+            </h4>}
           </Col>
           <Col xs={12} md={4}>
             {commander && <h3>Combat Units</h3>}
-            <Row>
-              <div>
-                <listOptions options={commander}/>
-              </div>
-            </Row>
             {units.length>0 && (units[0].name !== "") &&<RenderUnits
               units={units}
               removeCU={removeCU}
             />}
             {commander && <h4>
-              <div className="unit" onClick={addCombatUnit}>
-                <DrawImage2 location={"./Images/General/Combat-Unit.png"}/>
+              <div>
+                <ListCUOptions units={combatUnits[faction]} addCU={addCU}/>
               </div>
             </h4>}
           </Col>
