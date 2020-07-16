@@ -1,8 +1,12 @@
-export default function attachmentMatch(data, type) {
+export default function attachmentMatch(filteredData, type) {
 
-    const filteredData = data.filter(unit => unit.type === type);
-
-    console.log("After Attachment Match", filteredData);
+    for (let [i, f] of filteredData.entries()) {
+        if (f !== undefined) {
+            if (f.type !== type) {
+                delete filteredData[i];
+            }
+        }
+    }
 
     return filteredData;
 }

@@ -1,34 +1,34 @@
 const nonCombatUnits = [
     {
       type: 'group', name: 'Neutral', items: [
-        { name: "Lord Varys", subName: "The Spider", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Neutral/NCU/NEUTRAL-Varys-NCU.png", neutral: true },
-        { name: "Petyr Baelish", subName: "Littlefinger", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Neutral/NCU/NEUTRAL-Baelish-NCU.png", neutral: true },
-        { name: "Tycho Nestoris", subName: "Iron Banker", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Neutral/NCU/NEUTRAL-Tycho-NCU.png", neutral: true },
-        { name: "Jaqen H'ghar", subName: "Follower of The Red God", cost: 5, type: "NCU", unique: true, imgFile: "./Images/Neutral/NCU/NEUTRAL-Jaqen-NCU.png", neutral: true },
-        { name: "Walder Frey", subName: "Lord of The Crossing", cost: 5, type: "NCU", unique: true, imgFile: "./Images/Neutral/NCU/NEUTRAL-WalderFrey-NCU.png", neutral: true }
+        { name: "Lord Varys", subName: "The Spider", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Neutral/NCU/30403f.jpg", neutral: true },
+        { name: "Petyr Baelish", subName: "Littlefinger", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Neutral/NCU/30402f.jpg", neutral: true },
+        { name: "Tycho Nestoris", subName: "Iron Banker", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Neutral/NCU/30406f.jpg", neutral: true },
+        { name: "Jaqen H'ghar", subName: "Follower of The Red God", cost: 5, type: "NCU", unique: true, imgFile: "./Images/Neutral/NCU/30405f.jpg", neutral: true },
+        { name: "Walder Frey", subName: "Lord of The Crossing", cost: 5, type: "NCU", unique: true, imgFile: "./Images/Neutral/NCU/30407f.jpg", neutral: true }
       ]
     },
     {
      type: 'group', name: 'Lannister', items: [
-       { name: "Pycelle", subName: "Grand Maester", cost: 3, type: "NCU", unique: true, imgFile: "./Images/Lannister/NCU-Cards/LAN-Pycelle-NCU.png" },
-       { name: "Cersei Lannister", subName: "Queen Regent", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Lannister/NCU-Cards/LAN-Cersei-NCU.png" },
-       { name: "Joffrey Baratheon", subName: "Lord of The Seven Kingdoms", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Lannister/NCU-Cards/LAN-Joffrey-NCU.png" },
-       { name: "Tyrion Lannister", subName: "The Imp", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Lannister/NCU-Cards/LAN-Tyrion-NCU.png" },
-       { name: "Tywin Lannister", subName: "The Great Lion", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Lannister/NCU-Cards/LAN-Tywin-NCU.png" },
+       { name: "Pycelle", subName: "Grand Maester", cost: 3, type: "NCU", unique: true, imgFile: "./Images/Lannister/NCU-Cards/30102f.jpg", thumb: "./Images/Lannister/Thumb/P-30102b.png" },
+       { name: "Cersei Lannister", subName: "Queen Regent", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Lannister/NCU-Cards/30105f.jpg", thumb: "./Images/Lannister/Thumb/P-30105b.png" },
+       { name: "Joffrey Baratheon", subName: "Lord of The Seven Kingdoms", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Lannister/NCU-Cards/30106f.jpg", thumb: "./Images/Lannister/Thumb/P-30106b.png" },
+       { name: "Tyrion Lannister", subName: "The Imp", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Lannister/NCU-Cards/30104f.jpg", thumb: "./Images/Lannister/Thumb/P-30104b.png" },
+       { name: "Tywin Lannister", subName: "The Great Lion", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Lannister/NCU-Cards/30101f.jpg", thumb: "./Images/Lannister/Thumb/P-30101b.png" },
      ]
     },
     {
       type: 'group', name: 'Stark', items: [
-        { name: "Arya Stark", subName: "The Wolf Girl", cost: 3, type: "NCU", unique: true, imgFile: "./Images/Stark/NCU-Cards/Stark-Arya-NCU.png" },
-        { name: "Sansa Stark", subName: "Little Bird", cost: 3, type: "NCU", unique: true, imgFile: "./Images/Stark/NCU-Cards/Stark-Sansa.png" },
-        { name: "Catelyn Stark", subName: "Lady of Winterfell", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Stark/NCU-Cards/Stark-Catelyn.png" },
-        { name: "Eddard Stark", subName: "Warden of the North", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Stark/NCU-Cards/Stark-EddardStark-NCU.png" },
-        { name: "Rodrik Cassel", subName: "Combat Veteran", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Stark/NCU-Cards/Stark-RodrikCassel-NCU.png" },
+        { name: "Arya Stark", subName: "The Wolf Girl", cost: 3, type: "NCU", unique: true, imgFile: "./Images/Stark/NCU-Cards/30206f.jpg" },
+        { name: "Sansa Stark", subName: "Little Bird", cost: 3, type: "NCU", unique: true, imgFile: "./Images/Stark/NCU-Cards/30202f.jpg" },
+        { name: "Catelyn Stark", subName: "Lady of Winterfell", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Stark/NCU-Cards/30201f.jpg" },
+        { name: "Eddard Stark", subName: "Warden of the North", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Stark/NCU-Cards/30204f.jpg" },
+        { name: "Rodrik Cassel", subName: "Combat Veteran", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Stark/NCU-Cards/30205f.jpg" },
       ]
      },
      {
       type: 'group', name: 'Nights Watch', items: [
-        { name: "Craster", subName: "Ally of Convenience", cost: 3, type: "NCU", unique: true, imgFile: "./Images/NightsWatch/NCU/NW-NCU-CRASTER.png" },
+        { name: "Craster", subName: "Ally of Convenience", cost: 3, type: "NCU", unique: true, imgFile: "./Images/FreeFolk/NCU/30303f.jpg" },
         { name: "Aemon", subName: "Maester of Castle Black", cost: 4, type: "NCU", unique: true, imgFile: "./Images/NightsWatch/NCU/NW-NCU-Aemon.png" },
         { name: "Bowen Marsh", subName: "First Steward", cost: 4, type: "NCU", unique: true, imgFile: "./Images/NightsWatch/NCU/NW-NCU-Marsh.png" },
         { name: "Donal Noye", subName: "Expert Blacksmith", cost: 4, type: "NCU", unique: true, imgFile: "./Images/NightsWatch/NCU/NW-NCU-Noye.png" },
@@ -38,24 +38,24 @@ const nonCombatUnits = [
      },
      {
       type: 'group', name: 'Free Folk', items: [
-        { name: "Craster", subName: "Ally of Convenience", cost: 3, type: "NCU", unique: true, imgFile: "./Images/FreeFolk/NCU/Craster-NCU.png" },
-        { name: "Lady Val", subName: "The Wildling Princess", cost: 3, type: "NCU", unique: true, imgFile: "./Images/FreeFolk/NCU/VAL-NCU.png" },
-        { name: "Ygritte", subName: "Kissed by Fire", cost: 3, type: "NCU", unique: true, imgFile: "./Images/FreeFolk/NCU/Ygritte-NCU.png" },
-        { name: "Mance Rayder", subName: "Artful Tactician", cost: 4, type: "NCU", unique: true, imgFile: "./Images/FreeFolk/NCU/Mance-NCU.png" },
-        { name: "Styr", subName: "Iron-Fisted Tyrant", cost: 4, type: "NCU", unique: true, imgFile: "./Images/FreeFolk/NCU/Styr-NCU.png" },
+        { name: "Craster", subName: "Ally of Convenience", cost: 3, type: "NCU", unique: true, imgFile: "./Images/FreeFolk/NCU/30303f.jpg" },
+        { name: "Lady Val", subName: "The Wildling Princess", cost: 3, type: "NCU", unique: true, imgFile: "./Images/FreeFolk/NCU/30301f.jpg" },
+        { name: "Ygritte", subName: "Kissed by Fire", cost: 3, type: "NCU", unique: true, imgFile: "./Images/FreeFolk/NCU/30305f.jpg" },
+        { name: "Mance Rayder", subName: "Artful Tactician", cost: 4, type: "NCU", unique: true, imgFile: "./Images/FreeFolk/NCU/30302f.jpg" },
+        { name: "Styr", subName: "Iron-Fisted Tyrant", cost: 4, type: "NCU", unique: true, imgFile: "./Images/FreeFolk/NCU/30304f.jpg" },
       ]
      },
      {
       type: 'group', name: 'Baratheon', items: [
-        { name: "Axell Florent", subName: "Hand of the Queen", Loyalty: "Stannis Baratheon", cost: 3, type: "NCU", unique: true, imgFile: "" },
-        { name: "Eldon Estermont", subName: "Lord of Greenstone", Loyalty: "Renly Baratheon", cost: 3, type: "NCU", unique: true, imgFile: "" },
-        { name: "Shyra Errol", subName: "Lady of Haystack Hall", cost: 3, type: "NCU", unique: true, imgFile: "" },
-        { name: "Alester Florent", subName: "Lord of Blightwater", cost: 4, type: "NCU", unique: true, imgFile: "" },
-        { name: "Davos Seaworth", subName: "Hand of The True King", Loyalty: "Stannis Baratheon", cost: 4, type: "NCU", unique: true, imgFile: "" },
-        { name: "Margaery Tyrell", subName: "Little Rose", Loyalty: "Renly Baratheon", cost: 4, type: "NCU", unique: true, imgFile: "" },
-        { name: "Selyse and Shireen", subName: "Queen and Princess", Loyalty: "Stannis Baratheon", cost: 4, type: "NCU", unique: true, imgFile: "" },
-        { name: "Melisandre", subName: "The Red Woman", Loyalty: "Stannis Baratheon", cost: 5, type: "NCU", unique: true, imgFile: "" },
-        { name: "Olenna Tyrell", subName: "Queen of Thorns", Loyalty: "Renly Baratheon", cost: 4, type: "NCU", unique: true, imgFile: "" },
+        { name: "Axell Florent", subName: "Hand of the Queen", Loyalty: "Stannis Baratheon", cost: 3, type: "NCU", unique: true, imgFile: "./Images/Baratheon/NCU/30606f.jpg" },
+        { name: "Eldon Estermont", subName: "Lord of Greenstone", Loyalty: "Renly Baratheon", cost: 3, type: "NCU", unique: true, imgFile: "./Images/Baratheon/NCU/30610f.jpg" },
+        { name: "Shyra Errol", subName: "Lady of Haystack Hall", cost: 3, type: "NCU", unique: true, imgFile: "./Images/Baratheon/NCU/30602f.jpg" },
+        { name: "Alester Florent", subName: "Lord of Blightwater", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Baratheon/NCU/30601f.jpg" },
+        { name: "Davos Seaworth", subName: "Hand of The True King", Loyalty: "Stannis Baratheon", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Baratheon/NCU/30604f.jpg" },
+        { name: "Margaery Tyrell", subName: "Little Rose", Loyalty: "Renly Baratheon", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Baratheon/NCU/30608f.jpg" },
+        { name: "Selyse and Shireen", subName: "Queen and Princess", Loyalty: "Stannis Baratheon", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Baratheon/NCU/30605f.jpg" },
+        { name: "Melisandre", subName: "The Red Woman", Loyalty: "Stannis Baratheon", cost: 5, type: "NCU", unique: true, imgFile: "./Images/Baratheon/NCU/30603f.jpg" },
+        { name: "Olenna Tyrell", subName: "Queen of Thorns", Loyalty: "Renly Baratheon", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Baratheon/NCU/30609f.jpg" },
       ]
      },
      {

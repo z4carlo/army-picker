@@ -6,7 +6,6 @@ export default function chaosOptions(data) {
         console.log(i);
         allOptions = allOptions.concat(data[i].items);
     }
-    console.log(allOptions);
 
     return allOptions;
 }

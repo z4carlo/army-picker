@@ -5,12 +5,7 @@ import commanders from "../units/commanders"
 import combatUnits from "../units/combatUnits"
 import nonCombatUnits from "../units/nonCombatUnits"
 import attachments from "../units/attachments"
-import pickRandom from "../functions/pickRandom"
-import filterPoints from "../functions/filterPoints"
-import noRepeats from "../functions/noRepeats"
-import chaosOptions from "../functions/chaosOptions"
-import attachmentMatch from "../functions/attachmentMatch"
-import { Row, Col, Button } from "react-bootstrap"
+import { Row, Col, Button, Image } from "react-bootstrap"
 import RenderUnits from "../components/renderUnits"
 import RenderNCUs from "../components/renderNCUs"
 import Img from 'react-image';
@@ -23,115 +18,74 @@ import CreatedBy from "../components/CreatedBy.js"
 import ListCUOptions from "../functions/ListCUOptions"
 import ListNCUOptions from "../functions/ListNCUOptions"
 import ListAttachOptions from "../functions/ListAttachOptions"
+import ListCommanders from "../functions/ListCommanders"
 
 export default function Home(props) {
   useEffect(() => {
     ReactGA.pageview('/home');
   },[]);
 
-  const [commander, setCommander] = useState(false);
+  const [commanderSet, setCommanderSet] = useState(false);
   const [units, setUnits] = useState([]);
   const [NCUs, setNCUs] = useState([]);
-  const [pointsLeft, setPointsLeft] = useState(0);
-  const [pointsSet, setPointsSet] = useState(false);
+  const [commander, setCommander] = useState([]);
+  const [pointsLeft, setPointsLeft] = useState(40);
   const [faction, setFaction] = useState(0);
-  const [pickedFaction, setPickedFaction] = useState(false);
-  const [neutrals, setNeutrals] = useState(false);
   const [neutralPoints, setNeutralPoints] = useState(0);
   const [haveArya, setHaveArya] = useState(false);
   const [forceUpdate, setForceUpdate] = useState(0);
-  const [max, setMax] = useState(0);
-  const [chaos, setChaos] = useState(false);
+  const [max, setMax] = useState(40);
 
-  function addCommander(event) {
+  function addCommander(event, i) {
     event.preventDefault();
-    if (chaos === true) {
-      var newcommander = pickRandom(chaosOptions(commanders));
-    } else if (neutrals === false) {
-      newcommander = pickRandom(commanders[faction].items);
-    } else {
-      newcommander = pickRandom(commanders[faction].items.concat(commanders[0].items));
-    }
+    var newcommander = JSON.parse(JSON.stringify(commanders[faction].items[i]));
+    var unit = {};
     if ((newcommander.type === "Infantry") || (newcommander.type === "Cavalry")) {
-      if (newcommander.name === "Joffrey Baratheon") {
-        units[0] = {name: "Kingsguard", cost: 6, type: "Infantry", attachment: newcommander, attachment2: "None", unique: true, imgFile: "./Images/Lannister/CombatUnit-Cards/LAN-CombatUnit-Kingsguard.png"};
-      } else if (newcommander.name === "Eddard Stark") {
-        units[0] = {name: "Eddard's Honor Guard", cost: 7, type: "Infantry", attachment: newcommander, attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-HonorGuard.png"};
-      } else if (newcommander.name === "Rattleshirt") {
-        units[0] = { name: "Bonelords Chosen", cost: 8, type:"Infantry", attachment: newcommander, attachment2: "None", unique: true, imgFile: "./Images/FreeFolk/CombatUnit-Cards/FF-CombatUnit-Chosen.png" };
+      if (newcommander.name === "Rattleshirt") {
+        unit = units.concat({name: "Bonelords Chosen", cost: 8, type:"Infantry", attachment: newcommander, attachment2: "None", unique: true, imgFile: "./Images/FreeFolk/CombatUnit-Cards/FF-CombatUnit-Chosen.png" });
+        setUnits(unit);
       } else if (newcommander.name === "Robb Stark") {
-        units[0] = {name: "", attachment: newcommander};
-        units[1] = {name: "Greywind", cost: 0, type: "Solo", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Greywind.png"};
+        unit = units.concat({name: "", attachment: newcommander}).concat({name: "Greywind", cost: 0, type: "Solo", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/10204f.jpg"});
+        setUnits(unit);
       } else if (newcommander.name === "Jon Snow") {
-        units[0] = {name: "", attachment: newcommander};
-        units[1] = {name: "Ghost", cost: 0, type: "Solo", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/NightsWatch/CombatUnit-Cards/NW-CombatUnit-Ghost.png"};
+        unit = units.concat({name: "", attachment: newcommander}).concat({name: "Ghost", cost: 0, type: "Solo", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/NightsWatch/CombatUnit-Cards/10504.jpg"});
+        setUnits(unit);
       } else {
-        units[0] = {name: "", attachment: newcommander, attachment2: "None",};
+        unit = units.concat({name: "", attachment: newcommander, attachment2: "None",});
+        setUnits(unit);
       }
     }
     if (newcommander.type === ("NCU")) {
-      NCUs[0] = newcommander;
+      var NCU = NCUs.concat(newcommander);
+      setNCUs(NCU);
     }
-    setPointsLeft(pointsLeft-(newcommander.cost));
-    setCommander(true);
+    calculatePoints ()
+    setCommander(newcommander);
+    setCommanderSet(true);
+    setForceUpdate(forceUpdate + 1);
   };
 
-  function addCombatUnit(event) {
+  function addCU(event, i, j) {
     event.preventDefault();
-    if (chaos === true) {
-      var filteredData = filterPoints(chaosOptions(combatUnits), pointsLeft)
-    } else if (neutrals === false) {
-      filteredData = filterPoints(combatUnits[faction].items, pointsLeft);
-    } else {
-      var neutralUnits = filterPoints(combatUnits[0].items, neutralPoints);
-      filteredData = filterPoints(combatUnits[faction].items.concat(neutralUnits), pointsLeft);
-    }
-    filteredData = noRepeats(filteredData, commander, NCUs, units, attachments);
-    if (filteredData.length > 0) {
-      if (units.length>0 && units[0].name === "") {
-        filteredData = attachmentMatch(filteredData, units[0].attachment.type);
-      }
-    }
-    var newUnit = JSON.parse(JSON.stringify(pickRandom(filteredData)));
-    if (filteredData.length > 0) {
-      if (units.length>0 && units[0].name === "") {
-        newUnit.attachment = units[0].attachment;
-        units[0] = newUnit;
-      }
-      else {
-        var unit = units.concat(newUnit);
-        if(newUnit.name === "Free Folk Raiders") {
-          var newUnit2 = JSON.parse(JSON.stringify(newUnit));
-          unit = units.concat(newUnit).concat(newUnit2);
-        }
-        setUnits (unit);
-      }
-      if (newUnit.neutral === true) {
-        setNeutralPoints(neutralPoints-(newUnit.cost));
-      }
-      setPointsLeft(pointsLeft-(newUnit.cost));
-    }
-  };
-
-  function addCU(event, i) {
-    event.preventDefault();
+    var points = pointsLeft
     var newUnit = JSON.parse(JSON.stringify(combatUnits[faction].items[i]));
-    if (units.length>0 && units[0].name === "") {
-      newUnit.attachment = units[0].attachment;
-      units[0] = newUnit;
+    if (units[j] !== undefined && units[j].name === "") {
+      newUnit.attachment = units[j].attachment;
+      units[j] = newUnit;
     }
     else {
-      var unit = units.concat(newUnit);
-      if(newUnit.name === "Free Folk Raiders") {
-        var newUnit2 = JSON.parse(JSON.stringify(newUnit));
-        unit = units.concat(newUnit).concat(newUnit2);
-      }
-      setUnits (unit);
+      units[j] = newUnit;
+    }
+    if(newUnit.name === "Free Folk Raiders") {
+      var newUnit2 = { name: "Free Folk Raiders", cost: 3, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/FreeFolk/CombatUnit-Cards/10303f.jpg" };
+      units[units.length] = newUnit2;
+      points = points-3;
     }
     if (newUnit.neutral === true) {
       setNeutralPoints(neutralPoints-(newUnit.cost));
     }
-    setPointsLeft(pointsLeft-(newUnit.cost));
+    calculatePoints ();
+    setForceUpdate(forceUpdate + 1);
   };
 
   function removeCU(event, i) {
@@ -140,9 +94,9 @@ export default function Home(props) {
     if (units[i].neutral === true) {
       setNeutralPoints(neutralPoints+(units[i].cost));
     }
-    setPointsLeft(pointsLeft+(units[i].cost));
     const removedCU = units.splice(i,1);
     setUnits (units);
+    calculatePoints();
     setForceUpdate(forceUpdate + 1);
   };
 
@@ -156,8 +110,9 @@ export default function Home(props) {
     if (newUnit.neutral === true) {
       setNeutralPoints(neutralPoints-(newUnit.cost));
     }
-    setPointsLeft(pointsLeft-(newUnit.cost));
     setNCUs(NCU);
+    calculatePoints();
+    setForceUpdate(forceUpdate + 1);
   };
 
   function removeNCU(event, i) {
@@ -166,13 +121,17 @@ export default function Home(props) {
     if (NCUs[i].name === "Arya Stark") {
       setHaveArya(false);
     }
+    if (NCUs[i].commander === true) {
+      setCommanderSet(false);
+      setCommander([]);
+    }
     if (NCUs[i].neutral === true) {
       setNeutralPoints(neutralPoints+(NCUs[i].cost));
     }
-    setPointsLeft(pointsLeft+(NCUs[i].cost));
     const removedNCU = NCUs.splice(i,1);
-    console.log(removedNCU)
     setNCUs (NCUs);
+    calculatePoints();
+    setForceUpdate(forceUpdate + 1);
   };
 
   function addAttachment(event, i, j) {
@@ -189,20 +148,20 @@ export default function Home(props) {
     }
     const attachment = attachments[faction].items[i];
     if (attachment.name === "Robb Stark") {
-      units.splice((j+1), 0, {name: "Greywind", cost: 0, type: "Solo", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Greywind.png"});
+      units.splice((j+1), 0, {name: "Greywind", cost: 0, type: "Solo", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/10204f.jpg"});
     } else if (attachment.name === "Rickon Stark") {
-      units.splice((j+1), 0, {name: "Shaggydog", cost: 0, type: "Solo", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Shaggydog.png"});
+      units.splice((j+1), 0, {name: "Shaggydog", cost: 0, type: "Solo", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/10210f.jpg"});
     } else if (attachment.name === "Bran and Hodor") {
-      units.splice((j+1), 0, {name: "Summer", cost: 0, type: "Solo", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/STARK-CombatUnit-Summer.png"});
+      units.splice((j+1), 0, {name: "Summer", cost: 0, type: "Solo", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/10207f.jpg"});
     } else if (attachment.name === "Jon Snow") {
-      units.splice((j+1), 0, {name: "Ghost", cost: 0, type: "Solo", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/NightsWatch/CombatUnit-Cards/NW-CombatUnit-Ghost.png"});
+      units.splice((j+1), 0, {name: "Ghost", cost: 0, type: "Solo", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/NightsWatch/CombatUnit-Cards/10504.jpg"});
     }
     units[j].attachment = JSON.parse(JSON.stringify(attachment));
     setUnits(units);
     if (attachment.neutral === true) {
       setNeutralPoints(tempNeutralPoints-(attachment.cost));
     }
-    setPointsLeft(tempPoints-(attachment.cost));
+    calculatePoints ()
     setForceUpdate(forceUpdate + 1);
   };
 
@@ -216,54 +175,50 @@ export default function Home(props) {
       units.splice((i+1), 1);
     } else if (units[i].attachment.name === "Jon Snow" && units[i+1] !== undefined && units[i+1].name === "Ghost") {
       units.splice((i+1), 1);
-    }  
+    }
+    if (units[i].attachment.commander === true) {
+      setCommanderSet(false);
+      setCommander([]);
+    }
     if (units[i].attachment.neutral === true) {
       setNeutralPoints(neutralPoints+(units[i].attachment.cost));
     }
-    setPointsLeft(pointsLeft+(units[i].attachment.cost));
-    console.log(pointsLeft);
     units[i].attachment = "None";
+    if (units[i].name === "") {
+      units.splice(i,1);
+    }
     setUnits(units);
+    calculatePoints ()
     setForceUpdate(forceUpdate + 1);
   };
 
   function clearAll(event) {
     event.preventDefault();
-    setCommander(false);
+    setCommanderSet(false);
     setUnits([]);
     setNCUs([]);
-    setPointsLeft(0);
-    setPointsSet(false);
-    setFaction(0);
-    setPickedFaction(false);
-    setNeutrals(false);
+    setCommander([]);
+    setPointsLeft(max);
     setNeutralPoints(0);
     setHaveArya(false);
-    setMax(0);
-    setChaos(false);
   };
 
   const DrawImage = ({location}) => {return<Img width="93%" height="auto" src={location} />}
-  const DrawImage2 = ({location}) => {return<Img width="100%" height="auto" src={location} />}
-  const DrawImage3 = ({location}) => {return<Img width="200" height="100" src={location} />}
-  const DrawToken = ({location}) => {console.log (location); return<Img width="45%" height="auto" src={location} />}
-  const DrawTrash = ({location}) => {console.log (location); return<Img width="20%" height="auto" src={location} />}
-  const DrawTokenSmall = ({location}) => {console.log (location); return<Img width="40%" height="auto" src={location} class="mx-auto"/>}
   const DrawTokenCommander = ({location}) => {return<Img class="header-logo mx-auto" src={location} />}
-  const DrawTokenFaction = ({location}) => {console.log (location); return<Img width="80%" height="auto" src={location} />}
 
   function renderAttachments (units) {
+    console.log(units);
     return [].concat(units.map((unit, j) =>
       <Row>
         <Col xs={6}>
           {units[j].attachment === "None" ?
             <div>
-              <ListAttachOptions units={attachments[faction]} addAttachment={addAttachment} j={j}/>
+              {commanderSet && <ListAttachOptions options={attachments[faction]} addAttachment={addAttachment} points={pointsLeft} NCUs={NCUs} units={units} haveArya={haveArya} type={units[j].type} j={j}/>}
             </div>
             :
             <div>
               <div>
-                <DrawImage location={units[j].attachment.imgFile}/>
+                <Image src={units[j].attachment.imgFile} width="100%" height="auto" responsive rounded/>
               </div>
               <div onClick={event => removeAttach(event, j)}>
                   <Button bsStyle="primary">Remove</Button>
@@ -288,12 +243,9 @@ export default function Home(props) {
 
   function chooseChaos (event) {
     event.preventDefault();
-    console.log(commanders.length);
     const faction = (Math.floor(Math.random()*commanders.length));
     console.log(faction);
     setFaction(faction);
-    setPickedFaction(true);
-    setChaos(true);
     setNeutralPoints(pointsLeft);
     addCommander(event);
   }
@@ -301,151 +253,134 @@ export default function Home(props) {
   const chooseFaction = (event, faction) => {
     event.preventDefault();
     setFaction(faction);
-    setPickedFaction(true);
     if (event.value === 0) {
       setNeutralPoints(pointsLeft);
     } else {
       setNeutralPoints(pointsLeft/2);
     }
+    setCommanderSet(false);
+    setUnits([]);
+    setNCUs([]);
   }
 
   function setTotal (event, points) {
     event.preventDefault();
     setPointsLeft(points);
-    setPointsSet(true);
     setMax(points);
   }
 
-  function setNeutral (event) {
-    event.preventDefault();
-    setNeutrals(!neutrals);
-  }
-
-  function RenderNCUCommander() {
-    console.log("Draw NCU Commander");
+  function RenderCommander() {
     return (
       <div>
-        <DrawTokenCommander location={NCUs[0].token}/>
+        <DrawTokenCommander location={commander.token}/>
       </div>
     );
   }
 
-  function RenderCUCommander() {
-    console.log("Draw CU Commander");
-    return (
-      <div>
-        <DrawTokenCommander location={units[0].attachment.token}/>
-      </div>
-    );
+  function calculatePoints () {
+    var total = 0;
+    for (const n of NCUs) {
+      total = total + n.cost;
+    }
+    for (const u of units) {
+      if (u.cost !== undefined) {
+        total = total + u.cost;
+      }
+      if (u.adaptive === true) {
+        if (u.attachment.cost > 0) {
+          total = total - 1;
+        }
+      }
+      if (u.attachment.cost !== undefined) {
+        total = total + u.attachment.cost;
+      }
+      if (u.attachment.attachment2 !== undefined && u.attachment.attachment2.cost !== undefined) {
+        total = total + u.attachment.attachment2.cost;
+      }
+    }
+    const left = max - total;
+    setPointsLeft(left);
   }
 
   function renderPage() {
     return (
     <div class="background-100">
-      <Header block />
-      <HeaderSpacer/>
-      {!pointsSet && <PointsRow setTotal={setTotal}/>}
-      {pointsSet && <FactionRow pickedFaction={pickedFaction} chooseFaction={chooseFaction} chooseChaos={chooseChaos}/>}
-
+      {/* <Header block />
+      <HeaderSpacer/> */}
+      {<PointsRow setTotal={setTotal}/>}
+      {<FactionRow faction={faction} chooseFaction={chooseFaction}/>}
       <Row>
-        <Col xs={12} md={6}>
-          {!commander && pickedFaction && <div onClick={addCommander}>
-            <h3>Lets Get Started</h3>
-              <img src="./Images/General/ASOIAF-RANDOMBUILDER-ADD-COMMANDER.png" class="header-logo mx-auto"/>
-            <h3>Add Commander</h3>
-          </div>}
-        </Col>
-        <Col xs={12} md={6}>
-        {faction !== 0 && faction !== 4 && !commander &&<h3>Include Neutrals</h3>}
-        {faction !== 0 && faction !== 4 && !commander && (neutrals === false) && <div onClick={event => setNeutral(event)}>
-          <img src="./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-OFF.png" class="header-logo mx-auto"/>
-        </div>}
-        {faction !== 0 && faction !== 4 && !commander && (neutrals === true) && <div onClick={event => setNeutral(event)}>
-          <img src="./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-ON.png" class="header-logo mx-auto"/>     
-        </div>}
-        </Col>
-        <Col xs={3} md={3}>
-          {chaos && commander && <h3>Tactics Deck</h3>}
-          {!chaos && commander && <h3>Faction</h3>}
-          {commander && faction === 0 && <img src="./Images/General/Neutral.png" class="header-logo mx-auto" />}
-          {commander && faction === 1 && <img src="./Images/General/Lannister.png" class="header-logo mx-auto" />}
-          {commander && faction === 2 && <img src="./Images/General/Stark.png" class="header-logo mx-auto" />}
-          {commander && faction === 3 && <img src="./Images/General/NightsWatch.png" class="header-logo mx-auto" />}
-          {commander && faction === 4 && <img src="./Images/General/FreeFolk.png" class="header-logo mx-auto" />}
-          {commander && faction === 5 && <img src="./Images/General/Baratheon.png" class="header-logo mx-auto" />}
-          {commander && faction === 6 && <img src="./Images/General/Targaryen.png" class="header-logo mx-auto" />}
-        </Col>
-        <Col xs={3} md={3}>
+        <Col xs={12} md={2}>
+          {<h3>Faction</h3>}
+          {faction === 0 && <img src="./Images/General/Neutral.png" class="header-logo mx-auto" />}
+          {faction === 1 && <img src="./Images/General/Lannister.png" class="header-logo mx-auto" />}
+          {faction === 2 && <img src="./Images/General/Stark.png" class="header-logo mx-auto" />}
+          {faction === 3 && <img src="./Images/General/NightsWatch.png" class="header-logo mx-auto" />}
+          {faction === 4 && <img src="./Images/General/FreeFolk.png" class="header-logo mx-auto" />}
+          {faction === 5 && <img src="./Images/General/Baratheon.png" class="header-logo mx-auto" />}
+          {faction === 6 && <img src="./Images/General/Targaryen.png" class="header-logo mx-auto" />}
           <div class="image">
-            {commander && <h3>Total Army Size</h3>}
-              {max === 30 && commander && <img src="./Images/General/PointCounter-Container2-30PTS.png" class="header-logo mx-auto"/>}
-              {max === 40 && commander && <img src="./Images/General/PointCounter-Container2-40PTS.png" class="header-logo mx-auto"/>}
-              {max === 50 && commander && <img src="./Images/General/PointCounter-Container2-50PTS.png" class="header-logo mx-auto"/>}
+            {<h3>Total Army Size</h3>}
+              {max === 30 && <img src="./Images/General/PointCounter-Container2-30PTS.png" class="header-logo mx-auto"/>}
+              {max === 40 && <img src="./Images/General/PointCounter-Container2-40PTS.png" class="header-logo mx-auto"/>}
+              {max === 50 && <img src="./Images/General/PointCounter-Container2-50PTS.png" class="header-logo mx-auto"/>}
           </div>
-        </Col>
-        <Col xs={3} md={3}>
-          {commander && <h3>Commander</h3>}
-          {NCUs.length>0 && NCUs[0].token && RenderNCUCommander()}
-          {units.length>0 && units[0].attachment.token && RenderCUCommander()}
-        </Col>
-        <Col xs={3} md={3}>
-          {commander && neutrals && <div>
-            <h3>Neutrals On</h3>
-            <img src="./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-ON.png" class="header-logo mx-auto"/>
+          {commanderSet && <div>
+            {<h3>Commander</h3>}
+            {RenderCommander()}
           </div>}
-          {commander && !neutrals && <div>
-            <h3>Neutrals Off</h3>
-            <img src="./Images/General/ASOIAF-RANDOMBUILDER-SWITCH-OFF.png" class="header-logo mx-auto"/>
+          {!commanderSet && <div onClick={addCommander}>
+            <h3>Add Commander</h3>
+            <ListCommanders units={commanders[faction]} addCommander={addCommander}/>
           </div>}
           <div class="image2">
-          {commander && <div onClick={clearAll}>
+          {commanderSet && <div onClick={clearAll}>
             <h3>Clear All</h3>
             <img src="./Images/General/Clear-All.png" class="header-logo mx-auto"/>
           </div>}
           </div>
         </Col>
-      </Row>
-
-          <Row>
           <Col xs={12} md={2}>
-          </Col>
-          <Col xs={12} md={2}>
-          {commander && <h3>NCUs</h3>}
+          {<h3>NCUs</h3>}
             {NCUs.length>0 &&<RenderNCUs
-              // nonCombatUnits={nonCombatUnits}
               NCUs={NCUs}
               removeNCU={removeNCU}
             />}
-            {commander && <h4>
+            {commanderSet && <h4>
               <div>
-                <ListNCUOptions units={nonCombatUnits[faction]} addNCU={addNCU}/>
+                <ListNCUOptions options={nonCombatUnits[faction]} addNCU={addNCU} points={pointsLeft} NCUs={NCUs} units={units} haveArya={haveArya}/>
               </div>
             </h4>}
           </Col>
           <Col xs={12} md={4}>
-            {commander && <h3>Combat Units</h3>}
-            {units.length>0 && (units[0].name !== "") &&<RenderUnits
+            {<h3>Combat Units</h3>}
+            {<RenderUnits
               units={units}
               removeCU={removeCU}
+              options={combatUnits[faction]} 
+              addCU={addCU} 
+              points={pointsLeft} 
+              NCUs={NCUs} 
+              haveArya={haveArya}
             />}
-            {commander && <h4>
+            {commanderSet && <h4>
               <div>
-                <ListCUOptions units={combatUnits[faction]} addCU={addCU}/>
+                <ListCUOptions options={combatUnits[faction]} faction={faction} neutral={combatUnits[0]} addCU={addCU} points={pointsLeft} NCUs={NCUs} units={units} haveArya={haveArya} j={(units.length)} commander={commander}/>
               </div>
             </h4>}
           </Col>
           <Col xs={12} md={4}>
             <Row>
               <Col xs={12}>
-                {commander && <h3>Attachments</h3>}
-                {units.length>0 && renderAttachments(units)}
+                {<h3>Attachments</h3>}
+                {renderAttachments(units, commanderSet)}
               </Col>
             </Row>
           </Col>
         </Row>
-        {commander && <div class="image4">
-        {commander && <img src="./Images/General/PointCounter-Container.png" width="auto" height="120px"/>}
-        {commander && <h1>{pointsLeft}</h1>}
+        {commanderSet && <div class="image4">
+        {commanderSet && <img src="./Images/General/PointCounter-Container.png" width="auto" height="120px"/>}
+        {commanderSet && <h1>{pointsLeft}</h1>}
         </div>}
     </div>
   );

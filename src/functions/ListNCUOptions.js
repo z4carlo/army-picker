@@ -2,14 +2,17 @@ import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import "./listOptions.css";
 import RenderNCUOptions from '../components/RenderNCUOptions';
+import filterPoints from './filterPoints';
+import noRepeats from './noRepeats';
 
-function ListNCUOptions ({units, addNCU}) {
+function ListNCUOptions ({options, addNCU, points, NCUs, units, haveArya}) {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    console.log(units);
+    var filteredunits = filterPoints(options.items, points);
+    filteredunits = noRepeats(filteredunits, NCUs, units, haveArya);
   
     return (
         <div>
@@ -22,7 +25,9 @@ function ListNCUOptions ({units, addNCU}) {
                     <Modal.Title>Choose Combat Unit</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <RenderNCUOptions units={units.items} addNCU={addNCU} handleClose={handleClose}/>
+                    <div onClick={handleClose}>
+                        <RenderNCUOptions units={filteredunits} addNCU={addNCU}/>
+                    </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={handleClose}>Close</Button>

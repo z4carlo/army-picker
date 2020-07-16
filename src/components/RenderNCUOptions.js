@@ -1,11 +1,11 @@
 import React from "react";
 
-function RenderNCUOptions ({units, addNCU, handleClose}) {
+function RenderNCUOptions ({units, addNCU}) {
     console.log(units);
     return [].concat(units.map((unit, i) =>
     (
-        <div onClick={event => (handleClose, addNCU(event, i))}>
-            <img src={units[i].imgFile} width="100%" height="auto" responsive/>
+        <div onClick={event => addNCU(event, i)}>
+            <img src={units[i].thumb} width="100%" height="auto" responsive/>
         </div>
     )))
 }
