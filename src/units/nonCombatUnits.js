@@ -60,11 +60,11 @@ const nonCombatUnits = [
      },
      {
       type: 'group', name: 'Targaryen', items: [
-        { name: "Illyrio Mopatis", subName: "Magister of Pentos", cost: 3, type: "NCU", unique: true, imgFile: "" },
-        { name: "Barristan Selmy", subName: "Advisor To The Dragon", cost: 4, type: "NCU", unique: true, imgFile: "" },
-        { name: "Daenerys Targaryen", subName: "Khaleesi", cost: 4, type: "NCU", unique: true, imgFile: "" },
-        { name: "Pyat Pree", subName: "Warlock of Qarth", cost: 4, type: "NCU", unique: true, imgFile: "" },
-        { name: "Xaro Xhoan Daxos", subName: "Merchant Prince of Qarth", cost: 4, type: "NCU", unique: true, imgFile: "" },
+        { name: "Illyrio Mopatis", subName: "Magister of Pentos", cost: 3, type: "NCU", unique: true, imgFile: "./Images/Targaryen/NCU/30702f.jpg" },
+        { name: "Barristan Selmy", subName: "Advisor To The Dragon", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Targaryen/NCU/30704f.jpg" },
+        { name: "Daenerys Targaryen", subName: "Khaleesi", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Targaryen/NCU/30701f.jpg" },
+        { name: "Pyat Pree", subName: "Warlock of Qarth", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Targaryen/NCU/30703f.jpg" },
+        { name: "Xaro Xhoan Daxos", subName: "Merchant Prince of Qarth", cost: 4, type: "NCU", unique: true, imgFile: "./Images/Targaryen/NCU/30705f.jpg" },
       ]
      },
   ]

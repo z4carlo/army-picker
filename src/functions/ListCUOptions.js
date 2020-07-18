@@ -11,6 +11,10 @@ function ListCUOptions ({options, faction, neutral, addCU, points, NCUs, units, 
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    console.log(neutral);
+    var allUnits = options.items.concat(neutral.items);
+    console.log(allUnits);
     
     var filteredunits = filterPoints(options.items, points);
     filteredunits = noRepeats(filteredunits, NCUs, units, haveArya, commander);

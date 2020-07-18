@@ -92,14 +92,14 @@ const attachments = [
     },
     {
       type: 'group', name: 'Targaryen', items: [
-        { name: "Jorah Mormont", subName: "The Andal", cost: 1, type: "Infantry", unique: true, imgFile: "", attachment2: "None" },
-        { name: "Jorah Mormont", subName: "Penitent Betrayer", cost: 1, type: "Infantry", unique: true, imgFile: "", attachment2: "None" },
-        { name: "Outrider Ko", cost: 1, type: "Cavalry", unique: false, imgFile: "", attachment2: "None" },
-        { name: "Screamer Ko", cost: 1, type: "Cavalry", unique: false, imgFile: "", attachment2: "None" },
-        { name: "Jorah Mormont", subName: "The Exiled Knight", cost: 2, type: "Cavalry", unique: true, imgFile: "", attachment2: "None" },
-        { name: "Belwas", subName: "Veteran Pit-Fighter", cost: 2, type: "Infantry", unique: true, imgFile: "", attachment2: "None" },
-        { name: "Grey Worm", subName: "Freed By The Dragon", cost: 2, type: "Infantry", unique: true, imgFile: "", attachment2: "None" },
-        { name: "Unsullied Officer", cost: 3, type: "Infantry", unique: true, imgFile: "", attachment2: "None" },
+        { name: "Jorah Mormont", subName: "The Andal", cost: 1, type: "Infantry", unique: true, imgFile: "./Images/Targaryen/Attachment-Cards/20710f.jpg", attachment2: "None" },
+        { name: "Jorah Mormont", subName: "Penitent Betrayer", cost: 1, type: "Infantry", unique: true, imgFile: "./Images/Targaryen/Attachment-Cards/20709f.jpg", attachment2: "None" },
+        { name: "Outrider Ko", cost: 1, type: "Cavalry", unique: false, imgFile: "./Images/Targaryen/Attachment-Cards/20705f.jpg", attachment2: "None" },
+        { name: "Screamer Ko", cost: 1, type: "Cavalry", unique: false, imgFile: "./Images/Targaryen/Attachment-Cards/20704f.jpg", attachment2: "None" },
+        { name: "Jorah Mormont", subName: "The Exiled Knight", cost: 2, type: "Cavalry", unique: true, imgFile: "./Images/Targaryen/Attachment-Cards/20703f.jpg", attachment2: "None" },
+        { name: "Belwas", subName: "Veteran Pit-Fighter", cost: 2, type: "Infantry", unique: true, imgFile: "./Images/Targaryen/Attachment-Cards/20708f.jpg", attachment2: "None" },
+        { name: "Grey Worm", subName: "Freed By The Dragon", cost: 2, type: "Infantry", unique: true, imgFile: "./Images/Targaryen/Attachment-Cards/20713f.jpg", attachment2: "None" },
+        { name: "Unsullied Officer", cost: 3, type: "Infantry", unique: true, imgFile: "./Images/Targaryen/Attachment-Cards/20706f.jpg", attachment2: "None" },
       ]
     },
   ]

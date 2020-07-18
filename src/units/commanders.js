@@ -63,11 +63,11 @@ const commanders = [
   },
   {
     type: 'group', name: 'Targaryen', items: [
-    { name: "Barristan Selmy", subName: "Barristan The Bold", cost: 0, type: "Infantry", unique: true, commander: true, imgFile: "", token: "", attachment2: "None"},
-    { name: "Belwas", subName: "The Strong", cost: 0, type: "Infantry", unique: true, commander: true, imgFile: "", token: "", attachment2: "None" },
-    { name: "Grey Worm", subName: "Unsullied Commander", cost: 0, type: "Infantry", unique: true, commander: true, imgFile: "", token: "", attachment2: "None" },
-    { name: "Jorah Mormont", subName: "Westerosi Tactician", cost: 0, type: "Cavalry", unique: true, commander: true, imgFile: "", token: "", attachment2: "None" },
-    { name: "Khal Drogo", subName: "The Great Khal", cost: 0, type: "Cavalry", unique: true, commander: true, imgFile: "", token: "", attachment2: "None" },
+    { name: "Barristan Selmy", subName: "Barristan The Bold", cost: 0, type: "Infantry", unique: true, commander: true, imgFile: "./Images/Targaryen/Commander-Cards/20707f.jpg", token: "", attachment2: "None"},
+    { name: "Belwas", subName: "The Strong", cost: 0, type: "Infantry", unique: true, commander: true, imgFile: "./Images/Targaryen/Commander-Cards/20711f.jpg", token: "", attachment2: "None" },
+    { name: "Grey Worm", subName: "Unsullied Commander", cost: 0, type: "Infantry", unique: true, commander: true, imgFile: "./Images/Targaryen/Commander-Cards/20712f.jpg", token: "", attachment2: "None" },
+    { name: "Jorah Mormont", subName: "Westerosi Tactician", cost: 0, type: "Cavalry", unique: true, commander: true, imgFile: "./Images/Targaryen/Commander-Cards/20702f.jpg", token: "", attachment2: "None" },
+    { name: "Khal Drogo", subName: "The Great Khal", cost: 0, type: "Cavalry", unique: true, commander: true, imgFile: "./Images/Targaryen/Commander-Cards/20701f.jpg", token: "", attachment2: "None" },
     ]
   },
 ]

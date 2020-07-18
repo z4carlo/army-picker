@@ -1,17 +1,15 @@
 export default function noRepeats(data, NCUs, units, haveArya, commander) {
     var filteredData = data;
 
-    // for (const c of commander) {
-    //     if (c.name !== "Joffrey Baratheon") {
-    //         for (let [i, f] of filteredData.entries()) {
-    //             if (f !== undefined) {
-    //                 if (f.name === "Kingsguard") {
-    //                     delete filteredData[i];
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
+    if (commander !== undefined && commander.name !== "Joffrey Baratheon") {
+        for (let [i, f] of filteredData.entries()) {
+            if (f !== undefined) {
+                if (f.name === "Kingsguard") {
+                    delete filteredData[i];
+                }
+            }
+        }
+    }
 
     for (const n of NCUs) {
         if (n.unique === true) {
