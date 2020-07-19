@@ -38,7 +38,12 @@ export default function Home(props) {
 
   function addCommander(event, i) {
     event.preventDefault();
-    var newcommander = JSON.parse(JSON.stringify(commanders[faction].items[i]));
+    var newcommander = {}
+    if (i > commanders[faction].items.length) {
+      newcommander = JSON.parse(JSON.stringify(commanders[0].items[i-(commanders[faction].items.length)]));
+    } else {
+      newcommander = JSON.parse(JSON.stringify(commanders[faction].items[i]));
+    }
     var unit = {};
     if ((newcommander.type === "Infantry") || (newcommander.type === "Cavalry")) {
       if (newcommander.name === "Rattleshirt") {
@@ -68,7 +73,12 @@ export default function Home(props) {
   function addCU(event, i, j) {
     event.preventDefault();
     var points = pointsLeft
-    var newUnit = JSON.parse(JSON.stringify(combatUnits[faction].items[i]));
+    var newUnit = {}
+    if (i > combatUnits[faction].items.length) {
+      newUnit = JSON.parse(JSON.stringify(combatUnits[0].items[i-(combatUnits[faction].items.length)]));
+    } else {
+      newUnit = JSON.parse(JSON.stringify(combatUnits[faction].items[i]));
+    }
     if (units[j] !== undefined && units[j].name === "") {
       newUnit.attachment = units[j].attachment;
       units[j] = newUnit;
@@ -102,7 +112,12 @@ export default function Home(props) {
 
   function addNCU(event, i) {
     event.preventDefault();
-    var newUnit = JSON.parse(JSON.stringify(nonCombatUnits[faction].items[i]));
+    var newUnit = {}
+    if (i > combatUnits[faction].items.length) {
+      newUnit = JSON.parse(JSON.stringify(nonCombatUnits[0].items[i-(nonCombatUnits[faction].items.length)]));
+    } else {
+      newUnit = JSON.parse(JSON.stringify(nonCombatUnits[faction].items[i]));
+    }
     var NCU = NCUs.concat(newUnit);
     if (newUnit.name === "Arya Stark") {
       setHaveArya(true);
@@ -135,18 +150,12 @@ export default function Home(props) {
   };
 
   function addAttachment(event, i, j) {
-    event.preventDefault();
-    if (units[j].name === "Stormcrow Mercenaries") {
-      var tempPoints = pointsLeft + 1;
-      var tempNeutralPoints = neutralPoints + 1;
-    } else if (units[j].name === "Stormcrow Archers") {
-      tempPoints = pointsLeft + 1;
-      tempNeutralPoints = neutralPoints + 1;
+    var attachment = {}
+    if (i > attachments[faction].items.length) {
+      attachment = attachments[0].items[i-(attachments[faction].items.length)];
     } else {
-      tempPoints = pointsLeft;
-      tempNeutralPoints = neutralPoints;
+      attachment = attachments[faction].items[i];
     }
-    const attachment = attachments[faction].items[i];
     if (attachment.name === "Robb Stark") {
       units.splice((j+1), 0, {name: "Greywind", cost: 0, type: "Solo", attachment: "None", attachment2: "None", unique: true, imgFile: "./Images/Stark/CombatUnit-Cards/10204f.jpg"});
     } else if (attachment.name === "Rickon Stark") {
@@ -159,7 +168,7 @@ export default function Home(props) {
     units[j].attachment = JSON.parse(JSON.stringify(attachment));
     setUnits(units);
     if (attachment.neutral === true) {
-      setNeutralPoints(tempNeutralPoints-(attachment.cost));
+      setNeutralPoints(neutralPoints-(attachment.cost));
     }
     calculatePoints ()
     setForceUpdate(forceUpdate + 1);
@@ -213,7 +222,7 @@ export default function Home(props) {
         <Col xs={6}>
           {units[j].attachment === "None" ?
             <div>
-              {commanderSet && <ListAttachOptions options={attachments[faction]} addAttachment={addAttachment} points={pointsLeft} NCUs={NCUs} units={units} haveArya={haveArya} type={units[j].type} j={j}/>}
+              {commanderSet && <ListAttachOptions options={attachments[faction]} faction={faction} neutral={attachments[0]} addAttachment={addAttachment} points={pointsLeft} NCUs={NCUs} units={units} haveArya={haveArya} type={units[j].type} j={j}/>}
             </div>
             :
             <div>
@@ -321,9 +330,9 @@ export default function Home(props) {
           {faction === 6 && <img src="./Images/General/Targaryen.png" class="header-logo mx-auto" />}
           <div class="image">
             {<h3>Total Army Size</h3>}
-              {max === 30 && <img src="./Images/General/PointCounter-Container2-30PTS.png" class="header-logo mx-auto"/>}
-              {max === 40 && <img src="./Images/General/PointCounter-Container2-40PTS.png" class="header-logo mx-auto"/>}
-              {max === 50 && <img src="./Images/General/PointCounter-Container2-50PTS.png" class="header-logo mx-auto"/>}
+            {max === 30 && <img src="./Images/General/PointCounter-Container2-30PTS.png" class="header-logo mx-auto"/>}
+            {max === 40 && <img src="./Images/General/PointCounter-Container2-40PTS.png" class="header-logo mx-auto"/>}
+            {max === 50 && <img src="./Images/General/PointCounter-Container2-50PTS.png" class="header-logo mx-auto"/>}
           </div>
           {commanderSet && <div>
             {<h3>Commander</h3>}
@@ -331,7 +340,7 @@ export default function Home(props) {
           </div>}
           {!commanderSet && <div onClick={addCommander}>
             <h3>Add Commander</h3>
-            <ListCommanders units={commanders[faction]} addCommander={addCommander}/>
+            <ListCommanders units={commanders[faction]} faction={faction} neutral={commanders[0]} addCommander={addCommander}/>
           </div>}
           <div class="image2">
           {commanderSet && <div onClick={clearAll}>
@@ -348,21 +357,13 @@ export default function Home(props) {
             />}
             {commanderSet && <h4>
               <div>
-                <ListNCUOptions options={nonCombatUnits[faction]} addNCU={addNCU} points={pointsLeft} NCUs={NCUs} units={units} haveArya={haveArya}/>
+                <ListNCUOptions options={nonCombatUnits[faction]} faction={faction} neutral={nonCombatUnits[0]} addNCU={addNCU} points={pointsLeft} NCUs={NCUs} units={units} haveArya={haveArya}/>
               </div>
             </h4>}
           </Col>
           <Col xs={12} md={4}>
             {<h3>Combat Units</h3>}
-            {<RenderUnits
-              units={units}
-              removeCU={removeCU}
-              options={combatUnits[faction]} 
-              addCU={addCU} 
-              points={pointsLeft} 
-              NCUs={NCUs} 
-              haveArya={haveArya}
-            />}
+            {<RenderUnits units={units} faction={faction} neutral={combatUnits[0]} removeCU={removeCU} options={combatUnits[faction]} addCU={addCU} points={pointsLeft} NCUs={NCUs} haveArya={haveArya}/>}
             {commanderSet && <h4>
               <div>
                 <ListCUOptions options={combatUnits[faction]} faction={faction} neutral={combatUnits[0]} addCU={addCU} points={pointsLeft} NCUs={NCUs} units={units} haveArya={haveArya} j={(units.length)} commander={commander}/>

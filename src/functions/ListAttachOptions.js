@@ -6,18 +6,33 @@ import filterPoints from './filterPoints';
 import noRepeats from './noRepeats';
 import attachmentMatch from './attachmentMatch';
 
-function ListAttachOptions ({options, addAttachment, points, NCUs, units, haveArya, type, j}) {
+function ListAttachOptions ({options, faction, neutral, addAttachment, points, NCUs, units, haveArya, type, j}) {
     const [show, setShow] = useState(false);
     const [toggle, setToggle] = useState(false);
 
     const handleToggle = () => setToggle(!toggle);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-  
-    var filteredunits = filterPoints(options.items, points);
-    filteredunits = noRepeats(filteredunits, NCUs, units, haveArya);
-    filteredunits = attachmentMatch(filteredunits, type);
 
+    if (points !== undefined)
+        if (units[j].adaptive === true) {
+        points = points + 1;
+        // var neutralPoints = neutralPoints + 1;
+    }
+
+    var allUnits = options.items;
+    if (neutral !== undefined) {
+        if (faction !== 0 && faction !== 4) {
+            allUnits = options.items.concat(neutral.items);
+        }
+    }
+    let filteredUnits = filterPoints(allUnits, points);
+    filteredUnits = noRepeats(filteredUnits, NCUs, units, haveArya);
+    if (type !== undefined) {
+      filteredUnits = attachmentMatch(filteredUnits, type);
+    }
+    console.log('filteredUnits', filteredUnits);
+  
     return (
         <div>
             <div className="unit" onClick={handleShow}>
@@ -26,12 +41,12 @@ function ListAttachOptions ({options, addAttachment, points, NCUs, units, haveAr
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Choose Combat Unit
+                    <Modal.Title>Choose Attachment
                         <Button onClick={handleToggle} bsStyle="primary">Show Full Cards</Button>
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <RenderAttachOptions units={filteredunits} addAttachment={addAttachment} j={j} handleClose={handleClose} toggle={toggle}/>
+                    <RenderAttachOptions units={filteredUnits} addAttachment={addAttachment} j={j} handleClose={handleClose} toggle={toggle}/>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={handleClose}>Close</Button>

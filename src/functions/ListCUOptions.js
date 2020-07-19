@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
 import "./listOptions.css";
 import RenderCUOptions from '../components/RenderCUOptions';
@@ -8,19 +8,24 @@ import attachmentMatch from './attachmentMatch';
 
 function ListCUOptions ({options, faction, neutral, addCU, points, NCUs, units, haveArya, j, type, commander}) {
     const [show, setShow] = useState(false);
+    const [toggle, setToggle] = useState(false);
 
+    const handleToggle = () => setToggle(!toggle);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    console.log(neutral);
-    var allUnits = options.items.concat(neutral.items);
-    console.log(allUnits);
-    
-    var filteredunits = filterPoints(options.items, points);
-    filteredunits = noRepeats(filteredunits, NCUs, units, haveArya, commander);
-    if (type !== undefined) {
-        filteredunits = attachmentMatch(filteredunits, type);
+    var allUnits = options.items;
+    if (neutral !== undefined) {
+        if (faction !== 0 && faction !== 4) {
+            allUnits = options.items.concat(neutral.items);
+        }
     }
+    let filteredUnits = filterPoints(allUnits, points);
+    filteredUnits = noRepeats(filteredUnits, NCUs, units, haveArya, commander);
+    if (type !== undefined) {
+      filteredUnits = attachmentMatch(filteredUnits, type);
+    }
+    console.log('filteredUnits', filteredUnits);
 
     return (
         <div>
@@ -30,12 +35,12 @@ function ListCUOptions ({options, faction, neutral, addCU, points, NCUs, units, 
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Choose Combat Unit</Modal.Title>
+                    <Modal.Title>Choose Combat Unit
+                        <Button onClick={handleToggle} bsStyle="primary">Show Full Cards</Button>
+                    </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div onClick={handleClose}>
-                        <RenderCUOptions units={filteredunits} addCU={addCU} j={j}/>
-                    </div>
+                    <RenderCUOptions units={filteredUnits} addCU={addCU} j={j} handleClose={handleClose} toggle={toggle}/>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={handleClose}>Close</Button>

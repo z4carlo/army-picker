@@ -9,7 +9,7 @@ src={location}
 responsive
 />;
 
-function UnitCard ({unit, i, options, addCU, points, NCUs, units, haveArya}) {
+function UnitCard ({unit, faction, neutral, i, options, addCU, points, NCUs, units, haveArya}) {
     if (unit.imgFile !== undefined) {
         return(
             <DrawImage location={unit.imgFile}/>
@@ -18,17 +18,17 @@ function UnitCard ({unit, i, options, addCU, points, NCUs, units, haveArya}) {
     if (unit.imgFile === undefined) {
         return(
             <div>
-                <ListCUOptions options={options} addCU={addCU} points={points} NCUs={NCUs} units={units} haveArya={haveArya} j={i} type={units[i].attachment.type}/>
+                <ListCUOptions options={options} faction={faction} neutral={neutral} addCU={addCU} points={points} NCUs={NCUs} units={units} haveArya={haveArya} j={i} type={units[i].attachment.type}/>
             </div>
         )
     }
 }
 
-function renderUnits ({units, removeCU, options, addCU, points, NCUs, haveArya}) {
+function renderUnits ({units, faction, neutral, removeCU, options, addCU, points, NCUs, haveArya}) {
     return [].concat(units.map((unit, i) =>
     (
         <div>
-            <UnitCard unit={unit} i={i} options={options} addCU={addCU} points={points} NCUs={NCUs} haveArya={haveArya} units={units}/>
+            <UnitCard unit={unit} faction={faction} neutral={neutral} i={i} options={options} addCU={addCU} points={points} NCUs={NCUs} haveArya={haveArya} units={units}/>
             {unit.name !== "" && <div onClick={event => removeCU(event, i)}>
                 <Button bsStyle="primary">Remove</Button>
             </div>}

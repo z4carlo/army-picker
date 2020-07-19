@@ -12,7 +12,7 @@ function RenderAttachOptions ({units, addAttachment, j, handleClose, toggle}) {
                             <img src={units[i].thumb} width="100%" height="auto" responsive rounded/>
                         </Col>
                         <Col>
-                            <p>{units[i].name}</p>{units[i].subName && <p> - {units[i].subName}</p>} <p>({units[i].cost})</p> <p>{units[i].type}</p>
+                            <p>{units[i].name} {units[i].Loyalty !== undefined && <span>- (Loyalty: {units[i].Loyalty})</span>}</p>{units[i].subName && <p> - {units[i].subName}</p>} <p>({units[i].cost})</p> <p>{units[i].type}</p>
                         </Col>
                     </Row>
                 </div>

@@ -3,11 +3,21 @@ import { Modal, Button } from "react-bootstrap";
 import "./listOptions.css";
 import RenderCommanders from '../components/RenderCommanders';
 
-function ListCUOptions ({units, addCommander}) {
+function ListCUOptions ({units, faction, neutral, addCommander}) {
     const [show, setShow] = useState(false);
+    const [toggle, setToggle] = useState(false);
 
+    const handleToggle = () => setToggle(!toggle);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    var options = units.items;
+    if (neutral !== undefined) {
+        if (faction !== 0 && faction !== 4) {
+            options = units.items.concat(neutral.items);
+        }
+    }
+    console.log(options);
   
     return (
         <div>
@@ -17,12 +27,12 @@ function ListCUOptions ({units, addCommander}) {
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Choose Combat Unit</Modal.Title>
+                    <Modal.Title>Choose Commander
+                        <Button onClick={handleToggle} bsStyle="primary">Show Full Cards</Button>
+                    </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div onClick={handleClose}>
-                        <RenderCommanders units={units.items} addCommander={addCommander}/>
-                    </div>
+                    <RenderCommanders units={options} addCommander={addCommander} handleClose={handleClose} toggle={toggle}/>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={handleClose}>Close</Button>

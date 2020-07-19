@@ -82,4 +82,4 @@ const combatUnits = [
   },
 ]
 
-  export default combatUnits;
+export default combatUnits;

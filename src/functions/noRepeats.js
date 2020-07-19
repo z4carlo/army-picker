@@ -1,16 +1,6 @@
 export default function noRepeats(data, NCUs, units, haveArya, commander) {
     var filteredData = data;
 
-    if (commander !== undefined && commander.name !== "Joffrey Baratheon") {
-        for (let [i, f] of filteredData.entries()) {
-            if (f !== undefined) {
-                if (f.name === "Kingsguard") {
-                    delete filteredData[i];
-                }
-            }
-        }
-    }
-
     for (const n of NCUs) {
         if (n.unique === true) {
             for (let [i, f] of filteredData.entries()) {
@@ -152,6 +142,17 @@ export default function noRepeats(data, NCUs, units, haveArya, commander) {
                             }
                         }
                     }
+                }
+            }
+        }
+    }
+
+    if (commander !== undefined && commander.name !== "Joffrey Baratheon") {
+        console.log("here");
+        for (let [i, f] of filteredData.entries()) {
+            if (f !== undefined) {
+                if (f.name === "Kingsguard") {
+                    delete filteredData[i];
                 }
             }
         }

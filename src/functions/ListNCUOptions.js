@@ -5,14 +5,23 @@ import RenderNCUOptions from '../components/RenderNCUOptions';
 import filterPoints from './filterPoints';
 import noRepeats from './noRepeats';
 
-function ListNCUOptions ({options, addNCU, points, NCUs, units, haveArya}) {
+function ListNCUOptions ({options, faction, neutral, addNCU, points, NCUs, units, haveArya}) {
     const [show, setShow] = useState(false);
+    const [toggle, setToggle] = useState(false);
 
+    const handleToggle = () => setToggle(!toggle);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    var filteredunits = filterPoints(options.items, points);
-    filteredunits = noRepeats(filteredunits, NCUs, units, haveArya);
+    var allUnits = options.items;
+    if (neutral !== undefined) {
+        if (faction !== 0 && faction !== 4) {
+            allUnits = options.items.concat(neutral.items);
+        }
+    }
+    let filteredUnits = filterPoints(allUnits, points);
+    filteredUnits = noRepeats(filteredUnits, NCUs, units, haveArya);
+    console.log('filteredUnits', filteredUnits);
   
     return (
         <div>
@@ -22,12 +31,12 @@ function ListNCUOptions ({options, addNCU, points, NCUs, units, haveArya}) {
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Choose Combat Unit</Modal.Title>
+                    <Modal.Title>Choose NCU
+                        <Button onClick={handleToggle} bsStyle="primary">Show Full Cards</Button>
+                    </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div onClick={handleClose}>
-                        <RenderNCUOptions units={filteredunits} addNCU={addNCU}/>
-                    </div>
+                    <RenderNCUOptions units={filteredUnits} addNCU={addNCU} handleClose={handleClose} toggle={toggle}/>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={handleClose}>Close</Button>
