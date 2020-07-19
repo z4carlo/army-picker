@@ -5,8 +5,10 @@ import RenderAttachOptions from '../components/RenderAttachOptions';
 import filterPoints from './filterPoints';
 import noRepeats from './noRepeats';
 import attachmentMatch from './attachmentMatch';
+import ksFilter from './ksFilter';
+import unreleasedFilter from './unreleasedFilter';
 
-function ListAttachOptions ({options, faction, neutral, addAttachment, points, NCUs, units, haveArya, type, j}) {
+function ListAttachOptions ({options, faction, neutral, addAttachment, points, NCUs, units, haveArya, type, j, ks, unreleased}) {
     const [show, setShow] = useState(false);
     const [toggle, setToggle] = useState(false);
 
@@ -17,7 +19,6 @@ function ListAttachOptions ({options, faction, neutral, addAttachment, points, N
     if (points !== undefined)
         if (units[j].adaptive === true) {
         points = points + 1;
-        // var neutralPoints = neutralPoints + 1;
     }
 
     var allUnits = options.items;
@@ -29,9 +30,14 @@ function ListAttachOptions ({options, faction, neutral, addAttachment, points, N
     let filteredUnits = filterPoints(allUnits, points);
     filteredUnits = noRepeats(filteredUnits, NCUs, units, haveArya);
     if (type !== undefined) {
-      filteredUnits = attachmentMatch(filteredUnits, type);
+        filteredUnits = attachmentMatch(filteredUnits, type);
     }
-    console.log('filteredUnits', filteredUnits);
+    if (ks === false) {
+        filteredUnits = ksFilter(filteredUnits);
+    }
+    if (unreleased === false) {
+        filteredUnits = unreleasedFilter(filteredUnits);
+    }
   
     return (
         <div>

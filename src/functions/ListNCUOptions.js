@@ -4,8 +4,10 @@ import "./listOptions.css";
 import RenderNCUOptions from '../components/RenderNCUOptions';
 import filterPoints from './filterPoints';
 import noRepeats from './noRepeats';
+import ksFilter from './ksFilter';
+import unreleasedFilter from './unreleasedFilter';
 
-function ListNCUOptions ({options, faction, neutral, addNCU, points, NCUs, units, haveArya}) {
+function ListNCUOptions ({options, faction, neutral, addNCU, points, NCUs, units, haveArya, ks, unreleased}) {
     const [show, setShow] = useState(false);
     const [toggle, setToggle] = useState(false);
 
@@ -21,7 +23,12 @@ function ListNCUOptions ({options, faction, neutral, addNCU, points, NCUs, units
     }
     let filteredUnits = filterPoints(allUnits, points);
     filteredUnits = noRepeats(filteredUnits, NCUs, units, haveArya);
-    console.log('filteredUnits', filteredUnits);
+    if (ks === false) {
+        filteredUnits = ksFilter(filteredUnits);
+    }
+    if (unreleased === false) {
+        filteredUnits = unreleasedFilter(filteredUnits);
+    }
   
     return (
         <div>

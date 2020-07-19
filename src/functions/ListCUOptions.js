@@ -5,8 +5,10 @@ import RenderCUOptions from '../components/RenderCUOptions';
 import filterPoints from './filterPoints';
 import noRepeats from './noRepeats';
 import attachmentMatch from './attachmentMatch';
+import ksFilter from './ksFilter';
+import unreleasedFilter from './unreleasedFilter';
 
-function ListCUOptions ({options, faction, neutral, addCU, points, NCUs, units, haveArya, j, type, commander}) {
+function ListCUOptions ({options, faction, neutral, addCU, points, NCUs, units, haveArya, j, type, commander, ks, unreleased}) {
     const [show, setShow] = useState(false);
     const [toggle, setToggle] = useState(false);
 
@@ -25,7 +27,12 @@ function ListCUOptions ({options, faction, neutral, addCU, points, NCUs, units, 
     if (type !== undefined) {
       filteredUnits = attachmentMatch(filteredUnits, type);
     }
-    console.log('filteredUnits', filteredUnits);
+    if (ks === false) {
+        filteredUnits = ksFilter(filteredUnits);
+    }
+    if (unreleased === false) {
+        filteredUnits = unreleasedFilter(filteredUnits);
+    }
 
     return (
         <div>

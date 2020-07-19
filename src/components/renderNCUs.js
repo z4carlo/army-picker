@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "react-bootstrap"
 import Img from 'react-image';
 
-const DrawImage = ({location}) => <Img width="93%" height="auto" src={location} />
+const DrawImage = ({location}) => <Img width="100%" height="auto" src={location} />
 
 function renderUnits ({NCUs, removeNCU}) {
     console.log(NCUs);

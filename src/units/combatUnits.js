@@ -59,7 +59,8 @@ const combatUnits = [
       { name: "Followers of Bone", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/FreeFolk/CombatUnit-Cards/10307f.jpg" },
       { name: "Thenn Warriors", cost: 6, attachment: "None", type: "Infantry", unique: false, imgFile: "./Images/FreeFolk/CombatUnit-Cards/10308f.jpg" },
       { name: "Savage Giant", cost: 7, attachment: "None", type: "Solo", unique: false, imgFile: "./Images/FreeFolk/CombatUnit-Cards/10301f.jpg" },
-      // { name: "Bonelords Chosen", cost: 10, attachment: { name: "Rattleshirt", cost: 2, type: "Infantry", unique: true, imgFile: "./Images/FreeFolk/Attachment-Cards/Rattleshirt-A.png", attachment2: "None" }, type: "Infantry", unique: true, imgFile: "./Images/FreeFolk/CombatUnit-Cards/10311f.jpg" },   
+      { name: "Bonelords Chosen", cost: 8, attachment: "None", type: "Infantry", unique: true, imgFile: "./Images/FreeFolk/CombatUnit-Cards/10311f.jpg" },
+      { name: "Bonelords Chosen", cost: 10, attachment: { name: "Rattleshirt", cost: 2, type: "Infantry", unique: true, imgFile: "./Images/FreeFolk/Attachment-Cards/20316f.jpg", attachment2: "None" }, type: "Infantry", unique: true, imgFile: "./Images/FreeFolk/CombatUnit-Cards/10311f.jpg" },   
     ]
   },
   {

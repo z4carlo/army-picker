@@ -148,7 +148,6 @@ export default function noRepeats(data, NCUs, units, haveArya, commander) {
     }
 
     if (commander !== undefined && commander.name !== "Joffrey Baratheon") {
-        console.log("here");
         for (let [i, f] of filteredData.entries()) {
             if (f !== undefined) {
                 if (f.name === "Kingsguard") {

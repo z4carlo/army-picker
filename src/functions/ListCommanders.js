@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import "./listOptions.css";
 import RenderCommanders from '../components/RenderCommanders';
+import ksFilter from './ksFilter';
+import unreleasedFilter from './unreleasedFilter';
 
-function ListCUOptions ({units, faction, neutral, addCommander}) {
+function ListCUOptions ({units, faction, neutral, addCommander, ks, unreleased}) {
     const [show, setShow] = useState(false);
     const [toggle, setToggle] = useState(false);
 
@@ -17,7 +19,12 @@ function ListCUOptions ({units, faction, neutral, addCommander}) {
             options = units.items.concat(neutral.items);
         }
     }
-    console.log(options);
+    if (ks === false) {
+        options = ksFilter(options);
+    }
+    if (unreleased === false) {
+        options = unreleasedFilter(options);
+    }
   
     return (
         <div>
